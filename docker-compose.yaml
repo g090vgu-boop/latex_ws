@@ -1,0 +1,9 @@
+services:
+  latex:
+    image: texlive/texlive:latest
+    container_name: latex
+    volumes:
+      - ./src:/home/texlive/latex/src
+      - ./.vscode:/home/texlive/latex/.vscode
+    working_dir: /home/texlive/latex
+    command: sleep infinity
