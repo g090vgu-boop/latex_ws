@@ -1,0 +1,60 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{telnet_ssh}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=d461055fe4bf1d6ebc2fdc1af6461e8d}{%
+           family={Tomoya},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{d461055fe4bf1d6ebc2fdc1af6461e8d}
+      \strng{fullhash}{d461055fe4bf1d6ebc2fdc1af6461e8d}
+      \strng{fullhashraw}{d461055fe4bf1d6ebc2fdc1af6461e8d}
+      \strng{bibnamehash}{d461055fe4bf1d6ebc2fdc1af6461e8d}
+      \strng{authorbibnamehash}{d461055fe4bf1d6ebc2fdc1af6461e8d}
+      \strng{authornamehash}{d461055fe4bf1d6ebc2fdc1af6461e8d}
+      \strng{authorfullhash}{d461055fe4bf1d6ebc2fdc1af6461e8d}
+      \strng{authorfullhashraw}{d461055fe4bf1d6ebc2fdc1af6461e8d}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{31}
+      \field{journaltitle}{MiracleJOB (ミラクルソリューション)}
+      \field{month}{7}
+      \field{title}{Linuxの基礎を知る（TelnetとSSH）}
+      \field{urlday}{1}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://miraclejob.com/tech/202307311440.html
+      \endverb
+      \verb{url}
+      \verb https://miraclejob.com/tech/202307311440.html
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
