@@ -1,0 +1,103 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{bashdo_arp}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=317e52321dfff03ff375818ccb839b25}{%
+           family={{Bash玄}},
+           familyi={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{317e52321dfff03ff375818ccb839b25}
+      \strng{fullhash}{317e52321dfff03ff375818ccb839b25}
+      \strng{fullhashraw}{317e52321dfff03ff375818ccb839b25}
+      \strng{bibnamehash}{317e52321dfff03ff375818ccb839b25}
+      \strng{authorbibnamehash}{317e52321dfff03ff375818ccb839b25}
+      \strng{authornamehash}{317e52321dfff03ff375818ccb839b25}
+      \strng{authorfullhash}{317e52321dfff03ff375818ccb839b25}
+      \strng{authorfullhashraw}{317e52321dfff03ff375818ccb839b25}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Bash道, \url{https://bash-do.com/linux-command-arp/}}
+      \field{note}{閲覧日: 2026年6月1日}
+      \field{title}{arp – ARPテーブルを表示・操作するコマンド}
+      \field{year}{2026}
+    \endentry
+    \entry{kinsta_arp}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=eb6a10fbeca69d7f6397524a3c428de8}{%
+           family={Duò},
+           familyi={D\bibinitperiod},
+           given={Matteo},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{eb6a10fbeca69d7f6397524a3c428de8}
+      \strng{fullhash}{eb6a10fbeca69d7f6397524a3c428de8}
+      \strng{fullhashraw}{eb6a10fbeca69d7f6397524a3c428de8}
+      \strng{bibnamehash}{eb6a10fbeca69d7f6397524a3c428de8}
+      \strng{authorbibnamehash}{eb6a10fbeca69d7f6397524a3c428de8}
+      \strng{authornamehash}{eb6a10fbeca69d7f6397524a3c428de8}
+      \strng{authorfullhash}{eb6a10fbeca69d7f6397524a3c428de8}
+      \strng{authorfullhashraw}{eb6a10fbeca69d7f6397524a3c428de8}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Kinsta リソースセンター, \url{https://kinsta.com/jp/knowledgebase/what-is-arp/}}
+      \field{note}{最終更新日: 2025年10月02日, 閲覧日: 2026年6月1日}
+      \field{title}{アドレス解決プロトコル{ARP}とは}
+      \field{year}{2025}
+    \endentry
+    \entry{nw_text_r08}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=61bb057116a9971446b96f01670116b6}{%
+           family={美月},
+           familyi={美\bibinitperiod},
+           given={瀬戸},
+           giveni={瀬\bibinitperiod}}}%
+        {{hash=bd88c6eb68b3c43512c2af090341a00d}{%
+           family={株式会社わくわくスタディワールド},
+           familyi={株\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {インプレス}%
+      }
+      \strng{namehash}{f22db1d1dd93d91b799c9aa6821ee5fe}
+      \strng{fullhash}{f22db1d1dd93d91b799c9aa6821ee5fe}
+      \strng{fullhashraw}{f22db1d1dd93d91b799c9aa6821ee5fe}
+      \strng{bibnamehash}{f22db1d1dd93d91b799c9aa6821ee5fe}
+      \strng{authorbibnamehash}{f22db1d1dd93d91b799c9aa6821ee5fe}
+      \strng{authornamehash}{f22db1d1dd93d91b799c9aa6821ee5fe}
+      \strng{authorfullhash}{f22db1d1dd93d91b799c9aa6821ee5fe}
+      \strng{authorfullhashraw}{f22db1d1dd93d91b799c9aa6821ee5fe}
+      \field{sortinit}{美}
+      \field{sortinithash}{c422e7e32c806b179a63ecb43d44b902}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{ISBN: 978-4295022596}
+      \field{title}{徹底攻略 ネットワークスペシャリスト教科書 令和8年度}
+      \field{year}{2025}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
