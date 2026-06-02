@@ -1,0 +1,435 @@
+\documentclass[dvipdfmx,autodetect-engine, 12pt]{jsarticle}
+
+\usepackage{ulem} % 取消線を引くためのパッケージ
+\usepackage[dvipdfmx]{graphicx} % 画像を挿入するためのパッケージ
+\usepackage{array} % 表の幅指定や自動改行に必要
+\usepackage{enumitem}
+\usepackage{amsmath}
+
+% --- 考文献用の設定 ---
+\usepackage[backend=biber, style=numeric]{biblatex} % biblatexパッケージの使用
+\addbibresource{source.bib} % 先ほど作った別ファイルを指定（拡張子まで書く）
+\usepackage{url} % WebサイトのURLを綺麗に出力するため
+
+% --- section の文字サイズを小さくする設定 ---
+\makeatletter
+\renewcommand{\section}{%
+  \@startsection{section}{1}{\z@}%
+  {1.5ex \@plus .5ex \@minus .2ex}% 前の行との隙間
+  {0.5ex \@plus .3ex}% 下の行との隙間
+  {\normalfont\normalsize}% ← ここでサイズを \Large（少し大きめ）に指定
+}
+\makeatother
+
+\begin{document}
+
+% 課題のタイトル
+\begin{center}
+
+    {\LARGE \bfseries 課題③\,ARPおよびICMPパケットの解析\par}
+
+\end{center}
+
+\vspace{1cm}
+
+{\LARGE \uline{目的}} 
+
+\vspace{1cm}
+
+{\LARGE \uline{事前準備}} 
+
+\begin{enumerate}
+    \item server と router の VM を起動する．
+    \item arp と ping コマンドで利用されるプロトコルを調査する.
+\end{enumerate}
+
+\vspace{1cm}
+
+{\LARGE \uline{手順}} 
+
+\begin{enumerate}
+
+    \item arpとpingコマンドで, どのプロトコルが利用されるのか調査し, 
+          特に通信の開始から終了までに, 通信元と通信先との間に, OSI参照モデルのどの層で, 
+          どのような手順で, どのように, どのような情報が, やり取りされるのか詳細を調べ, 整理しなさい. \label{item:arp_ping_investigation}
+
+        \vspace{\baselineskip}
+
+        \quad arpコマンドは, ARP(Address Resolution Protocol)によって, ARPテーブルに記録された情報を表示・編集するためのコマンドである\cite{bashdo_arp}.
+        ARPとは, OSI参照モデルの第2層（データリンク層）と第3層（ネットワーク層）の間で動作するプロトコルである.
+        ネットワークがコンピュータのIPアドレスと物理的なマシンアドレスを変換（解決）するために使用される一般的な手法であり\cite{kinsta_arp}, 
+        宛先ホストのIPアドレスを手がかりに, 次に送るべき機器のMACアドレスを調べる.
+        送信元IPアドレスと宛先IPアドレスを比較して, 宛先IPアドレスが同じネットワーク上にあるときには, その宛先IPアドレスのMACアドレスを調べ, 
+        宛先IPアドレスが異なるネットワーク上にある場合には, 次に送るルータのIPアドレスからMACアドレスを調べる.
+        ARPパケットのフォーマットと各フィールドの説明をそれぞれ図\ref{fig:arp_packet_format}と表\ref{tab:arp_fields}に示す.
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/arp_packet_format.png} 
+            \caption{ARPによるアドレス解決の仕組み（\cite{nw_text_r08}より引用・改変）}
+            \label{fig:arp_packet_format}
+        \end{figure}
+
+        \begin{table}[htbp]
+            \centering
+            \caption{ARPパケットのフィールド構成（\cite{nw_text_r08}より引用・改変）}
+            \label{tab:arp_fields}
+            \begin{tabular}{|c|c|m{8.5cm}|}
+                \hline
+                \multicolumn{1}{|c|}{フィールド名} & ビット数 & \multicolumn{1}{c|}{内容} \\ \hline
+                ハードウェアタイプ & 16 & どのようなデータリンクを使用しているかを示す． \\ \hline
+                プロトコルタイプ   & 16 & ネットワーク層のプロトコルについて示す． \\ \hline
+                HLEN              & 8  & ハードウェアアドレスの長さを示す． \\ \hline
+                PLEN              & 8  & プロトコルアドレスの長さを示す． \\ \hline
+                オペレーション     & 16 & ARP要求パケットかARP応答パケットかを示す．\newline ARP要求パケットの場合は1，\newline ARP応答パケットの場合は2． \\ \hline
+                \begin{tabular}{@{}c@{}}送信元MAC\\アドレス\end{tabular}  & 48 & 送信元MACアドレスを示す．\newline ARP応答パケットでは，ここにARP要求パケットで求めていたMACアドレスが設定されて返される． \\ \hline
+                \begin{tabular}{@{}c@{}}送信元IP\\アドレス\end{tabular}   & 32 & 送信元IPアドレス． \\ \hline
+                \begin{tabular}{@{}c@{}}探索するMAC\\アドレス\end{tabular} & 48 & 探索するMACアドレスを示す．ARP要求パケットではここが分からないので，通常は0の値が設定されている． \\ \hline
+                \begin{tabular}{@{}c@{}}探索するIP\\アドレス\end{tabular}  & 32 & ARP要求パケットでは，探索するIPアドレスを示し，ARP応答パケットでは，宛先（要求パケットの送信元）のアドレスが設定される． \\ \hline
+            \end{tabular}
+        \end{table}
+
+        \quad 続いて, ARPによってアドレス解決を行う際の手順について示す.
+        ここではホストAがホストBのMACアドレスを解決しようとしているものとする.
+
+        \vspace{\baselineskip}
+
+        \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}]
+            \item ホストAは探索するIPアドレスにホストBのIPアドレスを指定したARP要求パケットをネットワークにブロードキャストする.
+            \item ホスト B は ARP 要求パケットを受け取ると, ホスト A に対して自身の NIC に割り当てられている MAC アドレスを ARP ユニキャストする.
+            \item ホスト A は ARP 応答パケットを受け取り, そこに記述される MAC アドレスはコンピュータ内の ARP テーブルに登録され, 数分間キャッシュされる. 一度登録されるとキャッシュされている間は ARP の再問い合わせが実行されることはない.
+        \end{enumerate}
+
+        \vspace{\baselineskip}
+
+        \quad
+        pingコマンドとはネットワークの疎通確認やサーバの死活監視をするために使用するコマンドである\cite{knowledgestare_ping}.
+        pingを実行すると, ICMPプロトコルは, 指定されたホストにデータグラムを送って, 応答を求める\cite{solaris_ping}.
+        ICMP(Internet Control Message Protocol)とはOSI参照モデルの第3層（ネットワーク層）で動作するプロトコルであり,
+        IPで通信するときに用いられる. 
+        ネットワークが正常な状態であるかを確認することや, 
+        異常が発生したときにその状況を把握してトラブルシューティングを行うことなどのために利用するものである. 
+        IPパケットのデータ部に図\ref{fig:icmp_packet_format}に示すようなフォーマットで格納される.
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/icmp_packet_format.png} 
+            \caption{ICMPパケットのフォーマット（\cite{nw_text_r08}より引用・改変）}
+            \label{fig:icmp_packet_format}
+        \end{figure}
+
+        続いてICMPパケットにおける主要タイプと到達不能(タイプが3)の場合の主要コードについて表\ref{tab:icmp_msg_type}, \ref{tab:icmp_code}に示す.
+
+        \begin{table}[htbp]
+            \centering
+            \caption{ICMPメッセージのタイプとその概要（\cite{nw_text_r08}より引用・改変）}
+            \label{tab:icmp_msg_type}
+            \begin{tabular}{|c|l|}
+                \hline
+                タイプ(10進数) & 意味 \\ \hline                
+                0  & エコー応答 \\ \hline
+                3  & 到達不能 \\ \hline
+                4  & 始点抑制 \\ \hline
+                5  & リダイレクト \\ \hline
+                8  & エコー要求 \\ \hline               
+                9  & ルータ広告 \\ \hline
+                10 & ルータ請願 \\ \hline
+                11 & 時間経過 \\ \hline       
+            \end{tabular}
+        \end{table}
+
+        \begin{table}[htbp]
+            \centering
+            \caption{到達不能メッセージの主なコードとその概要（\cite{nw_text_r08}より引用・改変）}
+            \label{tab:icmp_code}
+            \begin{tabular}{|c|l|}
+                \hline
+                コード(10進数) & 意味 \\ \hline                
+                0  & ネットワーク到達不能 \\ \hline
+                1  & ホスト到達不能 \\ \hline
+                3  & ポート到達不能 \\ \hline
+                4  & フラグメンテーションが必要 \\ \hline
+                5  & ソースルーティングが失敗 \\ \hline               
+                6  & 送信先ネットワークが拒否 \\ \hline       
+            \end{tabular}
+        \end{table}
+
+        タイプは1byteでICMPメッセージの種類を識別するためのもの, 
+        コードは1byteでタイプメッセージごとの詳細な内容を示すためのものである.
+        チェックサムとはICMPヘッダーを含むICMPメッセージ全体の誤りをチェックするためのもので,
+        データはタイプごとの必要な情報を記述する部分であり, そのフォーマットはタイプによって規定される\cite{nw_text_r08}.
+        \\
+        \quad
+        以下にクライアントからサーバに対してpingコマンドを発行した際のICMPパケットの流れを示す.
+
+        \vspace{\baselineskip}
+
+        \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}]
+            \item クライアントはサーバに対してエコー要求(タイプ8)のICMPパケットを送信する.
+            \item サーバはエコー要求を受け取るとタイプをエコー応答(タイプ0)に書き換えたICMPパケットをクライアントに送信する.
+        \end{enumerate}
+
+        \quad
+        
+
+        \vspace{\baselineskip}
+    
+    \item 両 VM で console を開く．
+
+    \item 次のコマンドを実行して，IP アドレスを確認する．\\
+          \texttt{\# ifconfig -a}\\
+          {\small ※ Request timed out.が表示され所定の情報が得られない場合は，各 PC のフィルタリングの設定を確認する．}
+    
+        \vspace{\baselineskip}
+        \quad
+        図\ref{fig:router_ifconfig}, \ref{fig:server_ifconfig}にそれぞれ router と server の ifconfig コマンドの実行結果を示す. 
+        また, この結果から読み取れる情報についてまとめたものを表\ref{tab:ifconfig_info}に示す.
+        routerは10.6.158.0/24のネットワークに属するインターフェースeth1と
+        192.168.100.0/24のネットワークに属するインターフェースeth0を持っており,
+        serverは192.168.100.0/24のネットワークに属するインターフェースeth0を持っていることが読み取れる.
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/router_ifconfig.png} 
+            \caption{router の ifconfig コマンドの実行結果}
+            \label{fig:router_ifconfig}
+        \end{figure}
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/server_ifconfig.png} 
+            \caption{server の ifconfig コマンドの実行結果}
+            \label{fig:server_ifconfig}
+        \end{figure}
+
+        \begin{table}[htbp]
+            \centering
+            \caption{ifconfig コマンドの実行結果から読み取れる情報のまとめ}
+            \label{tab:ifconfig_info}
+            \begin{tabular}{|c|c|c|c|}
+                \hline
+                VM & インターフェース名 & IPアドレス & MACアドレス \\ \hline
+                router & eth1 & 10.6.158.90 & 08:00:27:03:0c:a2 \\ \hline
+                router & eth0 & 192.168.100.1 & 08:00:27:e4:e7:c3 \\ \hline
+                server & eth0 & 192.168.100.2 & 08:00:27:9b:6c:8a \\ \hline
+            \end{tabular}
+        \end{table}    
+    
+    \item マシン間で ping を実行する．\\
+          \texttt{\# ping 別の VM の IP アドレス}
+
+        \vspace{\baselineskip}
+        \quad
+        VM間でのpingの実行結果を図\ref{fig:ping_router2server_before}, \ref{fig:ping_server2router_before}に示す.
+        いずれの場合においても, 全パケットに対して応答が帰ってきていることが0\%\, packet\, lossという出力から読み取れる.
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/router2server_ping.png} 
+            \caption{router から server への ping の実行結果}
+            \label{fig:ping_router2server_before}
+        \end{figure}
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/server2router_ping.png} 
+            \caption{server から router への ping の実行結果}
+            \label{fig:ping_server2router_before}
+        \end{figure}
+
+        \vspace{\baselineskip}
+        
+    \item 両方の VM で次のコマンドを実行し，ARP キャッシュの内容を確認する．\label{item:arp_cache_check1}\\
+          \texttt{\# arp -an}
+    \item 確認後，次のコマンドを実行し，server の arp キャッシュの内容をクリアする．\label{item:arp_cache_clear}\\
+          \texttt{\# arp -d IP アドレス（ARP キャッシュに残っている IP アドレス）}
+    \item 再度，ARP キャッシュの内容を確認し，クリアされていることを確認する．\label{item:arp_cache_check2}\\
+          {\small ※ 組織外側のネットワークの端末に関するキャッシュは消せなくてもよい．}
+
+        \vspace{\baselineskip}
+        \quad
+        図\ref{fig:router_arp}, \ref{fig:server_arp}にそれぞれ router と server の 
+        手順\ref{item:arp_cache_check1}, \ref{item:arp_cache_clear}, \ref{item:arp_cache_check2}
+        の実行結果を示す.
+        それぞれキャッシュがクリアされた後では, 192.168.100.0/24上のホストに対応するarpテーブルの内容が空になっていることがわかる.
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/router_arp.png} 
+            \caption{router の ARP キャッシュ}
+            \label{fig:router_arp}
+        \end{figure}
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/server_arp.png} 
+            \caption{server の ARP キャッシュ}
+            \label{fig:server_arp}
+        \end{figure}
+
+        \vspace{\baselineskip}
+    
+    \item server の VM で Wireshark-gtk を起動する．\label{item:wireshark_on}
+    \item \text{[Wireshark]}のメニューの\text{[Capture]}→\text{[Start]}を実行し，キャプチャを開始する.\label{item:wireshark_start}\\
+          {\small ※ Capture Interfaces で router と接続しているインターフェース(デバイス)を指定すること}
+    \item server から router へ ping を実行する．\label{item:ping_server2router}
+    
+        \vspace{\baselineskip}
+        \quad
+
+        図\ref{fig:ping_server2router_for_packet_analyze}, \ref{fig:ping_wireshark}
+        にserverからrouterへのpingコマンドを実行した結果とそれによって発生したパケットの一覧を示す.
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/server_ping_for_packet_analyze.png} 
+            \caption{serverからrouterへpingコマンドを実行した結果}
+            \label{fig:ping_server2router_for_packet_analyze}
+        \end{figure}
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/ping_wireshark.png} 
+            \caption{Wiresharkでキャプチャされたpingによって発生したパケットの一覧}
+            \label{fig:ping_wireshark}
+        \end{figure}
+
+        \quad
+        図\ref{fig:ping_server2router_for_packet_analyze}から, ここでもパケットは損失することなく, 正常に通信できたことがわかる.
+        図\ref{fig:ping_wireshark}から, pingコマンドによって生じた通信では, ARPのパケットが送受信された後に, ICMPのパケットが送受信されていることがわかる.
+
+        \vspace{\baselineskip}
+
+    \item \text{[Capture]}→\text{[Stop]}を実行してキャプチャを停止し，ARPによって生じた通信を確認し，調査結果より想定される手続きで情報が端末間でやり取りされているか解析しなさい．\label{item:check_arp_packet}
+
+        \vspace{\baselineskip}
+        \quad
+        図\ref{fig:arp_request_packet}, \ref{fig:arp_reply_packet}にARPによって生じた通信のパケットであるARP要求パケットとARP応答パケットを示す.
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/arp_request.png} 
+            \caption{ARP要求パケット}
+            \label{fig:arp_request_packet}
+        \end{figure}
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/arp_reply.png} 
+            \caption{ARP応答パケット}
+            \label{fig:arp_reply_packet}
+        \end{figure}
+
+        まず, パケットのフォーマットについて比較を行う. 
+        図\ref{fig:arp_packet_format}に示したARPパケットのフォーマットは図\ref{fig:arp_request_packet}, \ref{fig:arp_reply_packet}から確認できる実際に得られたパケットのフォーマットと完全に一致していることが確認できる.
+        オペレーション(opcode)について確認すると, それぞれ1,2の値が設定されており, それぞれARP要求パケットとARP応答パケットであることがわかる.
+        図\ref{fig:arp_request_packet}のARP要求パケットにおいて, 
+        送信元IPアドレスと送信元MACアドレスのフィールドには, pingを実行したserverのIPアドレスとMACアドレスがそれぞれ設定されている.
+        探索するIPアドレス(Target IP address)のフィールドにrouterのIPアドレス,
+        探索するMACアドレス(Target MAC address)のフィールドには表\ref{tab:arp_fields}に示したように0が設定されている.
+        また, イーサネットヘッダにおける宛先MACアドレスのフィールドには, ブロードキャストアドレスであるff:ff:ff:ff:ff:ffが設定されており, 
+        同一ネットワーク上の端末にブロードキャストされていることがわかる.
+        一方で, 図\ref{fig:arp_reply_packet}のARP応答パケットにおいて,
+        送信元IPアドレスと送信元MACアドレスのフィールドには, routerのIPアドレスとMACアドレス,
+        探索するIPアドレスと探索するMACアドレスのフィールドには, pingを実行したserverのIPアドレスとMACアドレスがそれぞれ設定されていることがわかる.
+        これらはARPによるアドレス解決の手順として示した手順\textcircled{\scriptsize 1},\textcircled{\scriptsize 2}に対応しているため,
+        ARPによるアドレス解決に関して想定される手続きでやり取りされていることが確認できた.
+
+        \vspace{\baselineskip}
+
+    \item 次に，ping コマンドによって生じた通信の内容を確認し，調査結果より想定される手続きで情報がやり取りされているか端末間で解析しなさい．\label{item:check_ping_packet}
+
+        \vspace{\baselineskip}
+        \quad
+        図\ref{fig:icmp_echo_request_packet}, \ref{fig:icmp_echo_reply_packet}にpingコマンドによって生じた通信のパケットであるICMPエコー要求パケットとICMPエコー応答パケットを示す.
+
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/icmp_echo_request.png} 
+            \caption{ICMPエコー要求パケット}
+            \label{fig:icmp_echo_request_packet}
+        \end{figure}
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/icmp_echo_reply.png} 
+            \caption{ICMPエコー応答パケット}
+            \label{fig:icmp_echo_reply_packet}
+        \end{figure}
+
+        まず, パケットのフォーマットについて比較を行う.
+        ICMPエコー要求パケットとICMPエコー応答パケットのフォーマットは, IPヘッダとICMPヘッダから構成されており, 
+        ヘッダ部に関しては図\ref{fig:icmp_packet_format}に示すICMPパケットのフォーマットと完全に一致していることが確認できる.
+        タイプとコードについて確認すると, 図\ref{fig:icmp_echo_request_packet}はタイプ8コード0のICMPエコー要求パケットであり,
+        図\ref{fig:icmp_echo_reply_packet}はタイプ0コード0のICMPエコー応答パケットであることがわかる.\\
+        ICMPエコー要求パケットと応答パケットとでのフィールドの値を比較すると, チェックサムとメッセージタイプ以外のすべての値が一致している.
+        これらはpingによる通信の手順として示した手順\textcircled{\scriptsize 1},\textcircled{\scriptsize 2}に対応しているため,
+        pingによる通信に関して想定される手続きでやり取りされていることが確認できた.
+
+        \vspace{\baselineskip}
+
+    \item 再度，ARP キャッシュの内容を確認する．
+    
+        \vspace{\baselineskip}
+        \quad
+        図\ref{fig:server_arp_after_ping}にpingの実行後のserverのARPキャッシュの内容を示す.
+        手順\ref{item:arp_cache_check2}で確認した際には空であった一方で, 
+        routerのインターフェース情報がキャッシュに追加されていることが確認できた.
+        これは, pingの実行によってARPによるアドレス解決が行われ, 
+        その結果がARPキャッシュに登録されたことを示しており,
+        ARPによるアドレス解決の手続きで示した手順\textcircled{\scriptsize 3}に対応している.
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/server_arp_after_ping.png} 
+            \caption{ARPキャッシュの内容（ping実行後）}
+            \label{fig:server_arp_after_ping}
+        \end{figure}
+        \vspace{\baselineskip}
+
+
+    \item 実験で得た結果（コマンド実行結果，キャプチャした結果など）を用いて，arp と ping を用いた通信の仕組み・手続きをレポートで報告しなさい．
+    
+        \vspace{\baselineskip}
+        \quad
+        手順\ref{item:check_arp_packet}, \ref{item:check_ping_packet}では
+        それぞれARPパケットやARPによるアドレス解決の手順とICMPパケットやpingによる通信の手順について,
+        実際に得られたパケットの内容を手順\ref{item:arp_ping_investigation}に記した調査結果と比較を行い, 
+        想定される手続きでやり取りされていることを確認した.
+        ここではまず, 本課題においてpingコマンドを実行した際に実際に行われた通信の流れをまとめ, 最後にarpとpingを用いた通信の仕組み・手続きをまとめる.
+        \\
+        \quad
+        手順10においてserverからrouterへpingコマンドを実行すると, 
+        まずARPによるアドレス解決が行われた.
+        これはICMPパケットを送信するためには, 送信先のMACアドレスを知る必要があるためである.
+        ARPキャッシュに対象のネットワークインターフェース情報が登録されている場合にはARPによるアドレス解決は行われないが, 
+        今回の実験では手順6においてARPキャッシュをクリアしたため,
+        ARPによるアドレス解決が行われた.
+        ここでは, 図\ref{fig:arp_request_packet}のARP要求パケットと図\ref{fig:arp_reply_packet}のARP応答パケットに示すように,
+        まずrouterのMACアドレスを求めるためのARP要求パケットがserverからブロードキャストされ, 
+        それを受け取ったrouterはARP応答パケットをserverにユニキャストし, 
+        最終的にserverのARPキャッシュにrouterのネットワークインターフェース情報が登録された.
+        アドレス解決が完了すると, 
+        図\ref{fig:icmp_echo_request_packet}のICMPエコー要求パケットと図\ref{fig:icmp_echo_reply_packet}のICMPエコー応答パケットに示すように,
+        serverからrouterに対してエコー要求のICMPパケットが送信され,
+        routerはエコー要求を受け取るとICMPヘッダにおけるタイプをエコー応答に書き換えたICMPパケットをserverに返送した.
+
+        \quad
+        したがって, arpとpingを用いた通信の仕組み・手続きを簡単にまとめると以下のようになる.
+
+
+        \vspace{\baselineskip}
+        \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}]
+            \item ARP要求パケットをブロードキャストして宛先MACアドレスを問い合わせる
+            \item ARP応答パケットを受信してARPキャッシュに登録する
+            \item ICMPエコー要求パケットを送信する
+            \item ICMPエコー応答パケットを受信する
+        \end{enumerate}
+\end{enumerate}
+\newpage
+
+% --- 参考文献リストの出力 ---
+\printbibliography[title=参考文献]
+
+\end{document}
+

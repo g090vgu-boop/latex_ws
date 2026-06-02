@@ -67,6 +67,52 @@
       \field{title}{アドレス解決プロトコル{ARP}とは}
       \field{year}{2025}
     \endentry
+    \entry{solaris_ping}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=d51288dc67d9f5e0330d927a009e208b}{%
+           family={{Oracle Corporation}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{d51288dc67d9f5e0330d927a009e208b}
+      \strng{fullhash}{d51288dc67d9f5e0330d927a009e208b}
+      \strng{fullhashraw}{d51288dc67d9f5e0330d927a009e208b}
+      \strng{bibnamehash}{d51288dc67d9f5e0330d927a009e208b}
+      \strng{authorbibnamehash}{d51288dc67d9f5e0330d927a009e208b}
+      \strng{authornamehash}{d51288dc67d9f5e0330d927a009e208b}
+      \strng{authorfullhash}{d51288dc67d9f5e0330d927a009e208b}
+      \strng{authorfullhashraw}{d51288dc67d9f5e0330d927a009e208b}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Oracle Documentation, \url{https://docs.oracle.com/cd/E19253-01/819-0380/ipv6-admintasks-53/index.html }}
+      \field{note}{閲覧日: 2026年6月2日}
+      \field{title}{ping コマンドによるリモートホストの検証 --- {Solaris} のシステム管理 ({IP} サービス)}
+      \field{year}{2010}
+    \endentry
+    \entry{knowledgestare_ping}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=6b99b948f0feb6e4f28d44c39e48cd65}{%
+           family={{TK (from SecuAvail)}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{6b99b948f0feb6e4f28d44c39e48cd65}
+      \strng{fullhash}{6b99b948f0feb6e4f28d44c39e48cd65}
+      \strng{fullhashraw}{6b99b948f0feb6e4f28d44c39e48cd65}
+      \strng{bibnamehash}{6b99b948f0feb6e4f28d44c39e48cd65}
+      \strng{authorbibnamehash}{6b99b948f0feb6e4f28d44c39e48cd65}
+      \strng{authornamehash}{6b99b948f0feb6e4f28d44c39e48cd65}
+      \strng{authorfullhash}{6b99b948f0feb6e4f28d44c39e48cd65}
+      \strng{authorfullhashraw}{6b99b948f0feb6e4f28d44c39e48cd65}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Knowledge Stare（ナレッジステア）, \url{https://www.secuavail.com/kb/windows-linux/linux-windows-ping/}}
+      \field{note}{投稿日: 2023年05月19日, 閲覧日: 2026年6月2日}
+      \field{title}{Linux/Windows pingコマンドの使い方とオプションについて}
+      \field{year}{2023}
+    \endentry
     \entry{nw_text_r08}{book}{}{}
       \name{author}{2}{}{%
         {{hash=61bb057116a9971446b96f01670116b6}{%
