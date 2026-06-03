@@ -2376,8 +2376,18 @@
     <bcf:citekey order="1" intorder="1">nmap_man_jp</bcf:citekey>
     <bcf:citekey order="2" intorder="1">nmap_man_host_discovery</bcf:citekey>
     <bcf:citekey order="3" intorder="1">telnet_ssh</bcf:citekey>
-    <bcf:citekey order="4" intorder="1">yamaguchi_ain_week5</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">nmap_man_port_scanning_techniques</bcf:citekey>
     <bcf:citekey order="5" intorder="1">yamaguchi_ain_week5</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">yamaguchi_ain_week5</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">nmap_man_port_scanning</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">nmap_man_port_scanning_techniques</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">nmap_man_port_scanning_techniques</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">yamaguchi_ain_week5</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">yamaguchi_ain_week5</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">nmap_man_port_scanning_techniques</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">yamaguchi_ain_week5</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">yamaguchi_ain_week5</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">nmap_man_port_scanning_techniques</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

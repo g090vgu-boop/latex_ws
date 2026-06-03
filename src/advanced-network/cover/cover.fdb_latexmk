@@ -1,11 +1,11 @@
 # Fdb version 4
-["dvipdf"] 1780269476.17812 "cover.dvi" "cover.pdf" "cover" 1780269476.37274 0
-  "cover.dvi" 1780269476.16897 428 c750b6cb9a3591b5ce727e08e0c02d46 "latex"
+["dvipdf"] 1780399591.42379 "cover.dvi" "cover.pdf" "cover" 1780399591.62014 0
+  "cover.dvi" 1780399591.41436 452 5c5387e46bcf4ada22e33d294bd67a53 "latex"
   (generated)
   "cover.pdf"
   (rewritten before read)
-["latex"] 1780269476.02835 "/home/texlive/latex/src/advanced-network/cover/cover.tex" "cover.dvi" "cover" 1780269476.37241 0
-  "/home/texlive/latex/src/advanced-network/cover/cover.tex" 1780269475.85097 593 90a2661bd3af4454e020036ec5f133c0 ""
+["latex"] 1780399591.239 "/home/texlive/latex/src/advanced-network/cover/cover.tex" "cover.dvi" "cover" 1780399591.61983 0
+  "/home/texlive/latex/src/advanced-network/cover/cover.tex" 1780399591.05036 628 118a6cb88ea455a1ae0a350d1543c5c2 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1136768653 1288 655e228510b4c2a1abe905c368440826 ""
@@ -21,8 +21,8 @@
   "/usr/local/texlive/2026/texmf-dist/web2c/texmf.cnf" 1770478701 43630 e9fa012910491fe5ae08a72c3c2997a7 ""
   "/usr/local/texlive/2026/texmf-var/web2c/euptex/uplatex.fmt" 1780207404 3654912 513732ae55b48895ece6eae1a908fd26 ""
   "/usr/local/texlive/2026/texmf.cnf" 1780207285 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
-  "cover.aux" 1780269476.16797 32 3985256e7290058c681f74d7a3565a19 "latex"
-  "cover.tex" 1780269475.85097 593 90a2661bd3af4454e020036ec5f133c0 ""
+  "cover.aux" 1780399591.41336 32 3985256e7290058c681f74d7a3565a19 "latex"
+  "cover.tex" 1780399591.05036 628 118a6cb88ea455a1ae0a350d1543c5c2 ""
   (generated)
   "cover.aux"
   "cover.dvi"

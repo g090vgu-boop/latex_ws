@@ -62,7 +62,7 @@
 
 {\LARGE \uline{手順}} 
 
-\begin{enumerate}[label=(\arabic*)]
+\begin{enumerate}[label=(\arabic*),leftmargin=*]
     \item Nmap を使ったホスト検出 \\
     サブゴール：探査用マシン(server)が属するネットワーク内で動作しているすべてのマシンをリストアップする．
     \begin{enumerate}[label=\arabic*, leftmargin=*]
@@ -84,7 +84,6 @@
             ホストが実行しているOS(OS名とバージョン)は何か, 
             どのような種類のパケットフィルタ/ファイアウォールが使用されているかなど,
             その他数多くの特徴を斬新な方法で判別する\cite{nmap_man_jp}.
-
             \quad
             ここでは-snオプションを用いる.
             このオプションを使うと, Nmapはpingスキャン(ホスト発見)のみを実行し, 
@@ -94,7 +93,6 @@
             デフォルトで、ICMPエコー要求と80番ポート宛てのTCPパケットを送信する. 
             高い権限を持つユーザが, ローカルイーサネットネットワーク上のターゲットのスキャンを試みる場合は,
             --send-ipが指定されていない限り、ARP要求(-PR)が用いられる\cite{nmap_man_host_discovery}.
-
             \vspace{\baselineskip}
             \quad
             pingスキャンのの実行結果を図\ref{fig:ping_scan_terminal}に示す.
@@ -218,17 +216,17 @@
     \begin{enumerate}[label=\arabic*, leftmargin=*]
         \item telnet と ssh のポート番号以外の違いで最も大きな違いは何か調査しなさい．
         
-        \vspace{\baselineskip}
-        \quad
-        telnetとsshはいずれもサーバ間のリモートアクセスに用いられるプロトコルであるが, sshでは通信内容が暗号化される一方でtelnetにおいては暗号化する仕組みがない\cite{telnet_ssh}.
-        \vspace{\baselineskip}
+            \vspace{\baselineskip}
+            \quad
+            telnetとsshはいずれもサーバ間のリモートアクセスに用いられるプロトコルであるが, sshでは通信内容が暗号化される一方でtelnetにおいては暗号化する仕組みがない\cite{telnet_ssh}.
+            \vspace{\baselineskip}
 
         \item 3 種類のポートスキャンで，OSI 参照モデルのどの層で，どのような手順で，どのように，どのような情報が，やり取りされるか再確認し，整理しなさい．
         
-        \vspace{\baselineskip}
-        \quad
-        3種類のポートスキャンとはTCP connectスキャン, SYNステルススキャン, UDPスキャンのことである.
-        各ポートスキャンの詳細については以下の通りである.
+            \vspace{\baselineskip}
+            \quad
+            3種類のポートスキャンとはTCP connectスキャン, SYNステルススキャン, UDPスキャンのことである.
+            各ポートスキャンの詳細については以下の通りである.
 
         \begin{enumerate}
             \item TCP connectスキャン\\
@@ -237,20 +235,10 @@
                 生パケットに書き込むのではなく, connectシステムコールを発行して, 
                 ターゲットのマシンのポートとコネクションを確立するよう下位OSに要求する. 
                 前述のとおり, 高レベルのシステムコールを呼び出しており, 制御の自由度や処理効率が低く, 
-                TCPコネクションを確立することからターゲットマシンのログにも残りやすい.
+                TCPコネクションを確立することからターゲットマシンのログにも残りやすい\cite{nmap_man_port_scanning_techniques}.
 
                 \quad
-                図\ref{fig:tcp_connect}はTCP\,connect\,スキャンの仕組みを示したものである.
-
-                \begin{figure}[htbp]
-                    \centering
-                    \includegraphics[width=0.8\textwidth]{imgs/2/tcp_connect.png} 
-                    \caption{TCP Connectスキャン(\cite{yamaguchi_ain_week5}より引用)}
-                    \label{fig:tcp_connect}
-                \end{figure}
-
-                \quad
-                図\ref{fig:tcp_connect}に示すTCP\,connect\,スキャンの手順は以下のとおりである.
+                TCP\,connect\,スキャンの手順は以下のとおりである.
 
                 \vspace{\baselineskip}
 
@@ -267,32 +255,222 @@
                             \item スキャン側から,ターゲットの対象ポートへ「接続したい」という要求（SYNパケット）を送信する.
                             \item ポートが閉じているため, ターゲットから「接続を拒否する」という応答（RST/ACKパケット）が返ってくる.
                         \end{enumerate}
-
                 \end{description}
-                
+
+                \vspace{\baselineskip}
+
+                \quad
+                図\ref{fig:tcp_connect_scan}は上述したTCP\,connect\,スキャンの手順をOSI参照モデルに基づいて図解したものである.
+
+                \begin{figure}[htbp]
+                    \centering
+                    \includegraphics[width=0.8\textwidth]{imgs/2/tcp_scan_osi.png} 
+                    \caption{OSIモデルに基づいたTCP Connectスキャンによるデータの流れ(\cite{yamaguchi_ain_week5}より引用・改変)}
+                    \label{fig:tcp_connect_scan}
+                \end{figure}
+
+                \quad
+                このスキャン手法はTCPコネクション確立の手続きを利用してポートのスキャンを行うため,
+                基本的には, それぞれのやり取りにおいてトランスポート層が起点・終点となってポートスキャンが行われる.
+                一方で, フィルタリングやファイアウォールの存在によって, 送信されたパケットがターゲットマシンのポートに到達しない場合もある.
+                タイプ3, コード13 (宛先到達不能; 通信が管理上の理由で禁止されている)などのICMPエラーメッセージを返すこともあるが,
+                応答しないで応答しないでパケットを破棄することが多い\cite{nmap_man_port_scanning}.
+                このような場合はICMPヘッダや, 何も応答がないことを理由にフィルタされている(filtered)と判定される\cite{nmap_man_port_scanning_techniques}.
+                したがって基本的には, TCP\,connect\,スキャンはTCPヘッダのフラグ情報をもとに,トランスポート層(第4層)以下で動作すると言える.
+  
                 \vspace{\baselineskip}
                 
-            \item SYNステルススキャン
-            \quad
+            \item SYNステルススキャン\\
+                \quad
                 nmapコマンドにおけるデフォルトのスキャン手法である. 
                 ファイアウォールによる妨害がなく, TCPコネクションも確立しないため, 
                 比較的秘匿性が高い. この手法ではTCPコネクションを確立するわけではないため, 
-                ハーフオープンスキャンと呼ばれることも多い.
+                ハーフオープンスキャンと呼ばれることも多い\cite{nmap_man_port_scanning_techniques}.
+
+                \quad
+                SYNステルススキャンの手順は以下のとおりである.
+
+                \vspace{\baselineskip}
+                \begin{description}[leftmargin=*]
+                    \item[ターゲットのポートが開放(open)されている場合] \leavevmode
+                        \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, leftmargin=*]
+                            \item スキャン側から,ターゲットの対象ポートへ「接続したい」という要求（SYNパケット）を送信する.
+                            \item ポートが開いているため, ターゲットから「接続を許可する」という応答（SYN/ACKパケット）が返ってくる.
+                            \item スキャン側から,さらに「確認した」という応答（RSTパケット）を返す.
+                        \end{enumerate}
+
+                    \item[ターゲットのポートがポートが閉塞(closed)している場合] \leavevmode
+                        \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, leftmargin=*]
+                            \item スキャン側から,ターゲットの対象ポートへ「接続したい」という要求（SYNパケット）を送信する.
+                            \item ポートが閉じているため, ターゲットから「接続を拒否する」という応答（RST/ACKパケット）が返ってくる.
+                        \end{enumerate}
+                \end{description}
+                \vspace{\baselineskip}
+                
+                \quad
+                図\ref{fig:syn_scan}は上述したSYNステルススキャンの手順をOSI参照モデルに基づいて図解したものである.
+
+                \begin{figure}[htbp]
+                    \centering
+                    \includegraphics[width=0.8\textwidth]{imgs/2/syn_scan_osi.png} 
+                    \caption{OSIモデルに基づいたSYNステルススキャンによるデータの流れ(\cite{yamaguchi_ain_week5}より引用・改変)}
+                    \label{fig:syn_scan}
+                \end{figure}
+
+                \quad
+                このスキャン手法もTCPコネクション確立の手続きを利用してポートのスキャンを行うため,
+                基本的には, それぞれのやり取りにおいてトランスポート層が起点・終点となってポートスキャンが行われる.
+                TCP\,connect\,スキャンと異なるのは, 
+                TCP\,connect\,スキャンと同じく, 一部例外を除けば基本的には図\ref{fig:syn_scan}の通り
+                トランスポート層を起点・終点としてポートスキャンが実行されるため, 
+                SYNステルススキャンはTCPヘッダのフラグ情報をもとに,
+                トランスポート層(第4層)以下で動作すると言える.
+                
+                \vspace{\baselineskip}
+            \item UDPスキャン\\
+            
+                空の(データなし)UDPヘッダを各ターゲットポートに送ることで機能する.
+                このスキャン手法の問題は, 処理が低速な点である.
+                ほか２つのスキャン手法と異なり, 
+                ポートが開いている場合にはターゲットからの応答がないため,
+                パケットや応答が行方不明になった場合に備えて再試行を行うことになる.
+                また, ポートが閉じている場合にはICMPポート到達不能エラーが帰ってくるが,
+                ICMP到達不能メッセージはデフォルトでレート制限されているため, 
+                すべてのポートをスキャンするのに膨大な時間を要するという問題がある\cite{nmap_man_port_scanning_techniques}.
+
+                \quad
+                UDPスキャンの手順は以下のとおりである.
+
+                \vspace{\baselineskip}
+                \begin{description}[leftmargin=*]
+                    \item[ターゲットのポートが開放(open)されている場合] \leavevmode
+                        \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, leftmargin=*]
+                            \item スキャン側から, ターゲットの対象ポートへ空のUDPヘッダ（データなしパケット）を送信する.
+                        \end{enumerate}
+                    
+                    \item[ターゲットのポートが閉塞(closed)している場合] \leavevmode
+                        \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, leftmargin=*]
+                            \item スキャン側から, ターゲットの対象ポートへ空のUDPヘッダ（データなしパケット）を送信する.
+                            \item ポートが閉じているため, ターゲットのOS（ネットワーク層）から「ポートに到達できない」という応答（ICMPポート到達不能エラー：Type 3, Code 3）が返ってくる.
+                        \end{enumerate}
+                \end{description}
+                \vspace{\baselineskip}
+
+                \quad
+                図\ref{fig:syn_scan}は上述したUDPスキャンの手順をOSI参照モデルに基づいて図解したものである.
+
+                \begin{figure}[htbp]
+                    \centering
+                    \includegraphics[width=0.8\textwidth]{imgs/2/udp_scan_osi.png} 
+                    \caption{OSIモデルに基づいたUDPスキャンによるデータの流れ(\cite{yamaguchi_ain_week5}より引用・改変)}
+                    \label{fig:udp_scan}
+                \end{figure}
+
+                \quad
+                空の(データなし)UDPヘッダを各ターゲットポートに送ることで機能する.
+                基本的には, ICMPポート到達不能エラー(タイプ3, コード1,2,9,10,13)が返された場合,
+                ポートは閉じており(closed), その他のICMPポート到達不能エラーがが返された場合,
+                ポートはフィルタされている(filtered).
+                まれにサービスがUDPパケットで応答する場合もあるが, その場合はポートは開いている(open)ことがわかる.
+                数回の再試行の後も応答がない場合にはポートは開いているあるいはフィルタされている(open|filtered)と判別することができる\cite{nmap_man_port_scanning_techniques}.
+                UDPスキャン手法もトランスポート層(第4層)以下で動くが,
+                ほか2つの手法と異なり, この手法は基本的にポートの状態の判断は,
+                ICMPエラーメッセージの有無(ネットワーク層)で行われる.
 
 
-            \item UDPスキャン
-        \end{enumerate}
-        \vspace{\baselineskip}
+            \end{enumerate}
+            \vspace{\baselineskip}
         
         \item ［被攻撃対象マシン］で telnetd と dropbear と ftp が起動していないことを確認する．起動している場合には停止させる．起動しているかどうかは ps コマンドなどで確認すること． \\
         ※ ftp は ftp という文字を含むプログラムが動いていないことを確認
+        
+            \vspace{\baselineskip}
+            \quad
+            図\ref{fig:router_process}はrouterにおいて,
+            psコマンドとgrepコマンドを組み合わせて
+            telnetdとdropbear, ftpのプロセスが起動していないことを確認するコマンドを実行した結果である.
+
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.8\textwidth]{imgs/2/no_process.png} 
+                \caption{routerにおける起動プロセスの確認}
+                \label{fig:router_process}
+            \end{figure}
+
+            grepによる条件を満たすプロセス(telnetまたはdropbearまたはftpという文字列を含むプロセス)は,
+            ここで実行したgrepコマンドによるもののみであるため, 
+            telnet, dropbear, ftp いずれのプロセスも起動していないことが確認できる.
+
+            \vspace{\baselineskip}
+        
+        
         \item ［探査用マシン］で Wireshark を起動し，以下の 4 つのポートスキャンによって生じた双方向の通信の内容を解析しなさい． \\
         ※ 先に以降の手順の意図を把握し，どのような結果を得るべきか考えて，解析をすることを奨める．また，適宜，解析を区切るなど，工夫して実施してもよい． \\
         ※ 結果の見通しをよくするためスキャン範囲を telnetd と dropbear が使用するポート番号の前後に絞ってもよいが、関係ないポートも一部含めること
+
+        telnet, dropbearが使用するポートはそれぞれ23,22である.
+        ここでは, 非攻撃対象マシンであるrouterに対して
+        telnetとdropbearのポートとftpの利用するポートである21を含めた
+        21から23の範囲にポートスキャンを行った.
+
         \begin{enumerate}[label=・]
             \item TCP connect スキャンを行う．
+                図\ref{fig:tcp_conncet_scan_result}はTCP\,connect\,スキャンの実行結果である. 
+                \begin{figure}[htbp]
+                    \centering
+                    \includegraphics[width=0.8\textwidth]{imgs/2/no_process_st_terminal.png} 
+                    \caption{TCP\,connect\,スキャンの実行結果1}
+                    \label{fig:tcp_connect_scan_result}
+                \end{figure}
+
+                \quad
+                ここから, 探索範囲にしたすべてのポートの状態(STATE)がclosedと表記されているため,
+                routerにおける21から23のすべてのポートが閉じていることが確認できる.
+                
+                \quad
+                図\ref{fig:tcp_connect_scan_result_w}は図\ref{fig:tcp_conncet_scan_result}においてスキャンが行われた際に
+                キャプチャされたパケットの一覧を示したものである.
+                \begin{figure}[htbp]
+                    \centering
+                    \includegraphics[width=0.8\textwidth]{imgs/2/no_process_st_w.png} 
+                    \caption{TCP\,connect\,スキャンの実行時にキャプチャされたパケット一覧1}
+                    \label{fig:tcp_connect_scan_result_w}
+                \end{figure}
+                
+                \vspace{\baselineskip}
+
+
+
             \item SYN ステルススキャンを行う．
+                図
+                % \ref{fig:tcp_conncet_scan_result}
+                はSYNステルススキャンの実行結果である. 
+                % \begin{figure}[htbp]
+                %     \centering
+                %     \includegraphics[width=0.8\textwidth]{imgs/2/no_process_ss_terminal.png} 
+                %     \caption{TCP\,connect\,スキャンの実行結果1}
+                %     \label{fig:tcp_connect_scan_result}
+                % \end{figure}
+
+                \quad
+                ここから, 探索範囲にしたすべてのポートの状態(STATE)がclosedと表記されているため,
+                routerにおける21から23のすべてのポートが閉じていることが確認できる.
+                \vspace{\baselineskip}
+                
             \item UDP スキャンを行う．
+            
+                図\ref{fig:udp_scan_result}はUDPスキャンの実行結果である. 
+                \begin{figure}[htbp]
+                    \centering
+                    \includegraphics[width=0.8\textwidth]{imgs/2/no_process_su_terminal.png} 
+                    \caption{TCP\,connect\,スキャンの実行結果1}
+                    \label{fig:tcp_connect_scan_result}
+                \end{figure}
+
+                \quad
+                ここから, 探索範囲にしたすべてのポートの状態(STATE)がclosedと表記されているため,
+                routerにおける21から23のすべてのポートが閉じていることが確認できる.
+                \vspace{\baselineskip}
             \item TCP/IP fingerprinting を用いて OS を判別する．
         \end{enumerate}
         \item ［被攻撃対象マシン］で telnetd と dropbear と ftp を起動させる．dropbear を起動させる際には，オプションとして -R をつけること．FTP server は，既にインストールされているソフト(GUI)を起動させればよい．

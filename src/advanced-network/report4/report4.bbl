@@ -46,7 +46,7 @@
       \field{title}{Nmap リファレンスガイド (Man Page)}
       \field{year}{2026}
     \endentry
-    \entry{nmap_man_host_discovery}{misc}{}{}
+    \entry{nmap_man_port_scanning}{misc}{}{}
       \name{author}{2}{}{%
         {{hash=848221c5154bbafbaa40135bda178bbe}{%
            family={{Insecure.Org}},
@@ -64,6 +64,60 @@
       \strng{authorfullhash}{b17f51ad042cf723129be1a06728e03c}
       \strng{authorfullhashraw}{b17f51ad042cf723129be1a06728e03c}
       \field{extraname}{2}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Nmap.org, \url{https://nmap.org/man/ja/man-port-scanning-basics.html}}
+      \field{note}{閲覧日: 2026年6月2日}
+      \field{title}{Nmap リファレンスガイド (Man Page) --- ポートスキャンの基本}
+      \field{year}{2026}
+    \endentry
+    \entry{nmap_man_port_scanning_techniques}{misc}{}{}
+      \name{author}{2}{}{%
+        {{hash=848221c5154bbafbaa40135bda178bbe}{%
+           family={{Insecure.Org}},
+           familyi={I\bibinitperiod}}}%
+        {{hash=ee6d50f56d2a0788635c237496a922b6}{%
+           family={{Nmap Project}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{fullhash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{fullhashraw}{b17f51ad042cf723129be1a06728e03c}
+      \strng{bibnamehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authorbibnamehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authornamehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authorfullhash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authorfullhashraw}{b17f51ad042cf723129be1a06728e03c}
+      \field{extraname}{3}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Nmap.org, \url{https://nmap.org/man/ja/man-port-scanning-techniques.html}}
+      \field{note}{閲覧日: 2026年6月2日}
+      \field{title}{Nmap リファレンスガイド (Man Page) --- ポートスキャン手法}
+      \field{year}{2026}
+    \endentry
+    \entry{nmap_man_host_discovery}{misc}{}{}
+      \name{author}{2}{}{%
+        {{hash=848221c5154bbafbaa40135bda178bbe}{%
+           family={{Insecure.Org}},
+           familyi={I\bibinitperiod}}}%
+        {{hash=ee6d50f56d2a0788635c237496a922b6}{%
+           family={{Nmap Project}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{fullhash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{fullhashraw}{b17f51ad042cf723129be1a06728e03c}
+      \strng{bibnamehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authorbibnamehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authornamehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authorfullhash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authorfullhashraw}{b17f51ad042cf723129be1a06728e03c}
+      \field{extraname}{4}
       \field{sortinit}{I}
       \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
       \field{labelnamesource}{author}
