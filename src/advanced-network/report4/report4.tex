@@ -686,13 +686,10 @@
                 \end{figure}
 
                 \quad
-                ここから, 探索範囲にしたすべてのポートの
-
+                ターミナルでの実行結果から, 
+                探索範囲内のすべてのudpポートが閉鎖(closed)されていることが確認できる.\\
                 \quad
-                % 図\ref{fig:udp_scan_result_w_2}はUDPスキャンの実行時にキャプチャされたパケットの一覧を示したものである.
-                
-
-                \quad
+                続いて, wiresharkでのキャプチャ結果では, 
                 データ長0, すなわち, 空のUDPパケットがserverからrouterへ送られた後に,
                 routerからserverに対してICMPのポート到達不能メッセージが送信されていることが確認できる.
                 図\ref{fig:udp_scan_osi}におけるUDPスキャンの手順において, 
@@ -709,11 +706,11 @@
                     \includegraphics[width=0.8\textwidth]{imgs/2/active_nmap_O.png} 
                     \caption{TCP/IP fingerprinting を用いて OS を判別の実行結果2}
                     \label{fig:fingerprint_scan_result_after}
-                \end{figure}
-
-                
+                \end{figure}   
 
                 \quad
+                ターミナルの実行結果から,
+
 
 
         \end{enumerate}
