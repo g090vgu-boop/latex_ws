@@ -2392,6 +2392,8 @@
     <bcf:citekey order="17" intorder="1">nmap_man_port_scanning_techniques</bcf:citekey>
     <bcf:citekey order="18" intorder="1">infraexpert_telnet_ssh</bcf:citekey>
     <bcf:citekey order="19" intorder="1">ubuntu_dropbear_man</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">nmap_os_detection</bcf:citekey>
+    <bcf:citekey order="21" intorder="1">nmap_man_osdetect_ja</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

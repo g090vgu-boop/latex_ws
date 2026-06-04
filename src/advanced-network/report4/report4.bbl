@@ -169,6 +169,58 @@
       \verb https://manpages.ubuntu.com/manpages/focal/man8/dropbear.8.html
       \endverb
     \endentry
+    \entry{nmap_os_detection}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=5fecd2561826eb4014ebd779cb15921a}{%
+           family={Lyon},
+           familyi={L\bibinitperiod},
+           given={Gordon},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{fullhash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{fullhashraw}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{bibnamehash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{authorbibnamehash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{authornamehash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{authorfullhash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{authorfullhashraw}{5fecd2561826eb4014ebd779cb15921a}
+      \field{extraname}{1}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://nmap.org/book/osdetect-methods.html}}
+      \field{note}{Accessed: 2026-06-04}
+      \field{title}{Nmap Network Scanning, Chapter 8. Remote OS Detection: TCP/IP Fingerprinting Methods Supported by Nmap}
+      \field{year}{2026}
+    \endentry
+    \entry{nmap_man_osdetect_ja}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=5fecd2561826eb4014ebd779cb15921a}{%
+           family={Lyon},
+           familyi={L\bibinitperiod},
+           given={Gordon},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{fullhash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{fullhashraw}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{bibnamehash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{authorbibnamehash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{authornamehash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{authorfullhash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{authorfullhashraw}{5fecd2561826eb4014ebd779cb15921a}
+      \field{extraname}{2}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://nmap.org/man/ja/man-os-detection.html}}
+      \field{note}{Accessed: 2026-06-04}
+      \field{title}{Nmap リファレンスガイド (Man Page): OS 検出}
+      \field{year}{2026}
+    \endentry
     \entry{rfc1035}{report}{}{}
       \name{author}{1}{}{%
         {{hash=a44b90ef653ba684badd93d3f7acb017}{%

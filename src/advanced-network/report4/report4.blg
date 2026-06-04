@@ -1,0 +1,17 @@
+[0] Config.pm:328> INFO - This is Biber 2.21
+[0] Config.pm:331> INFO - Logfile is 'report4.blg'
+[123] biber:342> INFO - === Thu Jun  4, 2026, 08:24:28
+[142] Biber.pm:421> INFO - Reading 'report4.bcf'
+[213] Biber.pm:1002> INFO - Found 11 citekeys in bib section 0
+[229] Biber.pm:4487> INFO - Processing section 0
+[241] Biber.pm:4678> INFO - Looking for bibtex file '../source.bib' for section 0
+[281] bibtex.pm:1713> INFO - LaTeX decoding ...
+[296] bibtex.pm:1519> INFO - Found BibTeX data source '../source.bib'
+[418] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[418] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[418] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[418] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
+[436] bbl.pm:676> INFO - Writing 'report4.bbl' with encoding 'UTF-8'
+[444] bbl.pm:779> INFO - Output to report4.bbl
+[444] Biber.pm:132> WARN - legacy month field 'November' in entry 'rfc1035' is not an integer - this will probably not sort properly.
+[445] Biber.pm:134> INFO - WARNINGS: 1
