@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.2-u2.02-251130-2.6 (utf8.uptex) (TeX Live 2026) (preloaded format=uplatex 2026.5.31)  1 JUN 2026 03:58
+This is e-upTeX, Version 3.141592653-p4.1.2-u2.02-251130-2.6 (utf8.uptex) (TeX Live 2026) (preloaded format=uplatex 2026.5.31)  4 JUN 2026 05:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -402,28 +402,31 @@ LaTeX Font Info:    Font shape `JY2/gt/m/n' will be
 File: imgs/no_dropbear.png Graphic file (type bmp)
 <imgs/no_dropbear.png>
 LaTeX Font Info:    Font shape `JT2/mc/m/n' will be
-(Font)              scaled to size 8.32214pt on input line 70.
+(Font)              scaled to size 8.32214pt on input line 68.
 LaTeX Font Info:    Font shape `JY2/mc/m/n' will be
-(Font)              scaled to size 8.32214pt on input line 70.
-File: imgs/ssh_failed.png Graphic file (type bmp)
-<imgs/ssh_failed.png>
+(Font)              scaled to size 8.32214pt on input line 68.
  [1
 
 ]
+File: imgs/ssh_failed.png Graphic file (type bmp)
+<imgs/ssh_failed.png>
 LaTeX Font Info:    Font shape `JT2/mc/m/n' will be
-(Font)              scaled to size 6.47278pt on input line 95.
+(Font)              scaled to size 6.47278pt on input line 106.
 LaTeX Font Info:    Font shape `JY2/mc/m/n' will be
-(Font)              scaled to size 6.47278pt on input line 95.
+(Font)              scaled to size 6.47278pt on input line 106.
+File: imgs/set_iptables.png Graphic file (type bmp)
+<imgs/set_iptables.png>
+ [2]
 File: imgs/ssh_win2sever_via_router.png Graphic file (type bmp)
 <imgs/ssh_win2sever_via_router.png>
- [2]
+ [3]
 File: imgs/ssh_login_result.png Graphic file (type bmp)
 <imgs/ssh_login_result.png>
 File: imgs/same_packet_example.png Graphic file (type bmp)
 <imgs/same_packet_example.png>
- [3] [4]
+ [4] [5]
 
-LaTeX Warning: Empty bibliography on input line 154.
+LaTeX Warning: Empty bibliography on input line 210.
 
 (./report5.aux)
  ***********
@@ -436,12 +439,12 @@ Package logreq Info: Writing requests to 'report5.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 9687 strings out of 467983
- 184991 string characters out of 5430778
- 1028772 words of memory out of 5000000
- 38735 multiletter control sequences out of 15000+600000
+ 9694 strings out of 467983
+ 185180 string characters out of 5430778
+ 1027804 words of memory out of 5000000
+ 38741 multiletter control sequences out of 15000+600000
  633729 words of font info for 76 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
  60i,7n,66p,745b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on report5.dvi (4 pages, 9232 bytes).
+Output written on report5.dvi (5 pages, 10164 bytes).

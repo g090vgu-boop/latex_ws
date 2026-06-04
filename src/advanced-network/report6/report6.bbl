@@ -1,0 +1,64 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{man:iptables}{manual}{}{}
+      \name{author}{2}{}{%
+        {{hash=bbdca53c492ce8ccdddee09b7907cb50}{%
+           family={Russell},
+           familyi={R\bibinitperiod},
+           given={Rusty},
+           giveni={R\bibinitperiod}}}%
+        {{hash=f0a19cab9257bb264246f6a579ff7cba}{%
+           family={Team},
+           familyi={T\bibinitperiod},
+           given={Netfilter\bibnamedelima Core},
+           giveni={N\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Netfilter Project}%
+      }
+      \strng{namehash}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{fullhash}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{fullhashraw}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{bibnamehash}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{authorbibnamehash}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{authornamehash}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{authorfullhash}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{authorfullhashraw}{b649952968d6aa4c00da7188a58fddaf}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{Version 1.4.21}
+      \field{note}{Linux Manual Page, Section: iptables 1.4.21 (8)}
+      \field{title}{iptables(8) --- IPv4/IPv6 のパケットフィルタと NAT の管理ツール}
+      \field{year}{2013}
+      \verb{urlraw}
+      \verb https://linuxjm.sourceforge.io/html/iptables/man8/iptables.8.html
+      \endverb
+      \verb{url}
+      \verb https://linuxjm.sourceforge.io/html/iptables/man8/iptables.8.html
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

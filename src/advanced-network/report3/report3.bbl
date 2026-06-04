@@ -85,7 +85,7 @@
       \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{howpublished}{Oracle Documentation, \url{https://docs.oracle.com/cd/E19253-01/819-0380/ipv6-admintasks-53/index.html }}
+      \field{howpublished}{Oracle Documentation, \url{https://docs.oracle.com/cd/E19253-01/819-0380/ipv6-admintasks-53/index.html}}
       \field{note}{閲覧日: 2026年6月2日}
       \field{title}{ping コマンドによるリモートホストの検証 --- {Solaris} のシステム管理 ({IP} サービス)}
       \field{year}{2010}

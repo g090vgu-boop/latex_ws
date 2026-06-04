@@ -7,7 +7,7 @@
 
 % --- 参考文献用の設定 ---
 \usepackage[backend=biber, style=numeric]{biblatex} % biblatexパッケージの使用
-\addbibresource{source.bib} % 先ほど作った別ファイルを指定（拡張子まで書く）
+\addbibresource{../source.bib} % 先ほど作った別ファイルを指定（拡張子まで書く）
 \usepackage{url} % WebサイトのURLを綺麗に出力するため
 
 % --- section の文字サイズを小さくする設定 ---
@@ -83,7 +83,7 @@
             これらのホストが提供しているサービス(アプリケーション名とバージョン)は何か, 
             ホストが実行しているOS(OS名とバージョン)は何か, 
             どのような種類のパケットフィルタ/ファイアウォールが使用されているかなど,
-            その他数多くの特徴を斬新な方法で判別する\cite{nmap_man_jp}.
+            その他数多くの特徴を斬新な方法で判別する\cite{nmap_man_jp}.\\
             \quad
             ここでは-snオプションを用いる.
             このオプションを使うと, Nmapはpingスキャン(ホスト発見)のみを実行し, 
@@ -92,8 +92,7 @@
             pingスウィープやpingスキャンとも呼ばれるこの手法は, 
             デフォルトで、ICMPエコー要求と80番ポート宛てのTCPパケットを送信する. 
             高い権限を持つユーザが, ローカルイーサネットネットワーク上のターゲットのスキャンを試みる場合は,
-            --send-ipが指定されていない限り、ARP要求(-PR)が用いられる\cite{nmap_man_host_discovery}.
-            \vspace{\baselineskip}
+            --send-ipが指定されていない限り、ARP要求(-PR)が用いられる\cite{nmap_man_host_discovery}.\\
             \quad
             pingスキャンのの実行結果を図\ref{fig:ping_scan_terminal}に示す.
             探索範囲には$192.168.100.1 \sim 192.168.100.5$を指定した.
@@ -109,6 +108,7 @@
                 \label{fig:ping_scan_terminal}
             \end{figure}
 
+            \quad
             図\ref{fig:ping_scan_terminal}の結果から, pingスキャンの結果として, 
             192.168.100.1と192.168.100.2の2つのIPアドレスが検出されたことがわかる.
             これはそれぞれrouterとserverのIPアドレスであり, 想定通りの結果が得られた.
@@ -134,7 +134,7 @@
             キャプチャ順にソートされている.
             ここから, pingスキャンの実行に伴い, ARPリクエスト・DNS・ICMPといったプロトコルのパケットがキャプチャされたことがわかる.
             最初にキャプチャされているパケットがARPによるものであり, 
-            まずNo.1\~4にかけて特定のMACアドレスからブロードキャストで合計4つのパケットが送信されていることが分かる.
+            まずNo.1$\sim$4にのパケットにかけて特定のMACアドレスからブロードキャストで合計4つのパケットが送信されていることが分かる.
             infoフィールドにはWho has 192.168.100.[1,3,4,5]と記載されている.
             例として図\ref{fig:nmap_ping_scan_result}におけるNo.1のパケットの詳細を図\ref{fig:nmap_ping_scan_result_arp_request}に示す.
             
@@ -166,27 +166,33 @@
             すなわち, routerからserverへ返されたARP応答である.
 
             \quad
-            続いてNo.6\~ 8にかけて再びARP要求パケットがブロードキャストされていることが分かる.
+            続いてNo.6$\sim$8にかけて再びARP要求パケットがブロードキャストされていることが分かる.
             これは1回目のARP要求に対する応答が得られなかったIPアドレスに対して, 再度ARP要求がブロードキャストされたものであると考えられる.
             実際にキャプチャされたパケットにおいてもARP要求の再送が行われているのは192.168.100.[3,4,5]のIPアドレスに対してである.
 
             \quad
-            次に, No.9でDNSのパケットがキャプチャされている.
-            このパケットの詳細について図\ref{fig:nmap_ping_scan_result_dns}に示す.
+            次にキャプチャされたDNSのパケットの詳細について図\ref{fig:nmap_ping_scan_result_dns}に示す.
 
             \begin{figure}[htbp]
                 \centering
-                \includegraphics[width=0.8\textwidth]{imgs/1/nmap_ping_scan_result_dns.png} 
+                \includegraphics[width=0.8\textwidth]{imgs/1/dns.png} 
                 \caption{DNS問い合わせ}
                 \label{fig:nmap_ping_scan_result_dns}
             \end{figure}
 
             \quad
-            図\ref{fig:nmap_ping_scan_result_dns}から, <todo>
+            図\ref{fig:nmap_ping_scan_result_dns}から, DNS$rightallow$Queriesにおいて,
+            1.100.168.192.in-addr.arpa:type\,PTR, class\,INとの記述が読み取れる.
+            DNS逆引きにおいてはドメイン名とタイプがそれぞれ,
+             [逆順IP].IN-ADDR.ARPA, PTR
+            になるため\cite{rfc1035},
+            これはDNS逆引きのためのDNSパケットであることがわかる.
+            今回は-nオプション(DNS解決を行わない)を指定していないため,
+            DNS逆引きを試みている\cite{nmap_man_host_discovery}.
+
 
             \quad
-            次にNo.10でICMPのパケットがキャプチャされている.
-            このパケットの詳細について図\ref{fig:nmap_ping_scan_result_icmp}に示す.
+            次に, ICMPパケットの詳細について図\ref{fig:nmap_ping_scan_result_icmp}に示す.
 
             \begin{figure}[htbp]
                 \centering
@@ -410,121 +416,107 @@
 
         telnet, dropbearが使用するポートはそれぞれ23,22である\cite{infraexpert_telnet_ssh}\cite{ubuntu_dropbear_man}.
         ここでは, 非攻撃対象マシンであるrouterに対して
-        telnetとdropbearのポートとftpの利用するポートである21を含めた
-        21から23の範囲にポートスキャンを行った.
+        telnetとdropbearのポートとftpの利用するポートである21と24を含めた
+        21から24の範囲にポートスキャンを行った.
 
         \begin{enumerate}[label=・]
             \item TCP connect スキャンを行う．
-                図\ref{fig:tcp_conncet_scan_result_1}はTCP\,connect\,スキャンの実行結果である. 
+                図\ref{fig:tcp_conncet_scan_result_after}はTCP\,connect\,スキャンの実行結果である. 
                 \begin{figure}[htbp]
                     \centering
-                    \includegraphics[width=0.8\textwidth]{imgs/2/no_process_st_terminal.png} 
-                    \caption{TCP\,connect\,スキャンの実行結果1}
-                    \label{fig:tcp_connect_scan_result_1}
+                    \includegraphics[width=0.8\textwidth]{imgs/2/no_process_st.png} 
+                    \caption{TCP\,connect\,スキャンの実行結果(サービスダウン時)}
+                    \label{fig:tcp_connect_scan_result_after}
                 \end{figure}
 
                 \quad
-                ここから, 探索範囲にしたすべてのポートの状態(STATE)がclosedと表記されているため,
-                routerにおける21から23のすべてのポートが閉じていることが確認できる.
-                
+                ターミナルにおける実行結果から, 探索範囲にしたすべてのポートの状態(STATE)がclosedと表記されているため,
+                routerにおける21から24のすべてのポートが閉じていることが確認できる.\\
                 \quad
-                図\ref{fig:tcp_connect_scan_result_w_1}は図\ref{fig:tcp_conncet_scan_result_1}においてスキャンが行われた際に
-                キャプチャされたパケットの一覧を示したものである.
-                \begin{figure}[htbp]
-                    \centering
-                    \includegraphics[width=0.8\textwidth]{imgs/2/no_process_st_w.png} 
-                    \caption{TCP\,connect\,スキャンの実行時にキャプチャされたパケット一覧1}
-                    \label{fig:tcp_connect_scan_result_w_1}
-                \end{figure}
-
-                \quad
-                図\ref{fig:tcp_connect_scan_result_w_1}においてNo.12-17にTCPプロトコルのパケットがキャプチャされていることがわかる.
+                また, wiresharkでのキャプチャ結果から,
                 serverからrouterに対して, SYNパケットが送信され,
                 routerからserverに対して, RST/ACKパケットが返されていることがわかる.
                 これは, 図\ref{fig:tcp_scan_osi}におけるTCP\,connect\,スキャンの手順において, 
-                ターゲットのポートが閉塞(closed)している場合の手順と一致していることが分かる.
-
-                
+                ターゲットのポートが閉塞(closed)している場合の手順と一致している. 
                 \vspace{\baselineskip}
 
-
-
-            \item SYN ステルススキャンを行う．
-                図
-                % \ref{fig:tcp_conncet_scan_result_1}
+            \item SYN ステルススキャンを行う．\\
+                図\ref{fig:syn_scan_result_before}
                 はSYNステルススキャンの実行結果である. 
-                % \begin{figure}[htbp]
-                %     \centering
-                %     \includegraphics[width=0.8\textwidth]{imgs/2/no_process_ss_terminal.png} 
-                %     \caption{TCP\,connect\,スキャンの実行結果1}
-                %     \label{fig:tcp_connect_scan_result_1}
-                % \end{figure}
+                \begin{figure}[htbp]
+                    \centering
+                    \includegraphics[width=0.8\textwidth]{imgs/2/no_process_ss.png} 
+                    \caption{SYNステルススキャンの実行結果(サービスダウン時)}
+                    \label{fig:syn_scan_result_before}
+                \end{figure}
 
                 \quad
                 ここから, 探索範囲にしたすべてのポートの状態(STATE)がclosedと表記されているため,
-                routerにおける21から23のすべてのポートが閉じていることが確認できる.
+                routerにおける21から24のすべてのポートが閉じていることが確認できる.\\
 
                 \quad
-                図\ref{fig:syn_scan_result_w_1}はSYNステルススキャンの実行時にキャプチャされたパケットの一覧を示したものである.
-                \begin{figure}[htbp]
-                    \centering
-                    \includegraphics[width=0.8\textwidth]{imgs/2/no_process_ss_w.png} 
-                    \caption{SYNステルススキャンの実行時にキャプチャされたパケット一覧1}
-                    \label{fig:syn_scan_result_w_1}
-                \end{figure}
+                また, wiresharkでのキャプチャ結果から,
+                serverからrouterに対して, SYNパケットが送信され,
+                routerからserverに対して, RST/ACKパケットが返されていることがわかる.
+                これは, 図\ref{fig:syn_scan_osi}におけるSYNステルススキャンの手順において, 
+                ターゲットのポートが閉塞(closed)している場合の手順と一致している. 
                 \vspace{\baselineskip}
+
+
                 
             \item UDP スキャンを行う．
             
-                % 図\ref{fig:udp_scan_result}はUDPスキャンの実行結果である. 
-                % \begin{figure}[htbp]
-                %     \centering
-                %     \includegraphics[width=0.8\textwidth]{imgs/2/no_process_su_terminal.png} 
-                %     \caption{UDPスキャンの実行結果}
-                %     \label{fig:udp_scan_result}
-                % \end{figure}
-
-                \quad
-                ここから, 探索範囲にしたすべてのポートの状態(STATE)がclosedと表記されているため,
-                routerにおける21から23のすべてのポートが閉じていることが確認できる.
-
-                \quad
-                図\ref{fig:udp_scan_result_w_1}はUDPスキャンの実行時にキャプチャされたパケットの一覧を示したものである.
+                図\ref{fig:udp_scan_result_before}はUDPスキャンの実行結果である. 
                 \begin{figure}[htbp]
                     \centering
-                    \includegraphics[width=0.8\textwidth]{imgs/2/no_process_su_w.png} 
-                    \caption{UDPスキャンの実行時にキャプチャされたパケット一覧1}
-                    \label{fig:udp_scan_result_w_1}
+                    \includegraphics[width=0.8\textwidth]{imgs/2/no_process_su.png} 
+                    \caption{UDPスキャンの実行結果(サービスダウン時)}
+                    \label{fig:udp_scan_result_before}
                 \end{figure}
 
-
-
+                \quad
+                ターミナルでの実行結果から, 
+                探索範囲にしたすべてのポートの状態(STATE)がclosedと表記されているため,
+                routerにおける21から24のすべてのポートが閉じていることが確認できる.\\
+                \quad
+                また, wiresharkでのキャプチャ結果から,
+                serverからrouterに対して, 
+                Info$\rightarrow$Lenが0すなわち, 
+                空データのUDPパケットがserverからrouterに送信され,
+                routerからserverに対してICMPのポート到達不能メッセージが送信されていることが確認できる.
+                これは図\ref{fig:udp_scan_osi}
+                におけるUDPスキャンの手順においてターゲットのポートが
+                閉鎖(closed)している場合の手順と一致している.
                 \vspace{\baselineskip}
+
             \item TCP/IP fingerprinting を用いて OS を判別する．
             
-                % 図\ref{fig:fingerprint_scan_result}はTCP/IP\, fingerprinting を用いて OS を判別の実行結果である.
-                % \begin{figure}[htbp]
-                %     \centering
-                %     \includegraphics[width=0.8\textwidth]{imgs/2/no_process_o_terminal.png} 
-                %     \caption{TCP/IP fingerprinting を用いて OS を判別の実行結果1}
-                %     \label{fig:fingerprint_scan_result}
-                % \end{figure}
+                \vspace{\baselineskip}    
+
+                図\ref{fig:fingerprint_scan_result_before}はTCP/IP\, fingerprinting を用いて OS を判別の実行結果である.
+                \begin{figure}[htbp]
+                    \centering
+                    \includegraphics[width=0.8\textwidth]{imgs/2/no_process_o.png} 
+                    \caption{TCP/IP fingerprinting を用いて OS を判別の実行結果(サービスダウン時)}
+                    \label{fig:fingerprint_scan_result_before}
+                \end{figure}
 
 
                 \quad
-                図\ref{fig:fingerprint_scan_result_w_1}はTCP/IP\, fingerprinting を用いて OS を判別の実行時にキャプチャされたパケットの一覧を示したものである.
-
-                \begin{figure}[htbp]
-                    \centering
-                    \includegraphics[width=0.8\textwidth]{imgs/2/no_process_o_w1.png} 
-                    \caption{TCP/IP\, fingerprinting を用いて OS を判別の実行時にキャプチャされたパケット一覧1}
-                    \label{fig:fingerprint_scan_result_w_1}
-                \end{figure}
+                ターミナルの実行結果から,
+                探索範囲にしたすべてのポートの状態(STATE)がclosedと表記されているため,
+                routerにおける21から24のすべてのポートが閉じていることが確認できる.\\
+                ここから, -Oオプションによるos判別のコマンドが実行されると,
+                大量のTCP, UDP, ICMPパケットが行き交っていることがわかる.
+                \vspace{\baselineskip}
 
         \end{enumerate}
         \item ［被攻撃対象マシン］で telnetd と dropbear と ftp を起動させる．dropbear を起動させる際には，オプションとして -R をつけること．FTP server は，既にインストールされているソフト(GUI)を起動させればよい．
         \item telnetd と dropbear と ftp が起動していることを確認する．
         
+            \vspace{\baselineskip}
+
+            \quad
             図\ref{fig:active_check}はrouter[被攻撃対象マシン]においてtelnetdとdropbearとftpが起動していることを確認した結果である.
             \begin{figure}[htbp]
                 \centering
@@ -533,6 +525,7 @@
                 \label{fig:active_check}
             \end{figure}
 
+            \quad
             grepによる条件を満たすプロセス(telnetまたはdropbearまたはftpという文字列を含むプロセス)がgrepによるプロセス以外に,
             telnetとdropbearとftpに対応するものがそれぞれ1つずつ確認できることから, telnetdとdropbearとftpが起動していることが確認できる.
             \vspace{\baselineskip}
@@ -553,14 +546,58 @@
         \item ［探査用マシン］から［被攻撃対象マシン］へ telnet および ssh でログインする過程で生じた通信の内容を解析し，調査結果より想定される telnet と ssh の最も大きな違いが確認できることを，実験した結果（比較を含む）を用いて，レポートで報告しなさい． \\
         ヒント：TCP stream でログイン時のパケット内の情報について確認する
 
-
-            図\ref{fig:ssh_login_packets}は探査用マシンから被攻撃対象マシンへsshでログインする過程でwiresharkでキャプチャされたパケットの一覧である.
+            図\ref{fig:telnet_login_packets}, \ref{fig:ssh_login_packets}は
+            探査用マシンから被攻撃対象マシンへtelnetおよびsshでログインする過程でwiresharkでキャプチャされたパケットの一覧である.
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.8\textwidth]{imgs/2/telnet_w.png} 
+                \caption{telnetでログインにキャプチャされたパケットの一覧}
+                \label{fig:telnet_login_packets}
+            \end{figure}
             \begin{figure}[htbp]
                 \centering
                 \includegraphics[width=0.8\textwidth]{imgs/2/ssh_w.png} 
-                \caption{ssh実行時にキャプチャされたパケットの一覧}
+                \caption{sshでログイン時にキャプチャされたパケットの一覧}
                 \label{fig:ssh_login_packets}
             \end{figure}
+
+            \quad
+            telnetでログインシた際にキャプチャされたパケットの一覧を確認すると,
+            最初に, 3wayハンドシェイクによりserverとrouterとの間で通信が確立された後に,
+            TCP及びTELNETプロトコルの大量のパケットがキャプチャされていることがわかる.\\
+            \quad 
+            一方で, sshでログインした際にキャプチャ刺されたパケットでは,
+            同じく3wayハンドシェイクによりserverとrouterとの間で通信が確立された後に,
+            TCP及びSSHv2プロトコルの大量のパケットがキャプチャされていることがわかる.\\
+            \quad
+            図\ref{fig:telnet_login_tcp_stream}, \ref{fig:ssh_login_tcp_stream}に
+            図\ref{fig:telnet_login_packets}, \ref{fig:ssh_login_packets}で
+            得られたパケットにおけるTCPストリームの例を示す.
+
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.8\textwidth]{imgs/2/telnet_w_tcp_stream.png} 
+                \caption{telnetでログイン時に得られたパケットの例}
+                \label{fig:telnet_login_tcp_stream}
+            \end{figure}
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.8\textwidth]{imgs/2/ssh_w_tcp_stream.png} 
+                \caption{sshでログイン時に得られたパケットの例}
+                \label{fig:ssh_login_tcp_stream}
+            \end{figure}
+
+            \quad
+            TCPストリームの内容を比較すると,
+            telnetによる通信によって生じたパケットにおいては
+            ユーザ名とパスワードがそのままTCPストリームに埋め込まれているのに対して,
+            sshによる通信によって生じたパケットでは, 
+            通信の内容が暗号化されていることが確認できる.
+
+            \vspace{\baselineskip}
+
+
+            
 
 
         \item 再び，手順 4.を実行し，以前の手順 4.での結果（出力とキャプチャパケットの面で）と比較し，整理した各ポートスキャンの動作の仕組み（OSI 参照モデルのどの層で，どのような手順で，どのように，どのような情報が，やり取りされるか）を，実験した結果（比較を含む）を用いて，レポートで報告しなさい．
@@ -607,6 +644,16 @@
                 \quad
                 ここから, 探索範囲にしたすべてのポートの状態(STATE)がclosedと表記されているため,
                 routerにおける21から23のすべてのポートが閉じていることが確認できる.
+
+                \begin{figure}[htbp]
+                    \centering
+                    \includegraphics[width=0.8\textwidth]{imgs/2/active_nmap_sS_w.png} 
+                    \caption{SYNステルススキャンの実行時にキャプチャされたパケット一覧2}
+                    \label{fig:syn_scan_result_w_2}
+                \end{figure}
+
+                \quad
+                ここから, 
                 \vspace{\baselineskip}
                 
             \item UDP スキャンを行う．
@@ -620,8 +667,7 @@
                 \end{figure}
 
                 \quad
-                ここから, 探索範囲にしたすべてのポートの状態(STATE)がclosedと表記されているため,
-                routerにおける21から23のすべてのポートが閉じていることが確認できる.
+                ここから, 探索範囲にしたすべてのポートの
 
                 \quad
                 図\ref{fig:udp_scan_result_w_2}はUDPスキャンの実行時にキャプチャされたパケットの一覧を示したものである.
@@ -632,10 +678,17 @@
                     \label{fig:udp_scan_result_w_2}
                 \end{figure}
 
+                \quad
+                データ長0, すなわち, 空のUDPパケットがserverからrouterへ送られた後に,
+                routerからserverに対してICMPのポート到達不能メッセージが送信されていることが確認できる.
+                図\ref{fig:udp_scan_osi}におけるUDPスキャンの手順において, 
+                ターゲットのポートが開放(open)されている場合の手順と一致していることが分かる.
+
 
                 \vspace{\baselineskip}
             \item TCP/IP fingerprinting を用いて OS を判別する．
             
+                \quad
                 図\ref{fig:fingerprint_scan_result_2}はTCP/IP\, fingerprinting を用いて OS を判別の実行結果である.
                 \begin{figure}[htbp]
                     \centering
@@ -644,6 +697,7 @@
                     \label{fig:fingerprint_scan_result_2}
                 \end{figure}
 
+                
 
                 \begin{figure}[htbp]
                     \centering
@@ -651,6 +705,10 @@
                     \caption{TCP/IP fingerprinting を用いた OS 判別を実行した際にキャプチャされたパケットの一覧2}
                     \label{fig:fingerprint_scan_result_w_2}
                 \end{figure}
+
+                \quad
+
+
         \end{enumerate}
             
             
