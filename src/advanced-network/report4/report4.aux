@@ -35,7 +35,7 @@
 \abx@aux@cite{0}{nmap_man_port_scanning_techniques}
 \abx@aux@segm{0}{0}{nmap_man_port_scanning_techniques}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces OSIモデルに基づいたTCP Connectスキャンによるデータの流れ(\blx@tocontentsinit {0}\cite {yamaguchi_ain_week5}より引用・改変)}}{8}{}\protected@file@percent }
-\newlabel{fig:tcp_connect_scan}{{7}{8}{}{figure.7}{}}
+\newlabel{fig:tcp_scan_osi}{{7}{8}{}{figure.7}{}}
 \abx@aux@cite{0}{yamaguchi_ain_week5}
 \abx@aux@segm{0}{0}{yamaguchi_ain_week5}
 \abx@aux@cite{0}{yamaguchi_ain_week5}
@@ -59,7 +59,7 @@
 \abx@aux@cite{0}{ubuntu_dropbear_man}
 \abx@aux@segm{0}{0}{ubuntu_dropbear_man}
 \@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces TCP\,connect\,スキャンの実行結果(サービスダウン時)}}{12}{}\protected@file@percent }
-\newlabel{fig:tcp_connect_scan_result_after}{{11}{12}{}{figure.11}{}}
+\newlabel{fig:tcp_connect_scan_result_before}{{11}{12}{}{figure.11}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces SYNステルススキャンの実行結果(サービスダウン時)}}{13}{}\protected@file@percent }
 \newlabel{fig:syn_scan_result_before}{{12}{13}{}{figure.12}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces UDPスキャンの実行結果(サービスダウン時)}}{13}{}\protected@file@percent }
@@ -72,23 +72,25 @@
 \newlabel{fig:fingerprint_scan_result_before}{{14}{14}{}{figure.14}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces telnetdとdropbearとftpが起動していることの確認結果}}{15}{}\protected@file@percent }
 \newlabel{fig:active_check}{{15}{15}{}{figure.15}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces serverからrouterへtelnetとsshでログインを試みた結果}}{15}{}\protected@file@percent }
-\newlabel{fig:ssh_login_check}{{16}{15}{}{figure.16}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces telnetでログインにキャプチャされたパケットの一覧}}{16}{}\protected@file@percent }
-\newlabel{fig:telnet_login_packets}{{17}{16}{}{figure.17}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces sshでログイン時にキャプチャされたパケットの一覧}}{17}{}\protected@file@percent }
-\newlabel{fig:ssh_login_packets}{{18}{17}{}{figure.18}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces telnetでログイン時に得られたパケットの例}}{17}{}\protected@file@percent }
-\newlabel{fig:telnet_login_tcp_stream}{{19}{17}{}{figure.19}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces sshでログイン時に得られたパケットの例}}{18}{}\protected@file@percent }
-\newlabel{fig:ssh_login_tcp_stream}{{20}{18}{}{figure.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces serverからrouterへtelnetとsshでログインを試みた結果}}{16}{}\protected@file@percent }
+\newlabel{fig:ssh_login_check}{{16}{16}{}{figure.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces telnetでログインにキャプチャされたパケットの一覧}}{17}{}\protected@file@percent }
+\newlabel{fig:telnet_login_packets}{{17}{17}{}{figure.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces sshでログイン時にキャプチャされたパケットの一覧}}{18}{}\protected@file@percent }
+\newlabel{fig:ssh_login_packets}{{18}{18}{}{figure.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces telnetでログイン時に得られたパケットの例}}{18}{}\protected@file@percent }
+\newlabel{fig:telnet_login_tcp_stream}{{19}{18}{}{figure.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces sshでログイン時に得られたパケットの例}}{19}{}\protected@file@percent }
+\newlabel{fig:ssh_login_tcp_stream}{{20}{19}{}{figure.20}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces TCP\,connect\,スキャンの実行結果(サービス起動時)}}{19}{}\protected@file@percent }
 \newlabel{fig:tcp_connect_scan_result_after}{{21}{19}{}{figure.21}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces SYNステルススキャンの実行結果2}}{19}{}\protected@file@percent }
-\newlabel{fig:syn_scan_result_after}{{22}{19}{}{figure.22}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces UDPスキャンの実行結果}}{20}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces SYNステルススキャンの実行結果(サービス起動時)}}{20}{}\protected@file@percent }
+\newlabel{fig:syn_scan_result_after}{{22}{20}{}{figure.22}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces UDPスキャンの実行結果(サービス起動時)}}{20}{}\protected@file@percent }
 \newlabel{fig:udp_scan_result_after}{{23}{20}{}{figure.23}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces TCP/IP fingerprinting を用いて OS を判別の実行結果2}}{21}{}\protected@file@percent }
+\abx@aux@cite{0}{nmap_os_detection}
+\abx@aux@segm{0}{0}{nmap_os_detection}
+\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces TCP/IP fingerprinting を用いて OS を判別の実行結果(サービス起動時)}}{21}{}\protected@file@percent }
 \newlabel{fig:fingerprint_scan_result_after}{{24}{21}{}{figure.24}{}}
 \abx@aux@read@bbl@mdfivesum{4B8667F7E2F35DC98672F6137D4B8E94}
 \abx@aux@defaultrefcontext{0}{nmap_man_jp}{nty/global//global/global/global}
@@ -102,4 +104,4 @@
 \abx@aux@defaultrefcontext{0}{telnet_ssh}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{infraexpert_telnet_ssh}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{yamaguchi_ain_week5}{nty/global//global/global/global}
-\gdef \@abspage@last{22}
+\gdef \@abspage@last{23}

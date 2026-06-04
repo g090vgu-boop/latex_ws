@@ -135,7 +135,7 @@
             ここから, pingスキャンの実行に伴い, ARPリクエスト・DNS・ICMPといったプロトコルのパケットがキャプチャされたことがわかる.
             最初にキャプチャされているパケットがARPによるものであり, 
             まずNo.1$\sim$4にのパケットにかけて特定のMACアドレスからブロードキャストで合計4つのパケットが送信されていることが分かる.
-            infoフィールドにはWho has 192.168.100.[1,3,4,5]と記載されている.
+            infoフィールドにはWho has 192.168.100.\{1,3,4,5\}と記載されている.
             例として図\ref{fig:nmap_ping_scan_result}におけるNo.1のパケットの詳細を図\ref{fig:nmap_ping_scan_result_arp_request}に示す.
             
             \begin{figure}[htbp]
@@ -227,164 +227,170 @@
             telnetとsshはいずれもサーバ間のリモートアクセスに用いられるプロトコルであるが, sshでは通信内容が暗号化される一方でtelnetにおいては暗号化する仕組みがない\cite{telnet_ssh}.
             \vspace{\baselineskip}
 
-        \item 3 種類のポートスキャンで，OSI 参照モデルのどの層で，どのような手順で，どのように，どのような情報が，やり取りされるか再確認し，整理しなさい．
+        \item 3 種類のポートスキャンで，OSI 参照モデルのどの層で，どのような手順で，どのように，どのような情報が，やり取りされるか再確認し，整理しなさい．\\
         
             \vspace{\baselineskip}
             \quad
             3種類のポートスキャンとはTCP connectスキャン, SYNステルススキャン, UDPスキャンのことである.
             各ポートスキャンの詳細については以下の通りである.
 
-        \begin{enumerate}
-            \item TCP connectスキャン\\
-                \quad
-                この手法では他のほとんどのスキャンタイプと異なり, 
-                生パケットに書き込むのではなく, connectシステムコールを発行して, 
-                ターゲットのマシンのポートとコネクションを確立するよう下位OSに要求する. 
-                前述のとおり, 高レベルのシステムコールを呼び出しており, 制御の自由度や処理効率が低く, 
-                TCPコネクションを確立することからターゲットマシンのログにも残りやすい\cite{nmap_man_port_scanning_techniques}.
+            \vspace{\baselineskip}
 
-                \quad
-                TCP\,connect\,スキャンの手順は以下のとおりである.
+            \begin{enumerate}
 
-                \vspace{\baselineskip}
+                \item TCP connectスキャン\\
 
-                \begin{description}[leftmargin=*]
-                    \item[ターゲットのポートが開放(open)されている場合] \leavevmode
-                        \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, leftmargin=*]
-                            \item スキャン側から,ターゲットの対象ポートへ「接続したい」という要求（SYNパケット）を送信する.
-                            \item ポートが開いているため, ターゲットから「接続を許可する」という応答（SYN/ACKパケット）が返ってくる.
-                            \item スキャン側から,さらに「確認した」という応答（ACKパケット）を返す.
-                        \end{enumerate}
+                    \quad
+                    この手法では他のほとんどのスキャンタイプと異なり, 
+                    生パケットに書き込むのではなく, connectシステムコールを発行して, 
+                    ターゲットのマシンのポートとコネクションを確立するよう下位OSに要求する. 
+                    前述のとおり, 高レベルのシステムコールを呼び出しており, 制御の自由度や処理効率が低く, 
+                    TCPコネクションを確立することからターゲットマシンのログにも残りやすい\cite{nmap_man_port_scanning_techniques}.
 
-                    \item[ターゲットのポートがポートが閉塞(closed)している場合] \leavevmode
-                        \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, leftmargin=*]
-                            \item スキャン側から,ターゲットの対象ポートへ「接続したい」という要求（SYNパケット）を送信する.
-                            \item ポートが閉じているため, ターゲットから「接続を拒否する」という応答（RST/ACKパケット）が返ってくる.
-                        \end{enumerate}
-                \end{description}
+                    \quad
+                    TCP\,connect\,スキャンの手順は以下のとおりである.
 
-                \vspace{\baselineskip}
+                    \vspace{\baselineskip}
 
-                \quad
-                図\ref{fig:tcp_connect_scan}は上述したTCP\,connect\,スキャンの手順をOSI参照モデルに基づいて図解したものである.
+                    \begin{description}[leftmargin=*]
+                        \item[ターゲットのポートが開放(open)されている場合] \leavevmode
+                            \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, leftmargin=*]
+                                \item スキャン側から,ターゲットの対象ポートへ「接続したい」という要求（SYNパケット）を送信する.
+                                \item ポートが開いているため, ターゲットから「接続を許可する」という応答（SYN/ACKパケット）が返ってくる.
+                                \item スキャン側から,さらに「確認した」という応答（ACKパケット）を返す.
+                            \end{enumerate}
 
-                \begin{figure}[htbp]
-                    \centering
-                    \includegraphics[width=0.8\textwidth]{imgs/2/tcp_scan_osi.png} 
-                    \caption{OSIモデルに基づいたTCP Connectスキャンによるデータの流れ(\cite{yamaguchi_ain_week5}より引用・改変)}
-                    \label{fig:tcp_connect_scan}
-                \end{figure}
+                        \item[ターゲットのポートがポートが閉塞(closed)している場合] \leavevmode
+                            \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, leftmargin=*]
+                                \item スキャン側から,ターゲットの対象ポートへ「接続したい」という要求（SYNパケット）を送信する.
+                                \item ポートが閉じているため, ターゲットから「接続を拒否する」という応答（RST/ACKパケット）が返ってくる.
+                            \end{enumerate}
+                    \end{description}
 
-                \quad
-                このスキャン手法はTCPコネクション確立の手続きを利用してポートのスキャンを行うため,
-                基本的には, それぞれのやり取りにおいてトランスポート層が起点・終点となってポートスキャンが行われる.
-                一方で, フィルタリングやファイアウォールの存在によって, 送信されたパケットがターゲットマシンのポートに到達しない場合もある.
-                タイプ3, コード13 (宛先到達不能; 通信が管理上の理由で禁止されている)などのICMPエラーメッセージを返すこともあるが,
-                応答しないで応答しないでパケットを破棄することが多い\cite{nmap_man_port_scanning}.
-                このような場合はICMPヘッダや, 何も応答がないことを理由にフィルタされている(filtered)と判定される\cite{nmap_man_port_scanning_techniques}.
-                したがって基本的には, TCP\,connect\,スキャンはTCPヘッダのフラグ情報をもとに,トランスポート層(第4層)以下で動作すると言える.
-  
-                \vspace{\baselineskip}
+                    \vspace{\baselineskip}
+
+                    \quad
+                    図\ref{fig:tcp_scan_osi}は上述したTCP\,connect\,スキャンの手順をOSI参照モデルに基づいて図解したものである.
+
+                    \begin{figure}[htbp]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{imgs/2/tcp_scan_osi.png} 
+                        \caption{OSIモデルに基づいたTCP Connectスキャンによるデータの流れ(\cite{yamaguchi_ain_week5}より引用・改変)}
+                        \label{fig:tcp_scan_osi}
+                    \end{figure}
+
+                    \quad
+                    このスキャン手法はTCPコネクション確立の手続きを利用してポートのスキャンを行うため,
+                    基本的には, それぞれのやり取りにおいてトランスポート層が起点・終点となってポートスキャンが行われる.
+                    一方で, フィルタリングやファイアウォールの存在によって, 送信されたパケットがターゲットマシンのポートに到達しない場合もある.
+                    タイプ3, コード13 (宛先到達不能; 通信が管理上の理由で禁止されている)などのICMPエラーメッセージを返すこともあるが,
+                    応答しないで応答しないでパケットを破棄することが多い\cite{nmap_man_port_scanning}.
+                    このような場合はICMPヘッダや, 何も応答がないことを理由にフィルタされている(filtered)と判定される\cite{nmap_man_port_scanning_techniques}.
+                    したがって基本的には, TCP\,connect\,スキャンはTCPヘッダのフラグ情報をもとに,トランスポート層(第4層)以下で動作すると言える.
                 
-            \item SYNステルススキャン\\
-                \quad
-                nmapコマンドにおけるデフォルトのスキャン手法である. 
-                ファイアウォールによる妨害がなく, TCPコネクションも確立しないため, 
-                比較的秘匿性が高い. この手法ではTCPコネクションを確立するわけではないため, 
-                ハーフオープンスキャンと呼ばれることも多い\cite{nmap_man_port_scanning_techniques}.
+                    \vspace{\baselineskip}
 
-                \quad
-                SYNステルススキャンの手順は以下のとおりである.
-
-                \vspace{\baselineskip}
-                \begin{description}[leftmargin=*]
-                    \item[ターゲットのポートが開放(open)されている場合] \leavevmode
-                        \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, leftmargin=*]
-                            \item スキャン側から,ターゲットの対象ポートへ「接続したい」という要求（SYNパケット）を送信する.
-                            \item ポートが開いているため, ターゲットから「接続を許可する」という応答（SYN/ACKパケット）が返ってくる.
-                            \item スキャン側から,さらに「確認した」という応答（RSTパケット）を返す.
-                        \end{enumerate}
-
-                    \item[ターゲットのポートがポートが閉塞(closed)している場合] \leavevmode
-                        \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, leftmargin=*]
-                            \item スキャン側から,ターゲットの対象ポートへ「接続したい」という要求（SYNパケット）を送信する.
-                            \item ポートが閉じているため, ターゲットから「接続を拒否する」という応答（RST/ACKパケット）が返ってくる.
-                        \end{enumerate}
-                \end{description}
-                \vspace{\baselineskip}
+                \item SYNステルススキャン\\
                 
-                \quad
-                図\ref{fig:syn_scan}は上述したSYNステルススキャンの手順をOSI参照モデルに基づいて図解したものである.
+                    \quad
+                    nmapコマンドにおけるデフォルトのスキャン手法である. 
+                    ファイアウォールによる妨害がなく, TCPコネクションも確立しないため, 
+                    比較的秘匿性が高い. この手法ではTCPコネクションを確立するわけではないため, 
+                    ハーフオープンスキャンと呼ばれることも多い\cite{nmap_man_port_scanning_techniques}.
 
-                \begin{figure}[htbp]
-                    \centering
-                    \includegraphics[width=0.8\textwidth]{imgs/2/syn_scan_osi.png} 
-                    \caption{OSIモデルに基づいたSYNステルススキャンによるデータの流れ(\cite{yamaguchi_ain_week5}より引用・改変)}
-                    \label{fig:syn_scan}
-                \end{figure}
+                    \quad
+                    SYNステルススキャンの手順は以下のとおりである.
 
-                \quad
-                このスキャン手法もTCPコネクション確立の手続きを利用してポートのスキャンを行うため,
-                基本的には, それぞれのやり取りにおいてトランスポート層が起点・終点となってポートスキャンが行われる.
-                TCP\,connect\,スキャンと異なるのは, 
-                TCP\,connect\,スキャンと同じく, 一部例外を除けば基本的には図\ref{fig:syn_scan}の通り
-                トランスポート層を起点・終点としてポートスキャンが実行されるため, 
-                SYNステルススキャンはTCPヘッダのフラグ情報をもとに,
-                トランスポート層(第4層)以下で動作すると言える.
+                    \vspace{\baselineskip}
+                    \begin{description}[leftmargin=*]
+                        \item[ターゲットのポートが開放(open)されている場合] \leavevmode
+                            \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, leftmargin=*]
+                                \item スキャン側から,ターゲットの対象ポートへ「接続したい」という要求（SYNパケット）を送信する.
+                                \item ポートが開いているため, ターゲットから「接続を許可する」という応答（SYN/ACKパケット）が返ってくる.
+                                \item スキャン側から,さらに「確認した」という応答（RSTパケット）を返す.
+                            \end{enumerate}
+
+                        \item[ターゲットのポートがポートが閉塞(closed)している場合] \leavevmode
+                            \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, leftmargin=*]
+                                \item スキャン側から,ターゲットの対象ポートへ「接続したい」という要求（SYNパケット）を送信する.
+                                \item ポートが閉じているため, ターゲットから「接続を拒否する」という応答（RST/ACKパケット）が返ってくる.
+                            \end{enumerate}
+                    \end{description}
+                    \vspace{\baselineskip}
+
+                    \quad
+                    図\ref{fig:syn_scan}は上述したSYNステルススキャンの手順をOSI参照モデルに基づいて図解したものである.
+
+                    \begin{figure}[htbp]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{imgs/2/syn_scan_osi.png} 
+                        \caption{OSIモデルに基づいたSYNステルススキャンによるデータの流れ(\cite{yamaguchi_ain_week5}より引用・改変)}
+                        \label{fig:syn_scan}
+                    \end{figure}
+
+                    \quad
+                    このスキャン手法もTCPコネクション確立の手続きを利用してポートのスキャンを行うため,
+                    基本的には, それぞれのやり取りにおいてトランスポート層が起点・終点となってポートスキャンが行われる.
+                    TCP\,connect\,スキャンと異なるのは, 
+                    TCP\,connect\,スキャンと同じく, 一部例外を除けば基本的には図\ref{fig:syn_scan}の通り
+                    トランスポート層を起点・終点としてポートスキャンが実行されるため, 
+                    SYNステルススキャンはTCPヘッダのフラグ情報をもとに,
+                    トランスポート層(第4層)以下で動作すると言える.
+
+                    \vspace{\baselineskip}
+                \item UDPスキャン\\
                 
-                \vspace{\baselineskip}
-            \item UDPスキャン\\
-            
-                空の(データなし)UDPヘッダを各ターゲットポートに送ることで機能する.
-                このスキャン手法の問題は, 処理が低速な点である.
-                ほか２つのスキャン手法と異なり, 
-                ポートが開いている場合にはターゲットからの応答がないため,
-                パケットや応答が行方不明になった場合に備えて再試行を行うことになる.
-                また, ポートが閉じている場合にはICMPポート到達不能エラーが帰ってくるが,
-                ICMP到達不能メッセージはデフォルトでレート制限されているため, 
-                すべてのポートをスキャンするのに膨大な時間を要するという問題がある\cite{nmap_man_port_scanning_techniques}.
+                    \quad
+                    空の(データなし)UDPヘッダを各ターゲットポートに送ることで機能する.
+                    このスキャン手法の問題は, 処理が低速な点である.
+                    ほか２つのスキャン手法と異なり, 
+                    ポートが開いている場合にはターゲットからの応答がないため,
+                    パケットや応答が行方不明になった場合に備えて再試行を行うことになる.
+                    また, ポートが閉じている場合にはICMPポート到達不能エラーが帰ってくるが,
+                    ICMP到達不能メッセージはデフォルトでレート制限されているため, 
+                    すべてのポートをスキャンするのに膨大な時間を要するという問題がある\cite{nmap_man_port_scanning_techniques}.
 
-                \quad
-                UDPスキャンの手順は以下のとおりである.
+                    \quad
+                    UDPスキャンの手順は以下のとおりである.
 
-                \vspace{\baselineskip}
-                \begin{description}[leftmargin=*]
-                    \item[ターゲットのポートが開放(open)されている場合] \leavevmode
-                        \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, leftmargin=*]
-                            \item スキャン側から, ターゲットの対象ポートへ空のUDPヘッダ（データなしパケット）を送信する.
-                        \end{enumerate}
-                    
-                    \item[ターゲットのポートが閉塞(closed)している場合] \leavevmode
-                        \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, leftmargin=*]
-                            \item スキャン側から, ターゲットの対象ポートへ空のUDPヘッダ（データなしパケット）を送信する.
-                            \item ポートが閉じているため, ターゲットのOS（ネットワーク層）から「ポートに到達できない」という応答（ICMPポート到達不能エラー：Type 3, Code 3）が返ってくる.
-                        \end{enumerate}
-                \end{description}
-                \vspace{\baselineskip}
+                    \vspace{\baselineskip}
+                    \begin{description}[leftmargin=*]
+                        \item[ターゲットのポートが開放(open)されている場合] \leavevmode
+                            \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, leftmargin=*]
+                                \item スキャン側から, ターゲットの対象ポートへ空のUDPヘッダ（データなしパケット）を送信する.
+                            \end{enumerate}
+                        
+                        \item[ターゲットのポートが閉塞(closed)している場合] \leavevmode
+                            \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, leftmargin=*]
+                                \item スキャン側から, ターゲットの対象ポートへ空のUDPヘッダ（データなしパケット）を送信する.
+                                \item ポートが閉じているため, ターゲットのOS（ネットワーク層）から「ポートに到達できない」という応答（ICMPポート到達不能エラー：Type 3, Code 3）が返ってくる.
+                            \end{enumerate}
+                    \end{description}
+                    \vspace{\baselineskip}
 
-                \quad
-                図\ref{fig:udp_scan}は上述したUDPスキャンの手順をOSI参照モデルに基づいて図解したものである.
+                    \quad
+                    図\ref{fig:udp_scan}は上述したUDPスキャンの手順をOSI参照モデルに基づいて図解したものである.
 
-                \begin{figure}[htbp]
-                    \centering
-                    \includegraphics[width=0.8\textwidth]{imgs/2/udp_scan_osi.png} 
-                    \caption{OSIモデルに基づいたUDPスキャンによるデータの流れ(\cite{yamaguchi_ain_week5}より引用・改変)}
-                    \label{fig:udp_scan}
-                \end{figure}
+                    \begin{figure}[htbp]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{imgs/2/udp_scan_osi.png} 
+                        \caption{OSIモデルに基づいたUDPスキャンによるデータの流れ(\cite{yamaguchi_ain_week5}より引用・改変)}
+                        \label{fig:udp_scan}
+                    \end{figure}
 
-                \quad
-                空の(データなし)UDPヘッダを各ターゲットポートに送ることで機能する.
-                基本的には, ICMPポート到達不能エラー(タイプ3, コード1,2,9,10,13)が返された場合,
-                ポートは閉じており(closed), その他のICMPポート到達不能エラーがが返された場合,
-                ポートはフィルタされている(filtered).
-                まれにサービスがUDPパケットで応答する場合もあるが, その場合はポートは開いている(open)ことがわかる.
-                数回の再試行の後も応答がない場合にはポートは開いているあるいはフィルタされている(open|filtered)と判別することができる\cite{nmap_man_port_scanning_techniques}.
-                UDPスキャン手法もトランスポート層(第4層)以下で動くが,
-                ほか2つの手法と異なり, この手法は基本的にポートの状態の判断は,
-                ICMPエラーメッセージの有無(ネットワーク層)で行われる.
+                    \quad
+                    空の(データなし)UDPヘッダを各ターゲットポートに送ることで機能する.
+                    基本的には, ICMPポート到達不能エラー(タイプ3, コード1,2,9,10,13)が返された場合,
+                    ポートは閉じており(closed), その他のICMPポート到達不能エラーがが返された場合,
+                    ポートはフィルタされている(filtered).
+                    まれにサービスがUDPパケットで応答する場合もあるが, その場合はポートは開いている(open)ことがわかる.
+                    数回の再試行の後も応答がない場合にはポートは開いているあるいはフィルタされている(open|filtered)と判別することができる\cite{nmap_man_port_scanning_techniques}.
+                    UDPスキャン手法もトランスポート層(第4層)以下で動くが,
+                    ほか2つの手法と異なり, この手法は基本的にポートの状態の判断は,
+                    ICMPエラーメッセージの有無(ネットワーク層)で行われる.
 
 
-            \end{enumerate}
+                \end{enumerate}
             \vspace{\baselineskip}
         
         \item ［被攻撃対象マシン］で telnetd と dropbear と ftp が起動していないことを確認する．起動している場合には停止させる．起動しているかどうかは ps コマンドなどで確認すること． \\
@@ -412,108 +418,118 @@
         
         \item ［探査用マシン］で Wireshark を起動し，以下の 4 つのポートスキャンによって生じた双方向の通信の内容を解析しなさい． \\
         ※ 先に以降の手順の意図を把握し，どのような結果を得るべきか考えて，解析をすることを奨める．また，適宜，解析を区切るなど，工夫して実施してもよい． \\
-        ※ 結果の見通しをよくするためスキャン範囲を telnetd と dropbear が使用するポート番号の前後に絞ってもよいが、関係ないポートも一部含めること
+        ※ 結果の見通しをよくするためスキャン範囲を telnetd と dropbear が使用するポート番号の前後に絞ってもよいが、関係ないポートも一部含めること\\
 
-        telnet, dropbearが使用するポートはそれぞれ23,22である\cite{infraexpert_telnet_ssh}\cite{ubuntu_dropbear_man}.
-        ここでは, 非攻撃対象マシンであるrouterに対して
-        telnetとdropbearのポートとftpの利用するポートである21と24を含めた
-        21から24の範囲にポートスキャンを行った.
+            \quad
+            telnet, dropbearが使用するポートはそれぞれ23,22である\cite{infraexpert_telnet_ssh}\cite{ubuntu_dropbear_man}.
+            ここでは, 非攻撃対象マシンであるrouterに対して
+            telnetとdropbearのポートとftpの利用するポートである21と24を含めた
+            21から24の範囲にポートスキャンの範囲を定めた.\\
 
-        \begin{enumerate}[label=・]
-            \item TCP connect スキャンを行う．
-                図\ref{fig:tcp_conncet_scan_result_after}はTCP\,connect\,スキャンの実行結果である. 
-                \begin{figure}[htbp]
-                    \centering
-                    \includegraphics[width=0.8\textwidth]{imgs/2/no_process_st.png} 
-                    \caption{TCP\,connect\,スキャンの実行結果(サービスダウン時)}
-                    \label{fig:tcp_connect_scan_result_after}
-                \end{figure}
-
-                \quad
-                ターミナルにおける実行結果から, 探索範囲にしたすべてのポートの状態(STATE)がclosedと表記されているため,
-                routerにおける21から24のすべてのポートが閉じていることが確認できる.\\
-                \quad
-                また, wiresharkでのキャプチャ結果から,
-                serverからrouterに対して, SYNパケットが送信され,
-                routerからserverに対して, RST/ACKパケットが返されていることがわかる.
-                これは, 図\ref{fig:tcp_scan_osi}におけるTCP\,connect\,スキャンの手順において, 
-                ターゲットのTCPポートが閉塞(closed)している場合の手順と一致している. 
-                \vspace{\baselineskip}
-
-            \item SYN ステルススキャンを行う．\\
-                図\ref{fig:syn_scan_result_before}
-                はSYNステルススキャンの実行結果である. 
-                \begin{figure}[htbp]
-                    \centering
-                    \includegraphics[width=0.8\textwidth]{imgs/2/no_process_ss.png} 
-                    \caption{SYNステルススキャンの実行結果(サービスダウン時)}
-                    \label{fig:syn_scan_result_before}
-                \end{figure}
-
-                \quad
-                ここから, 探索範囲にしたすべてのポートの状態(STATE)がclosedと表記されているため,
-                routerにおける21から24のすべてのポートが閉じていることが確認できる.\\
-
-                \quad
-                また, wiresharkでのキャプチャ結果から,
-                serverからrouterに対して, SYNパケットが送信され,
-                routerからserverに対して, RST/ACKパケットが返されていることがわかる.
-                これは, 図\ref{fig:syn_scan_osi}におけるSYNステルススキャンの手順において, 
-                ターゲットのTCPポートが閉塞(closed)している場合の手順と一致している. 
-                \vspace{\baselineskip}
-
-
+            \begin{enumerate}[label=・]
+                \item TCP connect スキャンを行う．\\
                 
-            \item UDP スキャンを行う．
-            
-                図\ref{fig:udp_scan_result_before}はUDPスキャンの実行結果である. 
-                \begin{figure}[htbp]
-                    \centering
-                    \includegraphics[width=0.8\textwidth]{imgs/2/no_process_su.png} 
-                    \caption{UDPスキャンの実行結果(サービスダウン時)}
-                    \label{fig:udp_scan_result_before}
-                \end{figure}
+                    \quad
+                    図\ref{fig:tcp_connect_scan_result_before}はTCP\,connect\,スキャンの実行結果である. 
+                    \begin{figure}[htbp]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{imgs/2/no_process_st.png} 
+                        \caption{TCP\,connect\,スキャンの実行結果(サービスダウン時)}
+                        \label{fig:tcp_connect_scan_result_before}
+                    \end{figure}
 
-                \quad
-                ターミナルでの実行結果から, 
-                探索範囲にしたすべてのポートの状態(STATE)がclosedと表記されているため,
-                routerにおける21から24のすべてのUDPポートが閉じていることが確認できる.\\
-                \quad
-                また, wiresharkでのキャプチャ結果から,
-                serverからrouterに対して, 
-                Info$\rightarrow$Lenが0すなわち, 
-                空データのUDPパケットがserverからrouterに送信され,
-                routerからserverに対してICMPのポート到達不能メッセージが送信されていることが確認できる.
-                これは図\ref{fig:udp_scan_osi}
-                におけるUDPスキャンの手順においてターゲットのポートが
-                閉鎖(closed)している場合の手順と一致している.
-                \vspace{\baselineskip}
+                    \quad
+                    ターミナルにおける実行結果から, 探索範囲にしたすべてのtcpポートの状態(STATE)がclosedと表記されているため,
+                    routerにおける21から24のすべてのtcpポートが閉じていることが確認できる.\\
+                    \quad
+                    また, wiresharkでのキャプチャ結果から,
+                    serverからrouterに対して, SYNパケットが送信され,
+                    routerからserverに対して, RST/ACKパケットが返されていることがわかる.
+                    これは, 図\ref{fig:tcp_scan_osi}におけるTCP\,connect\,スキャンの手順において, 
+                    ターゲットのtcpポートが閉塞(closed)している場合の手順と一致している. 
+                    \vspace{\baselineskip}
 
-            \item TCP/IP fingerprinting を用いて OS を判別する．
-            
-                \vspace{\baselineskip} 
-                \quad   
-                図\ref{fig:fingerprint_scan_result_before}はTCP/IP\, fingerprinting を用いて OS を判別の実行結果である.
-                \begin{figure}[htbp]
-                    \centering
-                    \includegraphics[width=0.8\textwidth]{imgs/2/no_process_o.png} 
-                    \caption{TCP/IP fingerprinting を用いて OS を判別の実行結果(サービスダウン時)}
-                    \label{fig:fingerprint_scan_result_before}
-                \end{figure}
+                \item SYN ステルススキャンを行う．\\
+                
+                    \quad
+                    図\ref{fig:syn_scan_result_before}
+                    はSYNステルススキャンの実行結果である. 
+                    \begin{figure}[htbp]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{imgs/2/no_process_ss.png} 
+                        \caption{SYNステルススキャンの実行結果(サービスダウン時)}
+                        \label{fig:syn_scan_result_before}
+                    \end{figure}
+
+                    \quad
+                    ここから, 探索範囲にしたすべてのtcpポートの状態(STATE)がclosedと表記されているため,
+                    routerにおける21から24のすべてのtcpポートが閉じていることが確認できる.\\
+                    \quad
+                    また, wiresharkでのキャプチャ結果から,
+                    serverからrouterに対して, SYNパケットが送信され,
+                    routerからserverに対して, RST/ACKパケットが返されていることがわかる.
+                    これは, 図\ref{fig:syn_scan_osi}におけるSYNステルススキャンの手順において, 
+                    ターゲットのTCPポートが閉塞(closed)している場合の手順と一致している. 
+                    \vspace{\baselineskip}
 
 
-                \quad
-                ターミナルの実行結果から,
-                探索範囲にしたすべてのポートの状態(STATE)がclosedと表記されているため,
-                routerにおける21から24のすべてのポートが閉じていることが確認できる.\\
-                ここから, -Oオプションによるos判別のコマンドが実行されると,
-                大量のTCP, UDP, ICMPパケットが行き交っていることがわかる.
-                nmapにおけるOS検出ではTCP,UDP,ICMPの様々な調査用パケットをターゲットに対して送信し\cite{nmap_os_detection},
-                その応答を調査することによってターゲットのOSを判別するため\cite{nmap_man_osdetect_ja},
-                ここでキャプチャされた大量のパケットそれらの調査パケットあるいはその応答パケットであると考えられる.
-                \vspace{\baselineskip}
 
-        \end{enumerate}
+                \item UDP スキャンを行う．\\
+                
+                    \quad
+                    図\ref{fig:udp_scan_result_before}はUDPスキャンの実行結果である. 
+                    \begin{figure}[htbp]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{imgs/2/no_process_su.png} 
+                        \caption{UDPスキャンの実行結果(サービスダウン時)}
+                        \label{fig:udp_scan_result_before}
+                    \end{figure}
+
+                    \quad
+                    ターミナルでの実行結果から, 
+                    探索範囲にしたすべてのポートの状態(STATE)がclosedと表記されているため,
+                    routerにおける21から24のすべてのUDPポートが閉じていることが確認できる.\\
+                    \quad
+                    また, wiresharkでのキャプチャ結果から,
+                    serverからrouterに対して, 
+                    Info$\rightarrow$Lenが0すなわち, 
+                    空データのUDPパケットがserverからrouterに送信され,
+                    routerからserverに対してICMPのポート到達不能メッセージが送信されていることが確認できる.
+                    これは図\ref{fig:udp_scan_osi}
+                    におけるUDPスキャンの手順においてターゲットのポートが
+                    閉鎖(closed)している場合の手順と一致している.
+                    \vspace{\baselineskip}
+
+                \item TCP/IP fingerprinting を用いて OS を判別する．\\
+                
+                    \quad   
+                    図\ref{fig:fingerprint_scan_result_before}はTCP/IP\, fingerprinting を用いて OS を判別の実行結果である.
+                    \begin{figure}[htbp]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{imgs/2/no_process_o.png} 
+                        \caption{TCP/IP fingerprinting を用いて OS を判別の実行結果(サービスダウン時)}
+                        \label{fig:fingerprint_scan_result_before}
+                    \end{figure}
+
+
+                    \quad
+                    ターミナルの実行結果から,
+                    探索範囲にしたすべてのポートの状態(STATE)がclosedと表記されているため,
+                    routerにおける21から24のすべてのポートが閉じていることが確認できる.
+                    また, Too many fingerprints match this host to give specific OS details"
+                    とも記述されており, 大量のfingerprintが一致しているため, 
+                    OSを特定できなかったことがわかる.
+                    \quad
+                    wiresharkでのパケットのキャプチャ結果から,
+                    -Oオプションによるos判別のコマンドが実行されると,
+                    大量のTCP, UDP, ICMPパケットが行き交っていることがわかる.
+                    nmapにおけるOS検出ではTCP,UDP,ICMPの様々な調査用パケットをターゲットに対して送信し\cite{nmap_os_detection},
+                    その応答を調査することによってターゲットのOSを判別するため\cite{nmap_man_osdetect_ja},
+                    ここでキャプチャされた大量のパケットは調査パケットあるいはその応答パケットであると考えられる.
+        
+                    \vspace{\baselineskip}
+
+            \end{enumerate}
         \item ［被攻撃対象マシン］で telnetd と dropbear と ftp を起動させる．dropbear を起動させる際には，オプションとして -R をつけること．FTP server は，既にインストールされているソフト(GUI)を起動させればよい．
         \item telnetd と dropbear と ftp が起動していることを確認する．
         
@@ -537,7 +553,7 @@
         
             \vspace{\baselineskip}
             \quad
-            図\ref{fig:login_check}はserverからrouterへtelnetとsshでログインを試みた結果である.
+            図\ref{fig:ssh_login_check}はserverからrouterへtelnetとsshでログインを試みた結果である.
             \begin{figure}[htbp]
                 \centering
                 \includegraphics[width=0.8\textwidth]{imgs/2/telnet_ssh_login_success.png} 
@@ -608,117 +624,126 @@
         \item 再び，手順 4.を実行し，以前の手順 4.での結果（出力とキャプチャパケットの面で）と比較し，整理した各ポートスキャンの動作の仕組み（OSI 参照モデルのどの層で，どのような手順で，どのように，どのような情報が，やり取りされるか）を，実験した結果（比較を含む）を用いて，レポートで報告しなさい．
         
             \begin{enumerate}[label=・]
-            \item TCP connect スキャンを行う．\\
                 \vspace{\baselineskip}
-                \quad
-                図\ref{fig:tcp_conncet_scan_result_after}はTCP\,connect\,スキャンの実行結果である. 
-                \begin{figure}[htbp]
-                    \centering
-                    \includegraphics[width=0.8\textwidth]{imgs/2/active_nmap_sT.png} 
-                    \caption{TCP\,connect\,スキャンの実行結果(サービス起動時)}
-                    \label{fig:tcp_connect_scan_result_after}
-                \end{figure}
-
-                \quad
-                ターミナルでの実行結果から, 
-                tcpのポート21$\sim$23, サービス名にするとftp,ssh,telnetのポートが開放(open)されており,
-                tcpのポート24は閉鎖(closed)されていることが確認できる.\\
-                \quad
-                続いて, wiresharkでのキャプチャ結果を確認する.
-                routerの21$\sim$23のtcpポートとのやり取りに着目すると,
-                serverからrouterに対して, SYNパケットが送信され,
-                routerからserverに対して, SYN/ACKパケットが返されたのち,
-                serverからrouterに対して, ACKパケットが送信されていることがわかる.
-                これは, 図\ref{fig:tcp_scan_osi}におけるTCP\,connect\,スキャンの手順において, 
-                ターゲットのTCPポートが開放(open)されている場合の手順と一致している.
-                tcpポート24とのやり取りに関しては,
-                手順4において得られた結果と同様である.
-
-                % 図\ref{fig:tcp_connect_scan_result_w_2}は図\ref{fig:tcp_conncet_scan_result_2}においてスキャンが行われた際に
-                % キャプチャされたパケットの一覧を示したものである.
-                % \begin{figure}[htbp]
-                %     \centering
-                %     \includegraphics[width=0.8\textwidth]{imgs/2/active_nmap_sT_w.png} 
-                %     \caption{TCP\,connect\,スキャンの実行時にキャプチャされたパケット一覧2}
-                %     \label{fig:tcp_connect_scan_result_w_2}
-                % \end{figure}
+                \item TCP connect スキャンを行う．\\
                 
-                \vspace{\baselineskip}
+                    \quad
+                    図\ref{fig:tcp_connect_scan_result_after}はTCP\,connect\,スキャンの実行結果である. 
+                    \begin{figure}[htbp]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{imgs/2/active_nmap_sT.png} 
+                        \caption{TCP\,connect\,スキャンの実行結果(サービス起動時)}
+                        \label{fig:tcp_connect_scan_result_after}
+                    \end{figure}
+                    
+                    \quad
+                    ターミナルでの実行結果から, 
+                    tcpのポート21$\sim$23, サービス名にするとftp,ssh,telnetのポートが開放(open)されており,
+                    tcpのポート24は閉鎖(closed)されていることが確認できる.\\
+                    \quad
+                    続いて, wiresharkでのキャプチャ結果を確認する.
+                    routerの21$\sim$23のtcpポートとのやり取りに着目すると,
+                    serverからrouterに対して, SYNパケットが送信され,
+                    routerからserverに対して, SYN/ACKパケットが返されたのち,
+                    serverからrouterに対して, ACKパケットが送信されていることがわかる.
+                    これは, 図\ref{fig:tcp_scan_osi}におけるTCP\,connect\,スキャンの手順において, 
+                    ターゲットのTCPポートが開放(open)されている場合の手順と一致している.
+                    tcpポート24とのやり取りに関しては,
+                    手順4において得られた結果と同様である.
 
-
-
-            \item SYN ステルススキャンを行う．
-                図
-                \ref{fig:tcp_conncet_scan_result_after}
-                はSYNステルススキャンの実行結果である. 
-                \begin{figure}[htbp]
-                    \centering
-                    \includegraphics[width=0.8\textwidth]{imgs/2/active_nmap_sS.png} 
-                    \caption{SYNステルススキャンの実行結果2}
-                    \label{fig:syn_scan_result_after}
-                \end{figure}
-
-                \quad
-                ターミナルでの実行結果から, 
-                tcpのポート21$\sim$23, サービス名にするとftp,ssh,telnetのポートが開放(open)されており,
-                tcpのポート24は閉鎖(closed)されていることが確認できる.\\
-                \quad
-                続いて, wiresharkでのキャプチャ結果を確認する.
-                routerの21$\sim$23のtcpポートとのやり取りに着目すると,
-                serverからrouterに対して, SYNパケットが送信され,
-                routerからserverに対して, SYN/ACKパケットが返されたのち,
-                serverからrouterに対して, RSTパケットが送信されていることがわかる.
-                これは, 図\ref{fig:syn_scan}におけるSYNステルススキャンの手順において, 
-                ターゲットのTCPポートが開放(open)されている場合の手順と一致している.
-                tcpポート24とのやり取りに関しては,
-                手順4において得られた結果と同様である.
-
-                \vspace{\baselineskip}
                 
-            \item UDP スキャンを行う．
+                    \vspace{\baselineskip}
+
+
+
+                \item SYN ステルススキャンを行う．\\
+                
+                    \quad
+                    図\ref{fig:syn_scan_result_after}
+                    はSYNステルススキャンの実行結果である. 
+                    \begin{figure}[htbp]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{imgs/2/active_nmap_sS.png} 
+                        \caption{SYNステルススキャンの実行結果(サービス起動時)}
+                        \label{fig:syn_scan_result_after}
+                    \end{figure}
+
+                    \quad
+                    ターミナルでの実行結果から, 
+                    tcpのポート21$\sim$23, サービス名にするとftp,ssh,telnetのポートが開放(open)されており,
+                    tcpのポート24は閉鎖(closed)されていることが確認できる.\\
+                    \quad
+                    続いて, wiresharkでのキャプチャ結果を確認する.
+                    routerの21$\sim$23のtcpポートとのやり取りに着目すると,
+                    serverからrouterに対して, SYNパケットが送信され,
+                    routerからserverに対して, SYN/ACKパケットが返されたのち,
+                    serverからrouterに対して, RSTパケットが送信されていることがわかる.
+                    これは, 図\ref{fig:syn_scan}におけるSYNステルススキャンの手順において, 
+                    ターゲットのTCPポートが開放(open)されている場合の手順と一致している.
+                    tcpポート24とのやり取りに関しては,
+                    手順4において得られた結果と同様である.
+
+                    \vspace{\baselineskip}
+
+                \item UDP スキャンを行う．\\
+                
+                    \quad
+                    図\ref{fig:udp_scan_result_after}はUDPスキャンの実行結果である. 
+                    \begin{figure}[htbp]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{imgs/2/active_nmap_sU.png} 
+                        \caption{UDPスキャンの実行結果(サービス起動時)}
+                        \label{fig:udp_scan_result_after}
+                    \end{figure}
+
+                    \quad
+                    ターミナルでの実行結果とwiresharkでのキャプチャ結果は手順4のUDPスキャンの実行結果
+                    と同じであるため, ここでの考察は省略する.
+                    \vspace{\baselineskip}
+
+                \item TCP/IP fingerprinting を用いて OS を判別する．\\
+                
+                    \quad
+                    図\ref{fig:fingerprint_scan_result_after}はTCP/IP\, fingerprinting を用いて OS を判別の実行結果である.
+                    \begin{figure}[htbp]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{imgs/2/active_nmap_O.png} 
+                        \caption{TCP/IP fingerprinting を用いて OS を判別の実行結果(サービス起動時)}
+                        \label{fig:fingerprint_scan_result_after}
+                    \end{figure}   
+
+                    \quad
+                    ターミナルの実行結果から,
+                    tcpのポート21$\sim$23, サービス名にするとftp,ssh,telnetのポートが開放(open)されており,
+                    tcpのポート24は閉鎖(closed)されていることが確認できる.
+                    また, "No exact OS matches for host"とも記述されており, 
+                    OSを特定できなかったことがわかる.
+                    \quad
+                    wiresharkでのパケットのキャプチャ結果から,
+                    ここでも手順4のOS判別の実行結果と同じく大量の
+                    TCP, UDP, ICMPパケットが検出されている.
+                    一方で, 今回のほうがTCPパケットがより大量に検出されている.
+                    これはOS検出において, ポートが閉鎖されている場合,
+                    開放ポート向けの調査用パケットはすべてスキップされるためである\cite{nmap_os_detection}.
+                    手順4では探索範囲におけるすべてのtcpポートが閉鎖していたため, 
+                    開放ポート向けの調査用パケットが送信されず,
+                    今回は, 21$\sim$23のtcpポートが開放されており, 
+                    開放ポート向けの調査用パケットが送信されたため,
+                    検出されたtcpパケットの両に差が生じたと考えられる.
+                    \vspace{\baselineskip}
+
+
+            \end{enumerate}
             
-                図\ref{fig:udp_scan_result_after}はUDPスキャンの実行結果である. 
-                \begin{figure}[htbp]
-                    \centering
-                    \includegraphics[width=0.8\textwidth]{imgs/2/active_nmap_sU.png} 
-                    \caption{UDPスキャンの実行結果}
-                    \label{fig:udp_scan_result_after}
-                \end{figure}
-
-                \quad
-                ターミナルでの実行結果から, 
-                探索範囲内のすべてのudpポートが閉鎖(closed)されていることが確認できる.\\
-                \quad
-                続いて, wiresharkでのキャプチャ結果では, 
-                データ長0, すなわち, 空のUDPパケットがserverからrouterへ送られた後に,
-                routerからserverに対してICMPのポート到達不能メッセージが送信されていることが確認できる.
-                図\ref{fig:udp_scan_osi}におけるUDPスキャンの手順において, 
-                ターゲットのポートが開放(open)されている場合の手順と一致していることが分かる.
-
-
-                \vspace{\baselineskip}
-            \item TCP/IP fingerprinting を用いて OS を判別する．
             
-                \quad
-                図\ref{fig:fingerprint_scan_result_after}はTCP/IP\, fingerprinting を用いて OS を判別の実行結果である.
-                \begin{figure}[htbp]
-                    \centering
-                    \includegraphics[width=0.8\textwidth]{imgs/2/active_nmap_O.png} 
-                    \caption{TCP/IP fingerprinting を用いて OS を判別の実行結果2}
-                    \label{fig:fingerprint_scan_result_after}
-                \end{figure}   
-
-                \quad
-                ターミナルの実行結果から,
-
-
-
-        \end{enumerate}
+        \item 手順 8.の比較の内，TCP/IP fingerprinting を用いた OS 判別において，3 つのポートスキャン方法の内，どの方法が利用されているか，実験した結果（比較を含む）を用いて，レポートで報告しなさい．また，OS の検出結果について違いが起きたか報告しなさい．\\
             
+            \quad
+            図\ref{fig:fingerprint_scan_result_before},\,\ref{fig:fingerprint_scan_result_after}に示した,
+            実際にキャプチャされたパケットについて見てみると,
+            SYNステルススキャンに相当する手続きがはじめに確認できる.
+            したがって, OS判別の最初に行われるポートスキャンにはSYNステルススキャンが用いられていると考えられる.
             
-        \item 手順 8.の比較の内，TCP/IP fingerprinting を用いた OS 判別において，3 つのポートスキャン方法の内，どの方法が利用されているか，実験した結果（比較を含む）を用いて，レポートで報告しなさい．また，OS の検出結果について違いが起きたか報告しなさい．
-    
-
     \end{enumerate}
 \end{enumerate}
 

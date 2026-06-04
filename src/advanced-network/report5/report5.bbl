@@ -16,5 +16,139 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{kazmax_sysctl_2022}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=60ac4088e0954d2e63c76e75398e51a2}{%
+           family={{kazmax}},
+           familyi={k\bibinitperiod}}}%
+      }
+      \strng{namehash}{60ac4088e0954d2e63c76e75398e51a2}
+      \strng{fullhash}{60ac4088e0954d2e63c76e75398e51a2}
+      \strng{fullhashraw}{60ac4088e0954d2e63c76e75398e51a2}
+      \strng{bibnamehash}{60ac4088e0954d2e63c76e75398e51a2}
+      \strng{authorbibnamehash}{60ac4088e0954d2e63c76e75398e51a2}
+      \strng{authornamehash}{60ac4088e0954d2e63c76e75398e51a2}
+      \strng{authorfullhash}{60ac4088e0954d2e63c76e75398e51a2}
+      \strng{authorfullhashraw}{60ac4088e0954d2e63c76e75398e51a2}
+      \field{sortinit}{k}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{kazmax - Linux で自宅サーバー}
+      \field{note}{Accessed: 2026-06-04}
+      \field{title}{sysctl - システム管理コマンドの説明 - Linux コマンド集 一覧表}
+      \field{year}{2022}
+      \verb{urlraw}
+      \verb http://kazmax.zpp.jp
+      \endverb
+      \verb{url}
+      \verb http://kazmax.zpp.jp
+      \endverb
+    \endentry
+    \entry{man_iptables_extensions_8}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=a40070697728cad9d8549b53d95f49d4}{%
+           family={{Linux man-pages project}},
+           familyi={L\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {man7.org}%
+      }
+      \strng{namehash}{a40070697728cad9d8549b53d95f49d4}
+      \strng{fullhash}{a40070697728cad9d8549b53d95f49d4}
+      \strng{fullhashraw}{a40070697728cad9d8549b53d95f49d4}
+      \strng{bibnamehash}{a40070697728cad9d8549b53d95f49d4}
+      \strng{authorbibnamehash}{a40070697728cad9d8549b53d95f49d4}
+      \strng{authornamehash}{a40070697728cad9d8549b53d95f49d4}
+      \strng{authorfullhash}{a40070697728cad9d8549b53d95f49d4}
+      \strng{authorfullhashraw}{a40070697728cad9d8549b53d95f49d4}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{iptables version 1.8.13. Accessed: 2026-06-04}
+      \field{title}{iptables-extensions(8) --- Linux manual page}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://man7.org/linux/man-pages/man8/iptables-extensions.8.html
+      \endverb
+      \verb{url}
+      \verb https://man7.org/linux/man-pages/man8/iptables-extensions.8.html
+      \endverb
+    \endentry
+    \entry{man:iptables}{manual}{}{}
+      \name{author}{2}{}{%
+        {{hash=bbdca53c492ce8ccdddee09b7907cb50}{%
+           family={Russell},
+           familyi={R\bibinitperiod},
+           given={Rusty},
+           giveni={R\bibinitperiod}}}%
+        {{hash=f0a19cab9257bb264246f6a579ff7cba}{%
+           family={Team},
+           familyi={T\bibinitperiod},
+           given={Netfilter\bibnamedelima Core},
+           giveni={N\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Netfilter Project}%
+      }
+      \strng{namehash}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{fullhash}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{fullhashraw}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{bibnamehash}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{authorbibnamehash}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{authornamehash}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{authorfullhash}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{authorfullhashraw}{b649952968d6aa4c00da7188a58fddaf}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{Version 1.4.21}
+      \field{note}{Linux Manual Page, Section: iptables 1.4.21 (8)}
+      \field{title}{iptables(8) --- IPv4/IPv6 のパケットフィルタと NAT の管理ツール}
+      \field{year}{2013}
+      \verb{urlraw}
+      \verb https://linuxjm.sourceforge.io/html/iptables/man8/iptables.8.html
+      \endverb
+      \verb{url}
+      \verb https://linuxjm.sourceforge.io/html/iptables/man8/iptables.8.html
+      \endverb
+    \endentry
+    \entry{zenn_known_hosts_2025}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=98d0360b392de5f1d53acdd6489b6e88}{%
+           family={{S.O.}},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{98d0360b392de5f1d53acdd6489b6e88}
+      \strng{fullhash}{98d0360b392de5f1d53acdd6489b6e88}
+      \strng{fullhashraw}{98d0360b392de5f1d53acdd6489b6e88}
+      \strng{bibnamehash}{98d0360b392de5f1d53acdd6489b6e88}
+      \strng{authorbibnamehash}{98d0360b392de5f1d53acdd6489b6e88}
+      \strng{authornamehash}{98d0360b392de5f1d53acdd6489b6e88}
+      \strng{authorfullhash}{98d0360b392de5f1d53acdd6489b6e88}
+      \strng{authorfullhashraw}{98d0360b392de5f1d53acdd6489b6e88}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Zenn}
+      \field{month}{5}
+      \field{note}{Accessed: 2026-06-04}
+      \field{title}{known\_hostsとは？}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://zenn.dev
+      \endverb
+      \verb{url}
+      \verb https://zenn.dev
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
 \endinput
 

@@ -1,23 +1,26 @@
 # Fdb version 4
-["biber report5"] 1780552453.8698 "report5.bcf" "report5.bbl" "report5" 1780552456.61804 0
-  "report5.bcf" 1780552455.70597 108550 d26ede5a7f900127ff5f3751c7384cea "latex"
+["biber report5"] 1780581675.89538 "report5.bcf" "report5.bbl" "report5" 1780582018.66324 0
+  "../source.bib" 1780579221.64338 7369 135edc8aa037f0b894a4a8abe9ee3d9b ""
+  "report5.bcf" 1780582017.28127 108846 19b4ea295b0e96f401311a1b332e1af6 "latex"
   (generated)
   "report5.bbl"
   "report5.blg"
   (rewritten before read)
-["dvipdf"] 1780552455.73534 "report5.dvi" "report5.pdf" "report5" 1780552456.61944 0
-  "report5.dvi" 1780552455.70697 10164 70f9328ddf664e4d28a87b44c1edf5b9 "latex"
+["dvipdf"] 1780582017.31473 "report5.dvi" "report5.pdf" "report5" 1780582018.66435 0
+  "report5.dvi" 1780582017.28227 17712 94fa5f3748bafe14e38152c4d5ca5452 "latex"
   (generated)
   "report5.pdf"
   (rewritten before read)
-["latex"] 1780552454.71556 "/home/texlive/latex/src/advanced-network/report5/report5.tex" "report5.dvi" "report5" 1780552456.61815 0
-  "/home/texlive/latex/src/advanced-network/report5/report5.tex" 1780552452.65197 9753 4e4cc735988e2d7069f5bc7d61346e5f ""
+["latex"] 1780582015.72809 "/home/texlive/latex/src/advanced-network/report5/report5.tex" "report5.dvi" "report5" 1780582018.66335 0
+  "/home/texlive/latex/src/advanced-network/report5/report5.tex" 1780582013.92727 15372 a93bf0f921209506c105de0c81b151f3 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
+  "/usr/local/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm" 1136768653 1300 63a6111ee6274895728663cf4b4e7e81 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmr17.tfm" 1136768653 1292 296a67155bdbfc32aa9c636f21e91433 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmr8.tfm" 1136768653 1292 21c1c5bfeaebccffdb478fd231a0997d ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmr9.tfm" 1136768653 1292 6b21b9c2c7bebb38aa2273f7ca0fb3af ""
+  "/usr/local/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm" 1136768653 768 1321e9409b4137d6fb428ac9dc956269 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/public/latex-fonts/lasy6.tfm" 1136768653 520 4889cce2180234b97cad636b6039c722 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/uptex-fonts/jis/upjisg-h.tfm" 1522271273 812 52bd92aa20c58a398601cda6dd62c8d1 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/uptex-fonts/jis/upjisg-v.tfm" 1522271273 536 5f2475e9deb198c23894800d3c5eed00 ""
@@ -61,16 +64,22 @@
   "/usr/local/texlive/2026/texmf-dist/web2c/texmf.cnf" 1770478701 43630 e9fa012910491fe5ae08a72c3c2997a7 ""
   "/usr/local/texlive/2026/texmf-var/web2c/euptex/uplatex.fmt" 1780207404 3654912 513732ae55b48895ece6eae1a908fd26 ""
   "/usr/local/texlive/2026/texmf.cnf" 1780207285 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
+  "imgs/iptable_state_4.png" 1780294698 111431 0a1ccf4f4bb3c23492174333eab858e3 ""
+  "imgs/iptable_state_8.png" 1780295346 117048 7d86734baa9b997327c06b01525610a1 ""
   "imgs/no_dropbear.png" 1779699022 29883 1abf49b8082be0b35052d52b63bdfc18 ""
+  "imgs/ping_server2windows.png" 1780295008 86656 88ce615d160d8dbc1176c0b2d2b639ae ""
+  "imgs/ping_server2windows_wireshark.png" 1780295710 280184 b3d11eef27ac738d888284687bfa3701 ""
   "imgs/same_packet_example.png" 1779700374 179265 f98ff4e1573d3e7afb4ddb13a411eab3 ""
-  "imgs/set_iptables.png" 1779730292 66319 2c5100d7d14b44794e361845fbd97c3a ""
+  "imgs/server_dropbear_active.png" 1780483710 25519 8ec5e6f0fe20daf5a2b2267e56128bfa ""
+  "imgs/set_iptables_4.png" 1780294450 56115 30a3f0908e8f25da17d4270488e456ce ""
+  "imgs/set_iptables_8.png" 1780295224 66075 0fc820233ffabb91b66accd99aad52c2 ""
   "imgs/ssh_failed.png" 1779698030 70762 e6940a4ec9af2e322b3b814d74eef572 ""
   "imgs/ssh_login_result.png" 1779700204 374098 17efaa2aef585fcf7d964d6cec861fd4 ""
   "imgs/ssh_win2sever_via_router.png" 1779697596 73470 20532249ac043ce9fb27ae2414032d28 ""
-  "report5.aux" 1780552455.70497 1487 5b81431b1370ac30c7c67e4d2d348e92 "latex"
-  "report5.bbl" 1780552454.68997 466 76d65a242ec496c9b4361af646ff12cb "biber report5"
-  "report5.run.xml" 1780552455.70697 2325 97609310e7d5a219327d19d3b5696ccd "latex"
-  "report5.tex" 1780552452.65197 9753 4e4cc735988e2d7069f5bc7d61346e5f ""
+  "report5.aux" 1780582017.28027 3427 90e9e4c57596235b0e3f8eafa90a432d "latex"
+  "report5.bbl" 1780581677.22928 5964 5c909d215b21197d3c50fc1f15b847a1 "biber report5"
+  "report5.run.xml" 1780582017.28227 2325 97609310e7d5a219327d19d3b5696ccd "latex"
+  "report5.tex" 1780582013.92727 15372 a93bf0f921209506c105de0c81b151f3 ""
   (generated)
   "report5.aux"
   "report5.bcf"

@@ -53,8 +53,6 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
 {\LARGE \uline{手順}} 
 
 \begin{enumerate}
-    
-    \item 2 台の VM（router と server）およびデスクトップ PC(Windows) を起動する．
 
     \item router で dropbear が起動していないことを確認し，起動している場合は停止する．
     
@@ -65,7 +63,7 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
         \begin{figure}[htbp]
             \centering
             \includegraphics[width=0.8\textwidth]{imgs/no_dropbear.png} 
-            \caption{server で dropbear が起動していないことを確認する様子}
+            \caption{server で dropbear が起動していないことの確認}
             \label{fig:no_dropbear}
         \end{figure}
 
@@ -76,21 +74,28 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
 
         \vspace{\baselineskip}
 
-    \item server で dropbear を -R オプション付きで起動し，起動を確認する．
-
+    \item server で dropbear を -R オプション付きで起動し，起動を確認する．\\
 
         \quad
-        図は server で dropbear を -R オプション付きで起動し，起動を確認する様子である.
-        ここではプロセス一覧において dropbear -R というコマンドで起動されたプロセスが表示されていることから, dropbearが-Rオプション付きで起動していることが確認できる.
+        図\ref{fig:dropbear_active}は server で dropbear を -R オプション付きで起動し，起動を確認する様子である.
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/server_dropbear_active.png} 
+            \caption{server で dropbear 起動確認}
+            \label{fig:dropbear_active}
+        \end{figure}
+
+        \quad
+        ここではプロセス一覧において dropbear -R というコマンドで起動されたプロセスが表示されていることから, 
+        dropbearが-Rオプション付きで起動していることが確認できる.\\
 
     \item デスクトップ PC(Windows) から router へ ssh で一般権限ユーザでログインできないことを確認する．
     
         \vspace{\baselineskip}
         \quad
         図\ref{fig:ssh_failed} はデスクトップPCからrouterへのssh接続に失敗する様子である.
-        ssh: connect to host 10.6.158.90 port 22: Connection refused というエラーメッセージが表示されている.
-        手順1で確認したとおり, routerにおいてはdropbearのプロセスが起動されていないためである.
-
+    
         \begin{figure}[htbp]
             \centering
             \includegraphics[width=0.8\textwidth]{imgs/ssh_failed.png} 
@@ -98,7 +103,9 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
             \label{fig:ssh_failed}
         \end{figure}
 
-        \vspace{\baselineskip}
+        \quad
+        ssh: connect to host 10.6.158.90 port 22: Connection refused というエラーメッセージが表示されている.
+        手順1で確認したとおり, routerにおいてはdropbearのプロセスが起動されていないためである.\\
 
     \item router の組織外側インターフェースに対して以下の iptables 設定を行う（必要なら sysctl で転送を有効化：net.ipv4.ip\_forward=1）：
     
@@ -110,22 +117,19 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
         \vspace{\baselineskip}
         \quad
         図\ref{fig:set_iptables_4}は手順4の要件を満たすようなiptablesの設定を行うコマンドの実行結果である.
+        各コマンドの説明については手順10で行う
 
         \begin{figure}[htbp]
             \centering
-            \includegraphics[width=0.8\textwidth]{imgs/set_iptables.png} 
+            \includegraphics[width=0.8\textwidth]{imgs/set_iptables_4.png} 
             \caption{手順4の要件を満たすためのiptablesの編集コマンド}
             \label{fig:set_iptables_4}
         \end{figure}
 
-        \vspace{\baselineskip}
+    \item Windows から router へ通信を発生させ，server に一般権限ユーザでログインできることを確認する（必要に応じて known\_hosts を編集して Host key 問題を解決する）．\\
     
-    \item Windows から router へ通信を発生させ，server に一般権限ユーザでログインできることを確認する（必要に応じて known\_hosts を編集して Host key 問題を解決する）．
-    
-        \vspace{\baselineskip}
         \quad
         図\ref{fig:ssh_login_success} はデスクトップPCからrouterへのssh接続を試みた結果である.
-        先程は失敗したssh接続が成功していることがわかる.
 
         \begin{figure}[htbp]
             \centering
@@ -134,9 +138,19 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
             \label{fig:ssh_login_success}
         \end{figure}
 
-        \vspace{\baselineskip}
-
-
+        \quad
+        sshコマンドを実行すると, "remote host identification has changed!"
+        と警告が発生していることがわかる.
+        一般にsshのソフトウェアでは, $\sim$/.ssh/known\_hostsに接続先のサーバの公開鍵情報を暗号化して保存しておく.
+        次回接続した際には, ここに保存された公開鍵と照合することによって同じサーバかどうかを検証する\cite{zenn_known_hosts_2025},
+        このときに公開鍵の情報が一致しなければ, 今回得られたような警告文が出力される.\\
+        \quad
+        今回の場合においては以前にwindowsからrouterに対してssh接続した際にrouterの公開鍵情報が$\sim$/.ssh/known\_hosts
+        に保存されており, 今回も同じようにrouterに対してssh接続のコマンドを実行したが, 手順4においてsshのパケットを
+        serverに転送するよう設定したことで, serverの公開鍵情報と以前に保存したrouterの公開鍵情報とで照合が行われ,
+        一致せずに警告が発されたと考えられる. したがってここでは記録されていた公開鍵情報を消去する, すなわち, 
+        $\sim$/.ssh/known\_hostsの中身を空にすることで対処した.
+        結果として, 最終的にwindowsからserverにuser1としてログインできていることが確認できる.\\
 
     \item router 上で Wireshark を起動し，Windows↔router および router↔server の両方のインターフェースをキャプチャ対象に設定する．
 
@@ -145,12 +159,13 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
         \vspace{\baselineskip}
         \quad
         図\ref{fig:ssh_login_result}はrouter上でWiresharkを起動し, Windows↔router および router↔server の両方のインターフェースをキャプチャ対象に設定した様子である.
-        ここではキャプチャするパケットは, Windows↔router および router↔server を流れるパケットにに限定するため, wiresharkのフィルタに
-        (ip.src==192.168.100.1 and ip.dst==192.168.100.2) or (ip.src==192.168.100.2 and ip.dst==192.168.100.1)
-        と
-        (ip.src==10.6.158.90 and ip.dst==10.6.158.153) or (ip.src==10.6.158.153 and ip.dst==10.6.158.90)
-        を設定している.
-        前述のようにフィルタリングした上で, 両方のインターフェースを流れるパケットを比較すると, プロトコルやパケット内の情報が酷似していることが確認できる.
+        % ここではキャプチャするパケットは, Windows↔router および router↔server を流れるパケットにに限定するため, wiresharkのフィルタに
+        % (ip.src==192.168.100.1 and ip.dst==192.168.100.2) or (ip.src==192.168.100.2 and ip.dst==192.168.100.1)
+        % と
+        % (ip.src==10.6.158.90 and ip.dst==10.6.158.153) or (ip.src==10.6.158.153 and ip.dst==10.6.158.90)
+        % を設定している.
+        % 前述のようにフィルタリングした上で, 
+        両方のインターフェースを流れるパケットを比較すると, プロトコルやパケット内の情報が酷似していることが確認できる.
         実際に, １つパケットを抽出して比較した例を図\ref{fig:same_packet_example}に示す.
 
         \begin{figure}[htbp]
@@ -167,11 +182,15 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
             \label{fig:same_packet_example}
         \end{figure}
 
-
         \quad
         図\ref{fig:same_packet_example}に示すパケットは,SSHv2のパケットである.
-        ここで, TCPより上位の層において, すべてのフィールドの値が完全一致しており,
-        serverからrouterへ向けて送信されたパケットがWindowsへと転送されていることがわかる.
+        ネットワーク以下のプロトコルのヘッダ情報はserverからrouterへのパケットであることを示す部分が
+        routerからwindowsへのパケットであることを示すものに置き換わっている一方で,
+        tcpのヘッダにおいて, フィールドの値が完全一致しており,
+        これらのパケットは,
+        tcpとそれより上位のプロトコルのヘッダ, 
+        ひいてはデータにおいて同じ値が格納されている, すなわち,
+        データが転送されていることが確認できる.
 
         \vspace{\baselineskip}
     
@@ -179,15 +198,14 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
     
         \vspace{\baselineskip}
 
-        図は
-        % \begin{figure}[htbp]
-        %     \centering
-        %     \includegraphics[width=0.8\textwidth]{imgs/ssh_login_result.png} 
-        %     \caption{手順7の要件を満たすためのiptablesの編集コマンド}
-        %     \label{fig:set_iptables_7}
-        % \end{figure}
-
-        図に
+        図\ref{fig:set_iptables_7}は, 手順9の要件を満たすためのiptablesの編集コマンドの実行結果である.
+        各コマンドの説明については手順10で行う.
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/set_iptables_8.png} 
+            \caption{手順9の要件を満たすためのiptablesの編集コマンド}
+            \label{fig:set_iptables_7}
+        \end{figure}
 
         \vspace{\baselineskip}
 
@@ -195,11 +213,83 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
     
         \vspace{\baselineskip}
 
+        \quad
+        図\ref{fig:server2windows_terminal}は, serverからwindowsに対してpingコマンドを実行した結果である.
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/ping_server2windows.png} 
+            \caption{serverからwindowsに対するpingコマンドの実行結果}
+            \label{fig:server2windows_terminal}
+        \end{figure}
+
+        \quad
+        windowsからの応答が確認でき, serverとwindowsとの間で通信が可能であることが確認できる.\\
+        \quad
+        続いて, 図\ref{fig:server2windows_wireshark}にserverからwindowsに対してpingコマンドを実行した際に
+        キャプチャされたパケットの一覧を示す.
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/ping_server2windows_wireshark.png} 
+            \caption{serverからwindowsに対するpingコマンド実行時にキャプチャされたパケット一覧}
+            \label{fig:server2windows_wireshark}
+        \end{figure}      
+        
+        \quad
+
 
 
         \vspace{\baselineskip}
     
-    \item 実験結果として，デスクトップ PC から server へログインできること，server から組織外ネットワークへ通信できることを示し，使用したすべての iptables 設定を列挙する．各設定がどのようにパケットを書き換え，転送処理を実現しているかを具体的に説明してレポートにまとめる．
+    \item 実験結果として，デスクトップ PC から server へログインできること，
+    server から組織外ネットワークへ通信できることを示し，
+    使用したすべての iptables 設定を列挙する．
+    各設定がどのようにパケットを書き換え，
+    転送処理を実現しているかを具体的に説明してレポートにまとめる．
+
+        \quad
+        手順5,\, 9においてそれぞれ転送によってデスクトップPCからserverにログインできることと
+        組織外ネットワークに属する装置と通信ができること
+
+        \quad
+        図\ref{fig:iptables_state_4}, \ref{fig:iptables_state_8} に手順4, \, 8におけるiptablesの状態を示す.
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/iptable_state_4.png} 
+            \caption{手順4におけるiptablesの状態}
+            \label{fig:iptables_state_4}
+        \end{figure}  
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{imgs/iptable_state_8.png} 
+            \caption{手順8におけるiptablesの状態}
+            \label{fig:iptables_state_8}
+        \end{figure}  
+
+        \quad
+        まず\ref{fig:set_iptables_4}手順4で行った設定について説明する.\\ 
+        \quad
+        まずsysctlコマンド\cite{kazmax_sysctl_2022}を-wオプションで用いて, 
+        ipv4.ip\_forwardの値を1に設定することで,
+        ポートフォワーディングを有効化した.\\
+        \quad
+        次にtcp22番ポートは以外へのアクセスは転送しないようにするため, 
+        -Pオプションによって対象のチェインのポリシーを設定している.
+        ここではfilterテーブル上のFORWARDチェインに対してDROPというポリシーを設定し,
+        デフォルトですべてのパケットを転送できないよう設定している\cite{man:iptables}.\\
+        \quad
+        続いてiptablesにおける接続追跡機能であるconntarackの--ctstateオプションで
+        ESTABLISHEDとRELATEDのstatelistを指定してそれらのstatelistに該当するパケットの
+        通信を許可することによって\cite{man_iptables_extensions_8}, 
+        serverからwindowsへの帰りのパケット(tcp22番ポートあて以外のパケット)を転送するための設定をしている.\\
+        \quad
+        次にnatテーブルのPREROUTINGチェインに対してeth1の10.6.158.0/24のネットワークから自身に対して送信された
+        tcp22番ポートへのパケットを宛先が192.168.100.2のパケットへと書き換える設定を行っている.
+
+
+
+
         
 
 \end{enumerate}

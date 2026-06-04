@@ -128,6 +128,9 @@ INPUT ./imgs/1/nmap_ping_scan_result.png
 INPUT ./imgs/1/nmap_ping_scan_result.png
 INPUT ./imgs/1/nmap_ping_scan_result.png
 INPUT extractbb -B cropbox -O imgs/1/nmap_ping_scan_result.png
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/base/omscmr.fd
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/base/omscmr.fd
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/base/omscmr.fd
 INPUT ./imgs/1/nmap_ping_scan_result_arp_request.png
 INPUT ./imgs/1/nmap_ping_scan_result_arp_request.png
 INPUT ./imgs/1/nmap_ping_scan_result_arp_request.png
@@ -163,7 +166,6 @@ INPUT ./imgs/2/no_process.png
 INPUT ./imgs/2/no_process.png
 INPUT ./imgs/2/no_process.png
 INPUT extractbb -B cropbox -O imgs/2/no_process.png
-INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT ./imgs/2/no_process_st.png
 INPUT ./imgs/2/no_process_st.png
 INPUT ./imgs/2/no_process_st.png
@@ -172,6 +174,7 @@ INPUT ./imgs/2/no_process_ss.png
 INPUT ./imgs/2/no_process_ss.png
 INPUT ./imgs/2/no_process_ss.png
 INPUT extractbb -B cropbox -O imgs/2/no_process_ss.png
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT ./imgs/2/no_process_su.png
 INPUT ./imgs/2/no_process_su.png
 INPUT ./imgs/2/no_process_su.png
@@ -184,6 +187,10 @@ INPUT ./imgs/2/active_check.png
 INPUT ./imgs/2/active_check.png
 INPUT ./imgs/2/active_check.png
 INPUT extractbb -B cropbox -O imgs/2/active_check.png
+INPUT ./imgs/2/telnet_ssh_login_success.png
+INPUT ./imgs/2/telnet_ssh_login_success.png
+INPUT ./imgs/2/telnet_ssh_login_success.png
+INPUT extractbb -B cropbox -O imgs/2/telnet_ssh_login_success.png
 INPUT ./imgs/2/telnet_w.png
 INPUT ./imgs/2/telnet_w.png
 INPUT ./imgs/2/telnet_w.png
@@ -200,38 +207,22 @@ INPUT ./imgs/2/ssh_w_tcp_stream.png
 INPUT ./imgs/2/ssh_w_tcp_stream.png
 INPUT ./imgs/2/ssh_w_tcp_stream.png
 INPUT extractbb -B cropbox -O imgs/2/ssh_w_tcp_stream.png
-INPUT ./imgs/2/active_nmap_sT_terminal.png
-INPUT ./imgs/2/active_nmap_sT_terminal.png
-INPUT ./imgs/2/active_nmap_sT_terminal.png
-INPUT extractbb -B cropbox -O imgs/2/active_nmap_sT_terminal.png
-INPUT ./imgs/2/active_nmap_sT_w.png
-INPUT ./imgs/2/active_nmap_sT_w.png
-INPUT ./imgs/2/active_nmap_sT_w.png
-INPUT extractbb -B cropbox -O imgs/2/active_nmap_sT_w.png
-INPUT ./imgs/2/active_nmap_sS_terminal.png
-INPUT ./imgs/2/active_nmap_sS_terminal.png
-INPUT ./imgs/2/active_nmap_sS_terminal.png
-INPUT extractbb -B cropbox -O imgs/2/active_nmap_sS_terminal.png
-INPUT ./imgs/2/active_nmap_sS_w.png
-INPUT ./imgs/2/active_nmap_sS_w.png
-INPUT ./imgs/2/active_nmap_sS_w.png
-INPUT extractbb -B cropbox -O imgs/2/active_nmap_sS_w.png
-INPUT ./imgs/2/active_nmap_sU_terminal.png
-INPUT ./imgs/2/active_nmap_sU_terminal.png
-INPUT ./imgs/2/active_nmap_sU_terminal.png
-INPUT extractbb -B cropbox -O imgs/2/active_nmap_sU_terminal.png
-INPUT ./imgs/2/active_nmap_sU_w.png
-INPUT ./imgs/2/active_nmap_sU_w.png
-INPUT ./imgs/2/active_nmap_sU_w.png
-INPUT extractbb -B cropbox -O imgs/2/active_nmap_sU_w.png
-INPUT ./imgs/2/active_nmap_O_terminal.png
-INPUT ./imgs/2/active_nmap_O_terminal.png
-INPUT ./imgs/2/active_nmap_O_terminal.png
-INPUT extractbb -B cropbox -O imgs/2/active_nmap_O_terminal.png
-INPUT ./imgs/2/active_nmap_O_w.png
-INPUT ./imgs/2/active_nmap_O_w.png
-INPUT ./imgs/2/active_nmap_O_w.png
-INPUT extractbb -B cropbox -O imgs/2/active_nmap_O_w.png
+INPUT ./imgs/2/active_nmap_sT.png
+INPUT ./imgs/2/active_nmap_sT.png
+INPUT ./imgs/2/active_nmap_sT.png
+INPUT extractbb -B cropbox -O imgs/2/active_nmap_sT.png
+INPUT ./imgs/2/active_nmap_sS.png
+INPUT ./imgs/2/active_nmap_sS.png
+INPUT ./imgs/2/active_nmap_sS.png
+INPUT extractbb -B cropbox -O imgs/2/active_nmap_sS.png
+INPUT ./imgs/2/active_nmap_sU.png
+INPUT ./imgs/2/active_nmap_sU.png
+INPUT ./imgs/2/active_nmap_sU.png
+INPUT extractbb -B cropbox -O imgs/2/active_nmap_sU.png
+INPUT ./imgs/2/active_nmap_O.png
+INPUT ./imgs/2/active_nmap_O.png
+INPUT ./imgs/2/active_nmap_O.png
+INPUT extractbb -B cropbox -O imgs/2/active_nmap_O.png
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
 INPUT report4.aux
 INPUT report4.run.xml
