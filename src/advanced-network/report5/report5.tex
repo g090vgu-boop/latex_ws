@@ -1,26 +1,26 @@
-\documentclass[dvipdfmx,autodetect-engine, 12pt]{jsarticle}
+% \documentclass[dvipdfmx,autodetect-engine, 12pt]{jsarticle}
 
-\usepackage{ulem} % 取消線を引くためのパッケージ
-\usepackage[dvipdfmx]{graphicx} % 画像を挿入するためのパッケージ
-\usepackage{array} % 表の幅指定や自動改行に必要
-\usepackage{enumitem}
+% \usepackage{ulem} % 取消線を引くためのパッケージ
+% \usepackage[dvipdfmx]{graphicx} % 画像を挿入するためのパッケージ
+% \usepackage{array} % 表の幅指定や自動改行に必要
+% \usepackage{enumitem}
 
-% --- 考文献用の設定 ---
-\usepackage[backend=biber, style=numeric]{biblatex} % biblatexパッケージの使用
-\addbibresource{../source.bib} % 先ほど作った別ファイルを指定（拡張子まで書く）
-\usepackage{url} % WebサイトのURLを綺麗に出力するため
+% % --- 考文献用の設定 ---
+% \usepackage[backend=biber, style=numeric]{biblatex} % biblatexパッケージの使用
+% \addbibresource{../source.bib} % 先ほど作った別ファイルを指定（拡張子まで書く）
+% \usepackage{url} % WebサイトのURLを綺麗に出力するため
 
-% --- section の文字サイズを小さくする設定 ---
-\makeatletter
-\renewcommand{\section}{%
-  \@startsection{section}{1}{\z@}%
-  {1.5ex \@plus .5ex \@minus .2ex}% 前の行との隙間
-  {0.5ex \@plus .3ex}% 下の行との隙間
-  {\normalfont\normalsize}% ← ここでサイズを \Large（少し大きめ）に指定
-}
-\makeatother
+% % --- section の文字サイズを小さくする設定 ---
+% \makeatletter
+% \renewcommand{\section}{%
+%   \@startsection{section}{1}{\z@}%
+%   {1.5ex \@plus .5ex \@minus .2ex}% 前の行との隙間
+%   {0.5ex \@plus .3ex}% 下の行との隙間
+%   {\normalfont\normalsize}% ← ここでサイズを \Large（少し大きめ）に指定
+% }
+% \makeatother
 
-\begin{document}
+% \begin{document}
 
 % 課題のタイトル
 \begin{center}
@@ -117,7 +117,6 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
         \vspace{\baselineskip}
         \quad
         図\ref{fig:set_iptables_4}は手順4の要件を満たすようなiptablesの設定を行うコマンドの実行結果である.
-        各コマンドの説明については手順10で行う
 
         \begin{figure}[htbp]
             \centering
@@ -125,6 +124,36 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
             \caption{手順4の要件を満たすためのiptablesの編集コマンド}
             \label{fig:set_iptables_4}
         \end{figure}
+
+        \quad
+        ここで行った設定についてコマンドごとに説明を行う。\\
+
+        \texttt{\# sysctl -w net.ipv4.ip\_forward=1} \\
+
+        \texttt{sysctl}コマンド\cite{kazmax_sysctl_2022}を\texttt{-w}オプションで用いて，\texttt{net.ipv4.ip\_forward}の値を1に設定することで，ポートフォワーディングを有効化した。\\
+
+        \texttt{\# iptables -P FORWARD DROP} \\
+
+        明示的に許可した通信以外は転送しないようにするため，
+        \texttt{-P}オプションによって対象のチェインのポリシーを設定している．
+        ここでは\texttt{filter}テーブル上の\texttt{FORWARD}チェインに対して\texttt{DROP}というポリシーを設定し，
+        デフォルトですべてのパケットを転送できないよう設定している\cite{man:iptables}．\\
+
+        \texttt{\# iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT} \\
+        
+        iptablesにおける接続追跡機能である\texttt{conntrack}の\texttt{--ctstate}オプションで\texttt{ESTABLISHED}と\texttt{RELATED}のステートリストを指定して，
+        それらに該当するパケットの通信を許可することによって\cite{man_iptables_extensions_8}，
+        既に確立済み（ESTABLISHED）または関連する（RELATED）通信のパケットを許可し，応答パケットを転送できるようにした.
+        これによってserverからwindowsへの応答パケットの転送が可能となる.\\
+
+        \texttt{\# iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 22 -j DNAT --to-destination 192.168.100.2:22} \\
+        
+        \texttt{nat}テーブルの\texttt{PREROUTING}チェインに対して，\texttt{eth1}から自身に対して送信されたTCP 22番ポートへのパケットを，宛先IPアドレス「192.168.100.2」，宛先ポート「TCP 22番」へと書き換えるDNAT（宛先IPアドレスの書き換え）の設定を行っている．これにより\texttt{eth1}から自身の22番ポートへ送られたパケットは，サーバーの22番ポートに転送される．\\
+
+        \texttt{\# iptables -A FORWARD -i eth1 -o eth0 -p tcp -d 192.168.100.2 --dport 22 -j ACCEPT} \\
+        
+        \texttt{filter}テーブルの\texttt{FORWARD}チェインに対して，\texttt{eth1}から送信された宛先IPアドレスが「192.168.100.2」で宛先ポートがTCP 22番のパケットの転送を許可する設定を行っている．これによって，DNATで宛先IPアドレスが変換されたパケットをサーバーの22番ポートに転送することが可能になる．\\
+
 
     \item Windows から router へ通信を発生させ，server に一般権限ユーザでログインできることを確認する（必要に応じて known\_hosts を編集して Host key 問題を解決する）．\\
     
@@ -141,15 +170,16 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
         \quad
         sshコマンドを実行すると, "remote host identification has changed!"
         と警告が発生していることがわかる.
-        一般にsshのソフトウェアでは, $\sim$/.ssh/known\_hostsに接続先のサーバの公開鍵情報を暗号化して保存しておく.
+        一般にsshのソフトウェアでは, $\sim$/.ssh/known\_hostsに接続先のサーバの公開鍵情報が保存される.
         次回接続した際には, ここに保存された公開鍵と照合することによって同じサーバかどうかを検証する\cite{zenn_known_hosts_2025},
         このときに公開鍵の情報が一致しなければ, 今回得られたような警告文が出力される.\\
         \quad
         今回の場合においては以前にwindowsからrouterに対してssh接続した際にrouterの公開鍵情報が$\sim$/.ssh/known\_hosts
         に保存されており, 今回も同じようにrouterに対してssh接続のコマンドを実行したが, 手順4においてsshのパケットを
         serverに転送するよう設定したことで, serverの公開鍵情報と以前に保存したrouterの公開鍵情報とで照合が行われ,
-        一致せずに警告が発されたと考えられる. したがってここでは記録されていた公開鍵情報を消去する, すなわち, 
-        $\sim$/.ssh/known\_hostsの中身を空にすることで対処した.
+        一致せずに警告が発されたと考えられる. 
+        ここでは記録されていたrouterの公開鍵情報を 
+        $\sim$/.ssh/known\_hostsから削除することで対処した.
         結果として, 最終的にwindowsからserverにuser1としてログインできていることが確認できる.\\
 
     \item router 上で Wireshark を起動し，Windows↔router および router↔server の両方のインターフェースをキャプチャ対象に設定する．
@@ -165,7 +195,7 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
         % (ip.src==10.6.158.90 and ip.dst==10.6.158.153) or (ip.src==10.6.158.153 and ip.dst==10.6.158.90)
         % を設定している.
         % 前述のようにフィルタリングした上で, 
-        両方のインターフェースを流れるパケットを比較すると, プロトコルやパケット内の情報が酷似していることが確認できる.
+        両方のインターフェースを流れるパケットを比較すると, プロトコルやパケット内の情報が類似していることが確認できる.
         実際に, １つパケットを抽出して比較した例を図\ref{fig:same_packet_example}に示す.
 
         \begin{figure}[htbp]
@@ -183,14 +213,12 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
         \end{figure}
 
         \quad
-        図\ref{fig:same_packet_example}に示すパケットは,SSHv2のパケットである.
-        ネットワーク以下のプロトコルのヘッダ情報はserverからrouterへのパケットであることを示す部分が
-        routerからwindowsへのパケットであることを示すものに置き換わっている一方で,
-        tcpのヘッダにおいて, フィールドの値が完全一致しており,
-        これらのパケットは,
-        tcpとそれより上位のプロトコルのヘッダ, 
-        ひいてはデータにおいて同じ値が格納されている, すなわち,
-        データが転送されていることが確認できる.
+        図\ref{fig:same_packet_example}に示すパケットは,それぞれrouterのeth0, eth1で観測されたSSHv2のパケットである.
+        tcpのヘッダにおいて, フィールドの値(\texttt{Sequensce Number(raw): 3645530960, Acknowledgment Number(raw): 1354975756 など})が完全一致しており,
+        転送されているものであるといえる.
+        ここでは, server(192.168.100.2)のTCP 22番ポートからrouter(192.168.100.1)のTCP 58333番ポートへ送信されたパケットが, 
+        router(10.6.158.90)のTCP 22番ポートからwindows(10.6.158.153)のTCP 58333番ポートへ送信されたパケットとして,
+        宛先IPアドレス, 送信元IPアドレスがともに書き換えられていることが分かる.
 
         \vspace{\baselineskip}
     
@@ -199,13 +227,24 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
         \vspace{\baselineskip}
 
         図\ref{fig:set_iptables_7}は, 手順9の要件を満たすためのiptablesの編集コマンドの実行結果である.
-        各コマンドの説明については手順10で行う.
+        
         \begin{figure}[htbp]
             \centering
             \includegraphics[width=0.8\textwidth]{imgs/set_iptables_8.png} 
             \caption{手順9の要件を満たすためのiptablesの編集コマンド}
             \label{fig:set_iptables_7}
         \end{figure}
+
+        \quad
+        ここで行った設定についてコマンドごとに説明を行う。\\
+
+        \texttt{\# iptables -t nat -A POSTROUTING -o eth1 -s 192.168.100.2 -j MASQUERADE} \\
+
+        \texttt{nat}テーブルの\texttt{POSTROUTING}チェインに対して，内部のサーバー（192.168.100.2）から\texttt{eth1}を経由して外部へ出ていく通信の送信元IPアドレスを，ルーターの外部IPアドレスへと書き換えるIPマスカレードの設定を行っている．\\
+
+        \texttt{\# iptables -A FORWARD -i eth0 -o eth1 -s 192.168.100.2 -j ACCEPT} \\
+
+        \texttt{filter}テーブルの\texttt{FORWARD}チェインに対して，\texttt{eth0}から受信して\texttt{eth1}から送信される，サーバー（192.168.100.2）から外部へ向かうパケットの転送を許可する設定を行っている．\\
 
         \vspace{\baselineskip}
 
@@ -225,17 +264,23 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
         \quad
         windowsからの応答が確認でき, serverとwindowsとの間で通信が可能であることが確認できる.\\
         \quad
-        続いて, 図\ref{fig:server2windows_wireshark}にserverからwindowsに対してpingコマンドを実行した際に
+        続いて, 図\ref{fig:masquerade_result}にserverからwindowsに対してpingコマンドを実行した際に
         キャプチャされたパケットの一覧を示す.
 
         \begin{figure}[htbp]
             \centering
-            \includegraphics[width=0.8\textwidth]{imgs/ping_server2windows_wireshark.png} 
+            \includegraphics[width=0.8\textwidth]{imgs/prove_masquarade.png} 
             \caption{serverからwindowsに対するpingコマンド実行時にキャプチャされたパケット一覧}
-            \label{fig:server2windows_wireshark}
+            \label{fig:masquerade_result}
         \end{figure}      
         
         \quad
+        左がeth0でのキャプチャ結果, 右がeth1でのキャプチャ結果である.
+        ここで, eth0においてserver(192.168.100.2)からwindows(10.6.158.153)に対して送信されたICMPのパケットが,
+        eth1においては, routerの外部アドレス(10.6.158.90)からwindows(10.6.158.153)に対してのパケットとして転送されていること,
+        あるいはその逆のケースについても確認ができる.
+        
+
 
 
 
@@ -245,58 +290,54 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
     server から組織外ネットワークへ通信できることを示し，
     使用したすべての iptables 設定を列挙する．
     各設定がどのようにパケットを書き換え，
-    転送処理を実現しているかを具体的に説明してレポートにまとめる．
+    転送処理を実現しているかを具体的に説明してレポートにまとめる．\\
 
         \quad
         手順5,\, 9においてそれぞれ転送によってデスクトップPCからserverにログインできることと
-        組織外ネットワークに属する装置と通信ができること
+        組織外ネットワークに属する装置と通信ができることが確認できた.\\
+        \quad
+        また, 手順7,\, 9においてパケットのiptablesによる転送処理(パケットの書き換え)が実現されていることが確認できた.\\
+        \quad
+        ここでは各通信の実現に必要な設定についても各手順で述べたとおりであるが,
+        serverから組織外ネットワークへの通信に必要な設定について,
+        デスクトップPCからserverにログインできるために必要な設定と重複して,
+        手順9で述べられていない部分があるため,
+        ここではその点に対する補足を行う.\\
+        \quad
+        まずはカーネルパラメータの設定で, 
+        コマンドにすると以下のとおりである.\\
+
+        \texttt{\# sysctl -w net.ipv4.ip\_forward=1} \\
+
+        の部分で, 
+        これは2つのNIC間でのパケットの転送を許可するためのパラメータを設定するものであり,
+        ルータとして機能させるためには必須の設定のためである.
+        この実験ネットワークでは, 
+        具体的にrouterのeth1から届いたパケットをeth0から転送したい際,あるいはその逆の場合に
+        ホスト(router)内インターフェース間でのパケットの転送を実現するものである.
+        \\
+        \quad
+        もう一点が, iptablesの設定で,
+        コマンドにすると以下のものである.\\
+
+        \texttt{\# iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT} \\
+
+        これは, 一度通信が確立された後の帰りのパケットを転送するための設定である.\\
+        手順9では, 組織内から組織外へパケットを送信する際に, routerの組織外とのインターフェースを用いて通信を行うための設定は行っているが,
+        応答パケットを転送するための設定は行っていない. 
+        したがって, ここでこの設定を行うことによって, 双方向の通信が実現される.
+        
 
         \quad
-        図\ref{fig:iptables_state_4}, \ref{fig:iptables_state_8} に手順4, \, 8におけるiptablesの状態を示す.
-
-        \begin{figure}[htbp]
-            \centering
-            \includegraphics[width=0.8\textwidth]{imgs/iptable_state_4.png} 
-            \caption{手順4におけるiptablesの状態}
-            \label{fig:iptables_state_4}
-        \end{figure}  
-        \begin{figure}[htbp]
-            \centering
-            \includegraphics[width=0.8\textwidth]{imgs/iptable_state_8.png} 
-            \caption{手順8におけるiptablesの状態}
-            \label{fig:iptables_state_8}
-        \end{figure}  
-
-        \quad
-        まず\ref{fig:set_iptables_4}手順4で行った設定について説明する.\\ 
-        \quad
-        まずsysctlコマンド\cite{kazmax_sysctl_2022}を-wオプションで用いて, 
-        ipv4.ip\_forwardの値を1に設定することで,
-        ポートフォワーディングを有効化した.\\
-        \quad
-        次にtcp22番ポートは以外へのアクセスは転送しないようにするため, 
-        -Pオプションによって対象のチェインのポリシーを設定している.
-        ここではfilterテーブル上のFORWARDチェインに対してDROPというポリシーを設定し,
-        デフォルトですべてのパケットを転送できないよう設定している\cite{man:iptables}.\\
-        \quad
-        続いてiptablesにおける接続追跡機能であるconntarackの--ctstateオプションで
-        ESTABLISHEDとRELATEDのstatelistを指定してそれらのstatelistに該当するパケットの
-        通信を許可することによって\cite{man_iptables_extensions_8}, 
-        serverからwindowsへの帰りのパケット(tcp22番ポートあて以外のパケット)を転送するための設定をしている.\\
-        \quad
-        次にnatテーブルのPREROUTINGチェインに対してeth1の10.6.158.0/24のネットワークから自身に対して送信された
-        tcp22番ポートへのパケットを宛先が192.168.100.2のパケットへと書き換える設定を行っている.
-
-
-
-
+        
+        
         
 
 \end{enumerate}
 
 \newpage
 
-% --- 参考文献リストの出力 ---
-\printbibliography[title=参考文献]
+% % --- 参考文献リストの出力 ---
+% \printbibliography[title=参考文献]
 
-\end{document}
+% \end{document}

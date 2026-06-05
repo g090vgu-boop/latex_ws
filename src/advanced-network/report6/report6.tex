@@ -1,26 +1,26 @@
-\documentclass[dvipdfmx,autodetect-engine, 12pt]{jsarticle}
+% \documentclass[dvipdfmx,autodetect-engine, 12pt]{jsarticle}
 
-\usepackage{ulem} % 取消線を引くためのパッケージ
-\usepackage[dvipdfmx]{graphicx} % 画像を挿入するためのパッケージ
-\usepackage{array} % 表の幅指定や自動改行に必要
-\usepackage{enumitem}
+% \usepackage{ulem} % 取消線を引くためのパッケージ
+% \usepackage[dvipdfmx]{graphicx} % 画像を挿入するためのパッケージ
+% \usepackage{array} % 表の幅指定や自動改行に必要
+% \usepackage{enumitem}
 
-% --- 参考文献用の設定 ---
-\usepackage[backend=biber, style=numeric]{biblatex}
-\addbibresource{../source.bib}
-\usepackage{url}
+% % --- 参考文献用の設定 ---
+% \usepackage[backend=biber, style=numeric]{biblatex}
+% \addbibresource{../source.bib}
+% \usepackage{url}
 
-% --- section の文字サイズを調整 ---
-\makeatletter
-\renewcommand{\section}{%
-  \@startsection{section}{1}{\z@}%
-    {1.5ex\@plus.5ex\@minus.2ex}%
-    {0.5ex\@plus.3ex}%
-  {\normalfont\normalsize}%
-}
-\makeatother
+% % --- section の文字サイズを調整 ---
+% \makeatletter
+% \renewcommand{\section}{%
+%   \@startsection{section}{1}{\z@}%
+%     {1.5ex\@plus.5ex\@minus.2ex}%
+%     {0.5ex\@plus.3ex}%
+%   {\normalfont\normalsize}%
+% }
+% \makeatother
 
-\begin{document}
+% \begin{document}
 
 % タイトル
 \begin{center}
@@ -152,7 +152,7 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
 
 \newpage
 
-% 参考文献
-\printbibliography[title=参考文献]
+% % 参考文献
+% \printbibliography[title=参考文献]
 
-\end{document}
+% \end{document}

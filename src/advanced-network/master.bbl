@@ -1,0 +1,630 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{bashdo_arp}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=317e52321dfff03ff375818ccb839b25}{%
+           family={{Bash玄}},
+           familyi={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{317e52321dfff03ff375818ccb839b25}
+      \strng{fullhash}{317e52321dfff03ff375818ccb839b25}
+      \strng{fullhashraw}{317e52321dfff03ff375818ccb839b25}
+      \strng{bibnamehash}{317e52321dfff03ff375818ccb839b25}
+      \strng{authorbibnamehash}{317e52321dfff03ff375818ccb839b25}
+      \strng{authornamehash}{317e52321dfff03ff375818ccb839b25}
+      \strng{authorfullhash}{317e52321dfff03ff375818ccb839b25}
+      \strng{authorfullhashraw}{317e52321dfff03ff375818ccb839b25}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Bash道, \url{https://bash-do.com/linux-command-arp/}}
+      \field{note}{閲覧日: 2026年6月1日}
+      \field{title}{arp – ARPテーブルを表示・操作するコマンド}
+      \field{year}{2026}
+    \endentry
+    \entry{kinsta_arp}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=eb6a10fbeca69d7f6397524a3c428de8}{%
+           family={Duò},
+           familyi={D\bibinitperiod},
+           given={Matteo},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{eb6a10fbeca69d7f6397524a3c428de8}
+      \strng{fullhash}{eb6a10fbeca69d7f6397524a3c428de8}
+      \strng{fullhashraw}{eb6a10fbeca69d7f6397524a3c428de8}
+      \strng{bibnamehash}{eb6a10fbeca69d7f6397524a3c428de8}
+      \strng{authorbibnamehash}{eb6a10fbeca69d7f6397524a3c428de8}
+      \strng{authornamehash}{eb6a10fbeca69d7f6397524a3c428de8}
+      \strng{authorfullhash}{eb6a10fbeca69d7f6397524a3c428de8}
+      \strng{authorfullhashraw}{eb6a10fbeca69d7f6397524a3c428de8}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Kinsta リソースセンター, \url{https://kinsta.com/jp/knowledgebase/what-is-arp/}}
+      \field{note}{最終更新日: 2025年10月02日, 閲覧日: 2026年6月1日}
+      \field{title}{アドレス解決プロトコル{ARP}とは}
+      \field{year}{2025}
+    \endentry
+    \entry{nmap_man_jp}{misc}{}{}
+      \name{author}{2}{}{%
+        {{hash=848221c5154bbafbaa40135bda178bbe}{%
+           family={{Insecure.Org}},
+           familyi={I\bibinitperiod}}}%
+        {{hash=ee6d50f56d2a0788635c237496a922b6}{%
+           family={{Nmap Project}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{fullhash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{fullhashraw}{b17f51ad042cf723129be1a06728e03c}
+      \strng{bibnamehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authorbibnamehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authornamehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authorfullhash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authorfullhashraw}{b17f51ad042cf723129be1a06728e03c}
+      \field{extraname}{1}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Nmap.org, \url{https://nmap.org/man/jp/index.html}}
+      \field{note}{閲覧日: 2026年6月2日}
+      \field{title}{Nmap リファレンスガイド (Man Page)}
+      \field{year}{2026}
+    \endentry
+    \entry{nmap_man_port_scanning}{misc}{}{}
+      \name{author}{2}{}{%
+        {{hash=848221c5154bbafbaa40135bda178bbe}{%
+           family={{Insecure.Org}},
+           familyi={I\bibinitperiod}}}%
+        {{hash=ee6d50f56d2a0788635c237496a922b6}{%
+           family={{Nmap Project}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{fullhash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{fullhashraw}{b17f51ad042cf723129be1a06728e03c}
+      \strng{bibnamehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authorbibnamehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authornamehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authorfullhash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authorfullhashraw}{b17f51ad042cf723129be1a06728e03c}
+      \field{extraname}{2}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Nmap.org, \url{https://nmap.org/man/ja/man-port-scanning-basics.html}}
+      \field{note}{閲覧日: 2026年6月2日}
+      \field{title}{Nmap リファレンスガイド (Man Page) --- ポートスキャンの基本}
+      \field{year}{2026}
+    \endentry
+    \entry{nmap_man_port_scanning_techniques}{misc}{}{}
+      \name{author}{2}{}{%
+        {{hash=848221c5154bbafbaa40135bda178bbe}{%
+           family={{Insecure.Org}},
+           familyi={I\bibinitperiod}}}%
+        {{hash=ee6d50f56d2a0788635c237496a922b6}{%
+           family={{Nmap Project}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{fullhash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{fullhashraw}{b17f51ad042cf723129be1a06728e03c}
+      \strng{bibnamehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authorbibnamehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authornamehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authorfullhash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authorfullhashraw}{b17f51ad042cf723129be1a06728e03c}
+      \field{extraname}{3}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Nmap.org, \url{https://nmap.org/man/ja/man-port-scanning-techniques.html}}
+      \field{note}{閲覧日: 2026年6月2日}
+      \field{title}{Nmap リファレンスガイド (Man Page) --- ポートスキャン手法}
+      \field{year}{2026}
+    \endentry
+    \entry{nmap_man_host_discovery}{misc}{}{}
+      \name{author}{2}{}{%
+        {{hash=848221c5154bbafbaa40135bda178bbe}{%
+           family={{Insecure.Org}},
+           familyi={I\bibinitperiod}}}%
+        {{hash=ee6d50f56d2a0788635c237496a922b6}{%
+           family={{Nmap Project}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{fullhash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{fullhashraw}{b17f51ad042cf723129be1a06728e03c}
+      \strng{bibnamehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authorbibnamehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authornamehash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authorfullhash}{b17f51ad042cf723129be1a06728e03c}
+      \strng{authorfullhashraw}{b17f51ad042cf723129be1a06728e03c}
+      \field{extraname}{4}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Nmap.org, \url{https://nmap.org/man/ja/man-host-discovery.html}}
+      \field{note}{閲覧日: 2026年6月2日}
+      \field{title}{Nmap リファレンスガイド (Man Page) --- ホストの発見}
+      \field{year}{2026}
+    \endentry
+    \entry{ubuntu_dropbear_man}{manual}{}{}
+      \name{author}{2}{}{%
+        {{hash=4ea81971c0b4cbd270e7bee061da27fe}{%
+           family={Johnston},
+           familyi={J\bibinitperiod},
+           given={Matt},
+           giveni={M\bibinitperiod}}}%
+        {{hash=6f70e5c0e37104a6d79f85b3dfee0de9}{%
+           family={Pape},
+           familyi={P\bibinitperiod},
+           given={Gerrit},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Canonical Ltd.}%
+      }
+      \strng{namehash}{00c2d7c567739961c67396a766995eeb}
+      \strng{fullhash}{00c2d7c567739961c67396a766995eeb}
+      \strng{fullhashraw}{00c2d7c567739961c67396a766995eeb}
+      \strng{bibnamehash}{00c2d7c567739961c67396a766995eeb}
+      \strng{authorbibnamehash}{00c2d7c567739961c67396a766995eeb}
+      \strng{authornamehash}{00c2d7c567739961c67396a766995eeb}
+      \strng{authorfullhash}{00c2d7c567739961c67396a766995eeb}
+      \strng{authorfullhashraw}{00c2d7c567739961c67396a766995eeb}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Ubuntu Manpages}
+      \field{title}{dropbear(8) — lightweight SSH server}
+      \field{urlday}{3}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://manpages.ubuntu.com/manpages/focal/man8/dropbear.8.html
+      \endverb
+      \verb{url}
+      \verb https://manpages.ubuntu.com/manpages/focal/man8/dropbear.8.html
+      \endverb
+    \endentry
+    \entry{kazmax_sysctl_2022}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=60ac4088e0954d2e63c76e75398e51a2}{%
+           family={{kazmax}},
+           familyi={k\bibinitperiod}}}%
+      }
+      \strng{namehash}{60ac4088e0954d2e63c76e75398e51a2}
+      \strng{fullhash}{60ac4088e0954d2e63c76e75398e51a2}
+      \strng{fullhashraw}{60ac4088e0954d2e63c76e75398e51a2}
+      \strng{bibnamehash}{60ac4088e0954d2e63c76e75398e51a2}
+      \strng{authorbibnamehash}{60ac4088e0954d2e63c76e75398e51a2}
+      \strng{authornamehash}{60ac4088e0954d2e63c76e75398e51a2}
+      \strng{authorfullhash}{60ac4088e0954d2e63c76e75398e51a2}
+      \strng{authorfullhashraw}{60ac4088e0954d2e63c76e75398e51a2}
+      \field{sortinit}{k}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{kazmax - Linux で自宅サーバー}
+      \field{note}{Accessed: 2026-06-04}
+      \field{title}{sysctl - システム管理コマンドの説明 - Linux コマンド集 一覧表}
+      \field{year}{2022}
+      \verb{urlraw}
+      \verb http://kazmax.zpp.jp
+      \endverb
+      \verb{url}
+      \verb http://kazmax.zpp.jp
+      \endverb
+    \endentry
+    \entry{man_iptables_extensions_8}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=a40070697728cad9d8549b53d95f49d4}{%
+           family={{Linux man-pages project}},
+           familyi={L\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {man7.org}%
+      }
+      \strng{namehash}{a40070697728cad9d8549b53d95f49d4}
+      \strng{fullhash}{a40070697728cad9d8549b53d95f49d4}
+      \strng{fullhashraw}{a40070697728cad9d8549b53d95f49d4}
+      \strng{bibnamehash}{a40070697728cad9d8549b53d95f49d4}
+      \strng{authorbibnamehash}{a40070697728cad9d8549b53d95f49d4}
+      \strng{authornamehash}{a40070697728cad9d8549b53d95f49d4}
+      \strng{authorfullhash}{a40070697728cad9d8549b53d95f49d4}
+      \strng{authorfullhashraw}{a40070697728cad9d8549b53d95f49d4}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{iptables version 1.8.13. Accessed: 2026-06-04}
+      \field{title}{iptables-extensions(8) --- Linux manual page}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://man7.org/linux/man-pages/man8/iptables-extensions.8.html
+      \endverb
+      \verb{url}
+      \verb https://man7.org/linux/man-pages/man8/iptables-extensions.8.html
+      \endverb
+    \endentry
+    \entry{nmap_os_detection}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=5fecd2561826eb4014ebd779cb15921a}{%
+           family={Lyon},
+           familyi={L\bibinitperiod},
+           given={Gordon},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{fullhash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{fullhashraw}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{bibnamehash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{authorbibnamehash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{authornamehash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{authorfullhash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{authorfullhashraw}{5fecd2561826eb4014ebd779cb15921a}
+      \field{extraname}{1}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://nmap.org/book/osdetect-methods.html}}
+      \field{note}{Accessed: 2026-06-04}
+      \field{title}{Nmap Network Scanning, Chapter 8. Remote OS Detection: TCP/IP Fingerprinting Methods Supported by Nmap}
+      \field{year}{2026}
+    \endentry
+    \entry{nmap_man_osdetect_ja}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=5fecd2561826eb4014ebd779cb15921a}{%
+           family={Lyon},
+           familyi={L\bibinitperiod},
+           given={Gordon},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{fullhash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{fullhashraw}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{bibnamehash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{authorbibnamehash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{authornamehash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{authorfullhash}{5fecd2561826eb4014ebd779cb15921a}
+      \strng{authorfullhashraw}{5fecd2561826eb4014ebd779cb15921a}
+      \field{extraname}{2}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://nmap.org/man/ja/man-os-detection.html}}
+      \field{note}{Accessed: 2026-06-04}
+      \field{title}{Nmap リファレンスガイド (Man Page): OS 検出}
+      \field{year}{2026}
+    \endentry
+    \entry{rfc1035}{report}{}{}
+      \name{author}{1}{}{%
+        {{hash=a44b90ef653ba684badd93d3f7acb017}{%
+           family={Mockapetris},
+           familyi={M\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {RFC Editor}%
+      }
+      \list{publisher}{1}{%
+        {RFC Editor}%
+      }
+      \strng{namehash}{a44b90ef653ba684badd93d3f7acb017}
+      \strng{fullhash}{a44b90ef653ba684badd93d3f7acb017}
+      \strng{fullhashraw}{a44b90ef653ba684badd93d3f7acb017}
+      \strng{bibnamehash}{a44b90ef653ba684badd93d3f7acb017}
+      \strng{authorbibnamehash}{a44b90ef653ba684badd93d3f7acb017}
+      \strng{authornamehash}{a44b90ef653ba684badd93d3f7acb017}
+      \strng{authorfullhash}{a44b90ef653ba684badd93d3f7acb017}
+      \strng{authorfullhashraw}{a44b90ef653ba684badd93d3f7acb017}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{11}
+      \field{number}{1035}
+      \field{title}{Domain Names - Implementation and Specification}
+      \field{type}{RFC}
+      \field{year}{1987}
+      \verb{doi}
+      \verb 10.17487/RFC1035
+      \endverb
+      \verb{urlraw}
+      \verb https://www.rfc-editor.org/info/rfc1035
+      \endverb
+      \verb{url}
+      \verb https://www.rfc-editor.org/info/rfc1035
+      \endverb
+    \endentry
+    \entry{solaris_ping}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=d51288dc67d9f5e0330d927a009e208b}{%
+           family={{Oracle Corporation}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{d51288dc67d9f5e0330d927a009e208b}
+      \strng{fullhash}{d51288dc67d9f5e0330d927a009e208b}
+      \strng{fullhashraw}{d51288dc67d9f5e0330d927a009e208b}
+      \strng{bibnamehash}{d51288dc67d9f5e0330d927a009e208b}
+      \strng{authorbibnamehash}{d51288dc67d9f5e0330d927a009e208b}
+      \strng{authornamehash}{d51288dc67d9f5e0330d927a009e208b}
+      \strng{authorfullhash}{d51288dc67d9f5e0330d927a009e208b}
+      \strng{authorfullhashraw}{d51288dc67d9f5e0330d927a009e208b}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Oracle Documentation, \url{https://docs.oracle.com/cd/E19253-01/819-0380/ipv6-admintasks-53/index.html}}
+      \field{note}{閲覧日: 2026年6月2日}
+      \field{title}{ping コマンドによるリモートホストの検証 --- {Solaris} のシステム管理 ({IP} サービス)}
+      \field{year}{2010}
+    \endentry
+    \entry{man:iptables}{manual}{}{}
+      \name{author}{2}{}{%
+        {{hash=bbdca53c492ce8ccdddee09b7907cb50}{%
+           family={Russell},
+           familyi={R\bibinitperiod},
+           given={Rusty},
+           giveni={R\bibinitperiod}}}%
+        {{hash=f0a19cab9257bb264246f6a579ff7cba}{%
+           family={Team},
+           familyi={T\bibinitperiod},
+           given={Netfilter\bibnamedelima Core},
+           giveni={N\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Netfilter Project}%
+      }
+      \strng{namehash}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{fullhash}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{fullhashraw}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{bibnamehash}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{authorbibnamehash}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{authornamehash}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{authorfullhash}{b649952968d6aa4c00da7188a58fddaf}
+      \strng{authorfullhashraw}{b649952968d6aa4c00da7188a58fddaf}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{Version 1.4.21}
+      \field{note}{Linux Manual Page, Section: iptables 1.4.21 (8)}
+      \field{title}{iptables(8) --- IPv4/IPv6 のパケットフィルタと NAT の管理ツール}
+      \field{year}{2013}
+      \verb{urlraw}
+      \verb https://linuxjm.sourceforge.io/html/iptables/man8/iptables.8.html
+      \endverb
+      \verb{url}
+      \verb https://linuxjm.sourceforge.io/html/iptables/man8/iptables.8.html
+      \endverb
+    \endentry
+    \entry{zenn_known_hosts_2025}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=98d0360b392de5f1d53acdd6489b6e88}{%
+           family={{S.O.}},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{98d0360b392de5f1d53acdd6489b6e88}
+      \strng{fullhash}{98d0360b392de5f1d53acdd6489b6e88}
+      \strng{fullhashraw}{98d0360b392de5f1d53acdd6489b6e88}
+      \strng{bibnamehash}{98d0360b392de5f1d53acdd6489b6e88}
+      \strng{authorbibnamehash}{98d0360b392de5f1d53acdd6489b6e88}
+      \strng{authornamehash}{98d0360b392de5f1d53acdd6489b6e88}
+      \strng{authorfullhash}{98d0360b392de5f1d53acdd6489b6e88}
+      \strng{authorfullhashraw}{98d0360b392de5f1d53acdd6489b6e88}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Zenn}
+      \field{month}{5}
+      \field{note}{Accessed: 2026-06-04}
+      \field{title}{known\_hostsとは？}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://zenn.dev
+      \endverb
+      \verb{url}
+      \verb https://zenn.dev
+      \endverb
+    \endentry
+    \entry{knowledgestare_ping}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=6b99b948f0feb6e4f28d44c39e48cd65}{%
+           family={{TK (from SecuAvail)}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{6b99b948f0feb6e4f28d44c39e48cd65}
+      \strng{fullhash}{6b99b948f0feb6e4f28d44c39e48cd65}
+      \strng{fullhashraw}{6b99b948f0feb6e4f28d44c39e48cd65}
+      \strng{bibnamehash}{6b99b948f0feb6e4f28d44c39e48cd65}
+      \strng{authorbibnamehash}{6b99b948f0feb6e4f28d44c39e48cd65}
+      \strng{authornamehash}{6b99b948f0feb6e4f28d44c39e48cd65}
+      \strng{authorfullhash}{6b99b948f0feb6e4f28d44c39e48cd65}
+      \strng{authorfullhashraw}{6b99b948f0feb6e4f28d44c39e48cd65}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Knowledge Stare（ナレッジステア）, \url{https://www.secuavail.com/kb/windows-linux/linux-windows-ping/}}
+      \field{note}{投稿日: 2023年05月19日, 閲覧日: 2026年6月2日}
+      \field{title}{Linux/Windows pingコマンドの使い方とオプションについて}
+      \field{year}{2023}
+    \endentry
+    \entry{telnet_ssh}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=d461055fe4bf1d6ebc2fdc1af6461e8d}{%
+           family={Tomoya},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{d461055fe4bf1d6ebc2fdc1af6461e8d}
+      \strng{fullhash}{d461055fe4bf1d6ebc2fdc1af6461e8d}
+      \strng{fullhashraw}{d461055fe4bf1d6ebc2fdc1af6461e8d}
+      \strng{bibnamehash}{d461055fe4bf1d6ebc2fdc1af6461e8d}
+      \strng{authorbibnamehash}{d461055fe4bf1d6ebc2fdc1af6461e8d}
+      \strng{authornamehash}{d461055fe4bf1d6ebc2fdc1af6461e8d}
+      \strng{authorfullhash}{d461055fe4bf1d6ebc2fdc1af6461e8d}
+      \strng{authorfullhashraw}{d461055fe4bf1d6ebc2fdc1af6461e8d}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{31}
+      \field{journaltitle}{MiracleJOB (ミラクルソリューション)}
+      \field{month}{7}
+      \field{title}{Linuxの基礎を知る（TelnetとSSH）}
+      \field{urlday}{1}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.miraclejob.com/recommend/detail?cd=4085
+      \endverb
+      \verb{url}
+      \verb https://www.miraclejob.com/recommend/detail?cd=4085
+      \endverb
+    \endentry
+    \entry{infraexpert_telnet_ssh}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=c2965d35f925429ad8df92fc5828cf89}{%
+           family={{ネットワークエンジニアとして}},
+           familyi={ネ\bibinitperiod}}}%
+      }
+      \strng{namehash}{c2965d35f925429ad8df92fc5828cf89}
+      \strng{fullhash}{c2965d35f925429ad8df92fc5828cf89}
+      \strng{fullhashraw}{c2965d35f925429ad8df92fc5828cf89}
+      \strng{bibnamehash}{c2965d35f925429ad8df92fc5828cf89}
+      \strng{authorbibnamehash}{c2965d35f925429ad8df92fc5828cf89}
+      \strng{authornamehash}{c2965d35f925429ad8df92fc5828cf89}
+      \strng{authorfullhash}{c2965d35f925429ad8df92fc5828cf89}
+      \strng{authorfullhashraw}{c2965d35f925429ad8df92fc5828cf89}
+      \field{sortinit}{ネ}
+      \field{sortinithash}{249f60b5735ca04a104bcbd168f2eb8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Telnet / SSH}
+      \field{urlday}{3}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.infraexpert.com/study/tcpip13.html
+      \endverb
+      \verb{url}
+      \verb https://www.infraexpert.com/study/tcpip13.html
+      \endverb
+    \endentry
+    \entry{yamaguchi_ain_week5}{online}{}{}
+      \name{author}{4}{}{%
+        {{hash=072fbd5ca6f05348868751810ede7f3f}{%
+           family={将},
+           familyi={将\bibinitperiod},
+           given={福士},
+           giveni={福\bibinitperiod}}}%
+        {{hash=eaa8f19ec4c06c7211f84927f383ced2}{%
+           family={裕大},
+           familyi={裕\bibinitperiod},
+           given={山本},
+           giveni={山\bibinitperiod}}}%
+        {{hash=0be3a7c290603ff4ab45a8b43b4d105b}{%
+           family={陽太},
+           familyi={陽\bibinitperiod},
+           given={黒川},
+           giveni={黒\bibinitperiod}}}%
+        {{hash=dc0b35bf5d4f76c17d0774f3c0d17abc}{%
+           family={俊満},
+           familyi={俊\bibinitperiod},
+           given={小林},
+           giveni={小\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {山口大学}%
+      }
+      \strng{namehash}{bea06abb269fc4ea2bffc3ed4507d654}
+      \strng{fullhash}{b0a3dd2bbe0c01bc9c0681fad69048bd}
+      \strng{fullhashraw}{b0a3dd2bbe0c01bc9c0681fad69048bd}
+      \strng{bibnamehash}{bea06abb269fc4ea2bffc3ed4507d654}
+      \strng{authorbibnamehash}{bea06abb269fc4ea2bffc3ed4507d654}
+      \strng{authornamehash}{bea06abb269fc4ea2bffc3ed4507d654}
+      \strng{authorfullhash}{b0a3dd2bbe0c01bc9c0681fad69048bd}
+      \strng{authorfullhashraw}{b0a3dd2bbe0c01bc9c0681fad69048bd}
+      \field{sortinit}{将}
+      \field{sortinithash}{f669a56d81f6542306f5bd8a4c50ee2f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{山口大学 Moodle, \url{https://mdcs5.cc.yamaguchi-u.ac.jp/moodle/pluginfile.php/1199181/mod_resource/content/13/AIN-week5.pdf}}
+      \field{note}{閲覧日: 2026年6月2日}
+      \field{title}{情報ネットワーク特論・実験 第5週目「不正アクセスにおける探査段階」}
+      \field{year}{2026}
+    \endentry
+    \entry{nw_text_r08}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=61bb057116a9971446b96f01670116b6}{%
+           family={美月},
+           familyi={美\bibinitperiod},
+           given={瀬戸},
+           giveni={瀬\bibinitperiod}}}%
+        {{hash=bd88c6eb68b3c43512c2af090341a00d}{%
+           family={株式会社わくわくスタディワールド},
+           familyi={株\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {インプレス}%
+      }
+      \strng{namehash}{f22db1d1dd93d91b799c9aa6821ee5fe}
+      \strng{fullhash}{f22db1d1dd93d91b799c9aa6821ee5fe}
+      \strng{fullhashraw}{f22db1d1dd93d91b799c9aa6821ee5fe}
+      \strng{bibnamehash}{f22db1d1dd93d91b799c9aa6821ee5fe}
+      \strng{authorbibnamehash}{f22db1d1dd93d91b799c9aa6821ee5fe}
+      \strng{authornamehash}{f22db1d1dd93d91b799c9aa6821ee5fe}
+      \strng{authorfullhash}{f22db1d1dd93d91b799c9aa6821ee5fe}
+      \strng{authorfullhashraw}{f22db1d1dd93d91b799c9aa6821ee5fe}
+      \field{sortinit}{美}
+      \field{sortinithash}{c422e7e32c806b179a63ecb43d44b902}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{ISBN: 978-4295022596}
+      \field{title}{徹底攻略 ネットワークスペシャリスト教科書 令和8年度}
+      \field{year}{2025}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

@@ -1,27 +1,27 @@
-\documentclass[dvipdfmx,autodetect-engine, 12pt]{jsarticle}
+% \documentclass[dvipdfmx,autodetect-engine, 12pt]{jsarticle}
 
-\usepackage{ulem} % 取消線を引くためのパッケージ
-\usepackage[dvipdfmx]{graphicx} % 画像を挿入するためのパッケージ
-\usepackage{array} % 表の幅指定や自動改行に必要
-\usepackage{enumitem}
-\usepackage{amsmath}
+% \usepackage{ulem} % 取消線を引くためのパッケージ
+% \usepackage[dvipdfmx]{graphicx} % 画像を挿入するためのパッケージ
+% \usepackage{array} % 表の幅指定や自動改行に必要
+% \usepackage{enumitem}
+% \usepackage{amsmath}
 
-% --- 考文献用の設定 ---
-\usepackage[backend=biber, style=numeric]{biblatex} % biblatexパッケージの使用
-\addbibresource{../source.bib} % 先ほど作った別ファイルを指定（拡張子まで書く）
-\usepackage{url} % WebサイトのURLを綺麗に出力するため
+% % --- 考文献用の設定 ---
+% \usepackage[backend=biber, style=numeric]{biblatex} % biblatexパッケージの使用
+% \addbibresource{../source.bib} % 先ほど作った別ファイルを指定（拡張子まで書く）
+% \usepackage{url} % WebサイトのURLを綺麗に出力するため
 
-% --- section の文字サイズを小さくする設定 ---
-\makeatletter
-\renewcommand{\section}{%
-  \@startsection{section}{1}{\z@}%
-  {1.5ex \@plus .5ex \@minus .2ex}% 前の行との隙間
-  {0.5ex \@plus .3ex}% 下の行との隙間
-  {\normalfont\normalsize}% ← ここでサイズを \Large（少し大きめ）に指定
-}
-\makeatother
+% % --- section の文字サイズを小さくする設定 ---
+% \makeatletter
+% \renewcommand{\section}{%
+%   \@startsection{section}{1}{\z@}%
+%   {1.5ex \@plus .5ex \@minus .2ex}% 前の行との隙間
+%   {0.5ex \@plus .3ex}% 下の行との隙間
+%   {\normalfont\normalsize}% ← ここでサイズを \Large（少し大きめ）に指定
+% }
+% \makeatother
 
-\begin{document}
+% \begin{document}
 
 % 課題のタイトル
 \begin{center}
@@ -428,8 +428,8 @@
 \end{enumerate}
 \newpage
 
-% --- 参考文献リストの出力 ---
-\printbibliography[title=参考文献]
+% % --- 参考文献リストの出力 ---
+% \printbibliography[title=参考文献]
 
-\end{document}
+% \end{document}
 
