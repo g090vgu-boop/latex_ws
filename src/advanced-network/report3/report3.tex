@@ -47,7 +47,7 @@
 
 {\LARGE \uline{手順}} 
 
-\begin{enumerate}
+\begin{enumerate}[label=\arabic*.]
 
     \item arpとpingコマンドで, どのプロトコルが利用されるのか調査し, 
           特に通信の開始から終了までに, 通信元と通信先との間に, OSI参照モデルのどの層で, 
@@ -96,7 +96,7 @@
 
         \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}]
             \item ホストAは探索するIPアドレスにホストBのIPアドレスを指定したARP要求パケットをネットワークにブロードキャストする.
-            \item ホスト B は ARP 要求パケットを受け取ると, ホスト A に対して自身の NIC に割り当てられている MAC アドレスを ARP ユニキャストする.
+            \item ホスト B は ARP 要求パケットを受け取ると, ホスト A に対して自身の NIC に割り当てられている MAC アドレスを ARP 応答パケットをユニキャストで送信する.
             \item ホスト A は ARP 応答パケットを受け取り, そこに記述される MAC アドレスはコンピュータ内の ARP テーブルに登録され, 数分間キャッシュされる. 一度登録されるとキャッシュされている間は ARP の再問い合わせが実行されることはない.
         \end{enumerate}
 
@@ -221,7 +221,7 @@
         \vspace{\baselineskip}
         \quad
         VM間でのpingの実行結果を図\ref{fig:ping_router2server_before}, \ref{fig:ping_server2router_before}に示す.
-        いずれの場合においても, 全パケットに対して応答が帰ってきていることが0\%\, packet\, lossという出力から読み取れる.
+        いずれの場合においても, 全パケットに対して応答が返ってきていることが0\%\, packet\, lossという出力から読み取れる.
 
         \begin{figure}[htbp]
             \centering
@@ -363,7 +363,7 @@
         ヘッダ部に関しては図\ref{fig:icmp_packet_format}に示すICMPパケットのフォーマットと完全に一致していることが確認できる.
         タイプとコードについて確認すると, 図\ref{fig:icmp_echo_request_packet}はタイプ8コード0のICMPエコー要求パケットであり,
         図\ref{fig:icmp_echo_reply_packet}はタイプ0コード0のICMPエコー応答パケットであることがわかる.\\
-        ICMPエコー要求パケットと応答パケットとでのフィールドの値を比較すると, チェックサムとメッセージタイプ以外のすべての値が一致している.
+        ICMPエコー要求パケットと応答パケットとでのICMPヘッダにおけるフィールドの値を比較すると, チェックサムとメッセージタイプ以外のすべての値が一致している.
         これらはpingによる通信の手順として示した手順\textcircled{\scriptsize 1},\textcircled{\scriptsize 2}に対応しているため,
         pingによる通信に関して想定される手続きでやり取りされていることが確認できた.
 

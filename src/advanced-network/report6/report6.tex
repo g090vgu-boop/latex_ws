@@ -63,7 +63,7 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
 
 
 
-\begin{enumerate}
+\begin{enumerate}[label=\arabic*.]
     \item 全ての iptables の設定を消去する．
     \item router で dropbear が起動していないことを確認する．起動している場合には停止させる．
     
@@ -85,7 +85,7 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
         \vspace{\baselineskip}
 
     \item iptables を設定し，router への全てのインターフェースに対する通信に対し，下記のように処理するように設定する．必要であれば sysctl によって転送の許可を行う ．
-    \begin{enumerate}
+    \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, leftmargin=*]
         \item 全ての通信を遮断する
         \item ただし， TCP2000 番ポートへのアクセスには応答できるようにする．
     \end{enumerate}
@@ -101,26 +101,41 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
         \end{figure}
 
         \quad
-        まず, -Pオプションによって対象のチェインのポリシーを設定している.
+        ここで確認できるコマンドごとに説明を行う.\\
+
+        \texttt{\# iptables -P INPUT ACCEPT} \\
+        \texttt{\# iptables -P FORWARD ACCEPT} \\
+        \texttt{\# iptables -P OUTPUT ACCEPT} \\
+
+        すべての設定を初期状態に戻すため,
+        iptablesの-Pオプションによって対象のチェインのポリシーを設定している.
         ここではfilterテーブル上のすべてのチェイン(INPUT, FORWARD, OUTPUT)に対してACCEPTというポリシーを設定し,
         デフォルトですべてのパケットを通過するよう設定している\cite{man:iptables}.\\
-        \quad
-        次に, -Fオプションを用いてチェイン上のルールをすべて消去している.
+        
+        \texttt{\# iptables -F} \\
+
+        iptablesの-Fオプションを用いてチェイン上のルールをすべて消去している.
         ここでは特にチェインを指定していないため, filterテーブル内のすべてのチェインのルールを全消去し\cite{man:iptables}, 
         -Lオプションを用いてfilterテーブル内のすべてチェインにあるすべてのルールを全表示することによって
         filterテーブル内のすべてのチェインのルールが消去されていることを確認している\cite{man:iptables}.\\
-        \quad
-        続いて, 要件\textcircled{1}を満たすため, INPUTチェインのポリシーをDROPに設定し, 
-        要件\textcircled{2}を満たすため, 
         
+        \texttt{\# iptables -P INPUT DROP} \\
         
+        要件\textcircled{1}を満たすため, INPUTチェインのポリシーをDROPに設定し,
+        すべての通信を遮断するよう設定を行っている.\\
 
+        \texttt{\# iptables -A INPUT -p tcp --dport 2000 -j ACCEPT} \\
+
+        要件\textcircled{2}を満たすため, filterテーブルの
+        INPUTチェイン上にtcpの2000番ポートに対するパケットのみ通信を許可する設定を行っている.
+            
         \vspace{\baselineskip}
-
 
     \item router で TCP 22 番，2000 番ポートを用いて SSH 通信が行えるように dropbear を起動させる．適宜，必要なオプションを用いること．dropbear が 2 つ起動していることを確認すること．
     
         \vspace{\baselineskip}
+
+        \quad
         図\ref{fig:processes_including_dropbear}にdropbearという文字列を含むプロセスの一覧を示す.
         \begin{figure}[htbp]
             \centering
@@ -128,13 +143,22 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
             \caption{dropbearという文字列を含むプロセスの一覧}
             \label{fig:processes_including_dropbear}
         \end{figure}
+        
+
+        \quad
+        dropbearコマンドによるプロセスが合計2つ, 22と2000番ポートで起動されていることが確認できる.
+
         \vspace{\baselineskip}
 
     \item router で Wireshark を起動し，組織内のインターフェースの通信を解析できるようにキャプチャする interface を設定する．
+    
     \item server から router の 22 番，2000 番ポートに SSH でアクセスする過程のパケットを，router で起動した Wireshark で解析し，通信が許可されたポートでのみ通信が可能で，許可されていないポートでは通信ができないことを，実験した結果を用いて，レポートで報告しなさい．
     
         \vspace{\baselineskip}
-        図\ref{fig:processes_including_dropbear}にdropbearという文字列を含むプロセスの一覧を示す.
+
+        \quad
+        図\ref{fig:ssh_22},\ref{fig:ssh_2000}にそれぞれ
+        22番ポートと2000番ポートででsshログインを試みた結果を示す.
         \begin{figure}[htbp]
             \centering
             \includegraphics[width=0.8\textwidth]{imgs/ssh_22.png} 
@@ -147,6 +171,35 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
             \caption{ポート2000にsshログインを試みた結果}
             \label{fig:ssh_2000}
         \end{figure}
+
+        \quad
+        図\ref{fig:ssh_2000}におけるターミナルでの実行結果から
+        ログインコマンド実行後から処理が進行していないことが確認できる.\\
+        \quad
+        wiresharkによるキャプチャ結果を確認すると,
+        serverからrouterに対してtcpコネクション確立要求を表す
+        SYNパケットが送信されているものの,
+        全く応答がないことが確認できる.
+        \quad
+        続いて, 図\ref{fig:ssh_2000}におけるターミナルでの実行結果から,
+        serverからrouterにsshでログインできたことが確認できる.\\
+        \quad
+        wiresharkによるキャプチャ結果を確認すると,
+        はじめに3\, way\, ハンドシェイクによってTCPコネクションが確立されていることが確認できる.\\
+        \quad
+        この違いは手順3で設定したrouterにおける
+        iptablesの設定により生じたものであると考えられる.
+        ここではINPUTチェインにおいてtcp2000番ポートに到達した通信のみ許可するような設定を行った.
+        したがって, tcp2000番ポートに到達したパケットは
+        routerのsshサービスに到達するが, 
+        tcp22番ポートに到達したパケットは
+        routerのiptablesによって破棄され,
+        SSHサービスに到達しない. 
+        その結果, tcp22番ポート宛てのSYNパケットに対してSYN/ACKパケットは返送されず, 
+        クライアント側では接続待ちの状態が継続したと考えられる.
+
+
+
         \vspace{\baselineskip}
 \end{enumerate}
 

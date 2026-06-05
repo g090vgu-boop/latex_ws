@@ -62,7 +62,7 @@
 
 {\LARGE \uline{手順}} 
 
-\begin{enumerate}[label=(\arabic*),leftmargin=*]
+\begin{enumerate}[label=(\arabic*.),leftmargin=*]
     \item Nmap を使ったホスト検出 \\
     サブゴール：探査用マシン(server)が属するネットワーク内で動作しているすべてのマシンをリストアップする．
     \begin{enumerate}[label=\arabic*, leftmargin=*]
@@ -94,24 +94,26 @@
             高い権限を持つユーザが, ローカルイーサネットネットワーク上のターゲットのスキャンを試みる場合は,
             --send-ipが指定されていない限り、ARP要求(-PR)が用いられる\cite{nmap_man_host_discovery}.\\
             \quad
-            pingスキャンのの実行結果を図\ref{fig:ping_scan_terminal}に示す.
+            pingスキャンの実行結果を図\ref{fig:ping_scan_result}に示す.
             探索範囲には$192.168.100.1 \sim 192.168.100.5$を指定した.
             プライベートアドレス空間192.168.100.0/24に属するホストはrouterとserverのみであり,
             それぞれIPアドレスに192.168.100.1と192.168.100.2を割り当てている.
             したがって, これらのアドレスを含まないアドレス空間に対するpingスキャンは
-            応答が期待できないためため, 上述のような探索範囲を指定した.
+            応答が期待できないため, 上述のような探索範囲を指定した.
 
             \begin{figure}[htbp]
                 \centering
-                \includegraphics[width=0.8\textwidth]{imgs/1/nmap_ping_scan_result_terminal.png} 
+                \includegraphics[width=0.8\textwidth]{imgs/1/new_nmap_sn_result.png} 
                 \caption{pingスキャンの結果}
-                \label{fig:ping_scan_terminal}
+                \label{fig:ping_scan_result}
             \end{figure}
 
             \quad
-            図\ref{fig:ping_scan_terminal}の結果から, pingスキャンの結果として, 
+            図\ref{fig:ping_scan_result}のターミナルでの実行結果から, pingスキャンの結果として, 
             192.168.100.1と192.168.100.2の2つのIPアドレスが検出されたことがわかる.
             これはそれぞれrouterとserverのIPアドレスであり, 想定通りの結果が得られた.
+            また, wiresharkでのキャプチャ結果からは,pingスキャン実行時にはeth0において
+            arp, dns, icmpといったプロトコルのパケットが検出されたことが確認できる.
 
             \vspace{\baselineskip}
 
@@ -119,99 +121,70 @@
         
             \vspace{\baselineskip}
             \quad
-            pingスキャンを実行した際にwiresharkでキャプチャされたパケットの一覧と各パケットの詳細について図
-            \ref{fig:nmap_ping_scan_result_arp_request}, \ref{fig:nmap_ping_scan_result_arp_reply}, \ref{fig:nmap_ping_scan_result_dns}, \ref{fig:nmap_ping_scan_result_icmp}に示す.
-
-            \begin{figure}[htbp]
-                \centering
-                \includegraphics[width=0.8\textwidth]{imgs/1/nmap_ping_scan_result.png} 
-                \caption{pingスキャン時にキャプチャされたパケット一覧}
-                \label{fig:nmap_ping_scan_result}
-            \end{figure}
-
-            \quad
-            図\ref{fig:nmap_ping_scan_result}はpingスキャンを実行した際にwiresharkでキャプチャされたパケットの一覧であり, 
-            キャプチャ順にソートされている.
-            ここから, pingスキャンの実行に伴い, ARPリクエスト・DNS・ICMPといったプロトコルのパケットがキャプチャされたことがわかる.
+            図\ref{fig:ping_scan_result}のwiresharkでのキャプチャ結果から
             最初にキャプチャされているパケットがARPによるものであり, 
-            まずNo.1$\sim$4にのパケットにかけて特定のMACアドレスからブロードキャストで合計4つのパケットが送信されていることが分かる.
-            infoフィールドにはWho has 192.168.100.\{1,3,4,5\}と記載されている.
-            例として図\ref{fig:nmap_ping_scan_result}におけるNo.1のパケットの詳細を図\ref{fig:nmap_ping_scan_result_arp_request}に示す.
-            
-            \begin{figure}[htbp]
-                \centering
-                \includegraphics[width=0.8\textwidth]{imgs/1/nmap_ping_scan_result_arp_request.png} 
-                \caption{ARPリクエスト}
-                \label{fig:nmap_ping_scan_result_arp_request}
-            \end{figure}
-
-            \quad
-            図\ref{fig:nmap_ping_scan_result_arp_request}では, 
-            serverのIPアドレスである192.168.100.2から192.168.100.1のIPアドレスを解決するためのARPリクエストがブロードキャストされていることがわかる.
-
-            \quad
-            次にNo.5のパケットでユニキャストのパケットがキャプチャされていることが分かる.
-            No.5のパケットの詳細を図\ref{fig:nmap_ping_scan_result_arp_reply}に示す.
+            まず,No.1$\sim$4のパケットにかけて特定のMACアドレスからブロードキャストで合計4つのパケットが送信されていることが分かる.
+            また, それぞれのパケットにおいてinfoフィールドにはWho has 192.168.100.\{1,3,4,5\}と記載されていることが確認できる.
+            例として図\ref{fig:ping_scan_result}におけるNo.1, \, 5のパケットの詳細を図\ref{fig:nmap_ping_scan_result_arp}に示す.
 
             \begin{figure}[htbp]
                 \centering
-                \includegraphics[width=0.8\textwidth]{imgs/1/nmap_ping_scan_result_arp_reply.png} 
-                \caption{ARP応答}
-                \label{fig:nmap_ping_scan_result_arp_reply}
+                \includegraphics[width=0.8\textwidth]{imgs/1/new_nmap_sn_result_arp.png} 
+                \caption{pingスキャン時にキャプチャされたarpパケットの例}
+                \label{fig:nmap_ping_scan_result_arp}
             \end{figure}
 
             \quad
-            図\ref{fig:nmap_ping_scan_result_arp_reply}から, このパケットは
+            No.1のパケットでは, 
+            serverのIPアドレスである192.168.100.2から192.168.100.3のIPアドレスを解決するためのARPリクエストが送信されていることがわかる.\\
+            \quad
+            No.5のパケットは
             192.168.100.1から192.168.100.2へのARP応答,
-            すなわち, routerからserverへ返されたARP応答である.
-
+            すなわち, routerからserverへ返されたARP応答である.\\
             \quad
-            続いてNo.6$\sim$8にかけて再びARP要求パケットがブロードキャストされていることが分かる.
+            続いてNo.6$\sim$8にかけて再びARP要求パケットが送信されていることが分かる.
             これは1回目のARP要求に対する応答が得られなかったIPアドレスに対して, 再度ARP要求がブロードキャストされたものであると考えられる.
-            実際にキャプチャされたパケットにおいてもARP要求の再送が行われているのは192.168.100.[3,4,5]のIPアドレスに対してである.
-
+            実際にキャプチャされたパケットにおいてもARP要求の再送が行われているのは192.168.100.[3,4,5]のIPアドレスに対してである.\\
             \quad
-            次にキャプチャされたDNSのパケットの詳細について図\ref{fig:nmap_ping_scan_result_dns}に示す.
+            次にキャプチャされたDNSとICMPのパケットの詳細について図\ref{fig:nmap_ping_scan_result_dns_icmp}に示す.
 
             \begin{figure}[htbp]
                 \centering
-                \includegraphics[width=0.8\textwidth]{imgs/1/dns.png} 
-                \caption{DNS問い合わせ}
-                \label{fig:nmap_ping_scan_result_dns}
+                \includegraphics[width=0.8\textwidth]{imgs/1/new_nmap_sn_result_dns_icmp.png} 
+                \caption{DNSとICMPパケットの例}
+                \label{fig:nmap_ping_scan_result_dns_icmp}
             \end{figure}
 
             \quad
-            図\ref{fig:nmap_ping_scan_result_dns}から, DNS$rightallow$Queriesにおいて,
-            1.100.168.192.in-addr.arpa:type\,PTR, class\,INとの記述が読み取れる.
+            図\ref{fig:nmap_ping_scan_result_dns_icmp}から, 
+            No.1のパケットのDNS $\rightarrow$ Transaction\,IDの値が, 
+            No.5のパケットのICMP $\rightarrow$ DNS $\rightarrow$ Transaction\,ID
+            の値が一致しており, 
+            transactionIDが一致しているため, 
+            このパケットは図\ref{fig:nmap_ping_scan_result_dns_icmp}のDNS問い合わせに対する応答であることがわかる.\\
+            \quad
+            また, No.5のパケットの
+            ICMP $\rightarrow$ DNS $\rightarrow$ Queries 
+            において
+            Nameが1.100.168.192.in-addr.arpa,\,
+            TypeがPTR(Domain\, name\, PoinTeR)
+            であることが確認できる.
             DNS逆引きにおいてはドメイン名とタイプがそれぞれ,
              [逆順IP].IN-ADDR.ARPA, PTR
             になるため\cite{rfc1035},
             これはDNS逆引きのためのDNSパケットであることがわかる.
             今回は-nオプション(DNS解決を行わない)を指定していないため,
-            DNS逆引きを試みている\cite{nmap_man_host_discovery}.
-
-
+            DNS逆引きを試みている\cite{nmap_man_host_discovery}.\\
             \quad
-            次に, ICMPパケットの詳細について図\ref{fig:nmap_ping_scan_result_icmp}に示す.
-
-            \begin{figure}[htbp]
-                \centering
-                \includegraphics[width=0.8\textwidth]{imgs/1/nmap_ping_scan_result_icmp.png} 
-                \caption{ICMP到達不能メッセージ}
-                \label{fig:nmap_ping_scan_result_icmp}
-            \end{figure}
-
-            \quad
-            図\ref{fig:nmap_ping_scan_result_icmp}から,
-            ICMP $\rightarrow$ DNS $\rightarrow$ Transaction\,IDの値が図\ref{fig:nmap_ping_scan_result_dns}のDNS問い合わせのDNS $\rightarrow$ Transaction\,IDと同じであることから,
-            このパケットは図\ref{fig:nmap_ping_scan_result_dns}のDNS問い合わせに対する応答であることがわかる.
             さらに, ICMPのTypeが3でCodeが3であることから,
-            ポート到達不能によるICMP到達不能メッセージであることがわかる.
-
+            ポート到達不能によるICMP到達不能メッセージであることがわかる.\\
             \quad
             以上の解析から, pingスキャンの実行に伴い,
             まずARPリクエストが探索範囲に対して送信され,
-            ARP応答が返されたIPのみが利用可能なホストとして検出されることがわかった.
+            ARP応答が返されたIPのみが利用可能なホストとして検出されたこと,
+            またその過程においてDNS逆引きを試みるパケットが流れていることが確認できた.
+            今回はroot権限で同一セグメント上のホストにのみpingスキャンを行ったため,
+            このような結果が得られたと考えられる.
 
             \vspace{\baselineskip}
     \end{enumerate}
@@ -219,7 +192,7 @@
     \vspace{0.5cm}
     \item Nmap を使ったポートスキャン \\
     サブゴール：探査用マシン(server)から，（１）ホスト検出で検出された各マシン（以下，被攻撃対象マシン）について順番に調査する
-    \begin{enumerate}[label=\arabic*, leftmargin=*]
+    \begin{enumerate}[label=\arabic*., leftmargin=*]
         \item telnet と ssh のポート番号以外の違いで最も大きな違いは何か調査しなさい．
         
             \vspace{\baselineskip}
@@ -229,7 +202,6 @@
 
         \item 3 種類のポートスキャンで，OSI 参照モデルのどの層で，どのような手順で，どのように，どのような情報が，やり取りされるか再確認し，整理しなさい．\\
         
-            \vspace{\baselineskip}
             \quad
             3種類のポートスキャンとはTCP connectスキャン, SYNステルススキャン, UDPスキャンのことである.
             各ポートスキャンの詳細については以下の通りである.
@@ -284,7 +256,7 @@
                     基本的には, それぞれのやり取りにおいてトランスポート層が起点・終点となってポートスキャンが行われる.
                     一方で, フィルタリングやファイアウォールの存在によって, 送信されたパケットがターゲットマシンのポートに到達しない場合もある.
                     タイプ3, コード13 (宛先到達不能; 通信が管理上の理由で禁止されている)などのICMPエラーメッセージを返すこともあるが,
-                    応答しないで応答しないでパケットを破棄することが多い\cite{nmap_man_port_scanning}.
+                    応答せずにパケットを破棄することが多い\cite{nmap_man_port_scanning}.
                     このような場合はICMPヘッダや, 何も応答がないことを理由にフィルタされている(filtered)と判定される\cite{nmap_man_port_scanning_techniques}.
                     したがって基本的には, TCP\,connect\,スキャンはTCPヘッダのフラグ情報をもとに,トランスポート層(第4層)以下で動作すると言える.
                 
@@ -310,7 +282,7 @@
                                 \item スキャン側から,さらに「確認した」という応答（RSTパケット）を返す.
                             \end{enumerate}
 
-                        \item[ターゲットのポートがポートが閉塞(closed)している場合] \leavevmode
+                        \item[ターゲットのポートが閉塞(closed)している場合] \leavevmode
                             \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, leftmargin=*]
                                 \item スキャン側から,ターゲットの対象ポートへ「接続したい」という要求（SYNパケット）を送信する.
                                 \item ポートが閉じているため, ターゲットから「接続を拒否する」という応答（RST/ACKパケット）が返ってくる.
@@ -381,7 +353,7 @@
                     \quad
                     空の(データなし)UDPヘッダを各ターゲットポートに送ることで機能する.
                     基本的には, ICMPポート到達不能エラー(タイプ3, コード1,2,9,10,13)が返された場合,
-                    ポートは閉じており(closed), その他のICMPポート到達不能エラーがが返された場合,
+                    ポートは閉じており(closed), その他のICMPポート到達不能エラーが返された場合,
                     ポートはフィルタされている(filtered).
                     まれにサービスがUDPパケットで応答する場合もあるが, その場合はポートは開いている(open)ことがわかる.
                     数回の再試行の後も応答がない場合にはポートは開いているあるいはフィルタされている(open|filtered)と判別することができる\cite{nmap_man_port_scanning_techniques}.
@@ -468,7 +440,7 @@
                     また, wiresharkでのキャプチャ結果から,
                     serverからrouterに対して, SYNパケットが送信され,
                     routerからserverに対して, RST/ACKパケットが返されていることがわかる.
-                    これは, 図\ref{fig:syn_scan_osi}におけるSYNステルススキャンの手順において, 
+                    これは, 図\ref{fig:syn_scan}におけるSYNステルススキャンの手順において, 
                     ターゲットのTCPポートが閉塞(closed)している場合の手順と一致している. 
                     \vspace{\baselineskip}
 
@@ -495,7 +467,7 @@
                     Info$\rightarrow$Lenが0すなわち, 
                     空データのUDPパケットがserverからrouterに送信され,
                     routerからserverに対してICMPのポート到達不能メッセージが送信されていることが確認できる.
-                    これは図\ref{fig:udp_scan_osi}
+                    これは図\ref{fig:udp_scan}
                     におけるUDPスキャンの手順においてターゲットのポートが
                     閉鎖(closed)している場合の手順と一致している.
                     \vspace{\baselineskip}
@@ -562,7 +534,7 @@
             \end{figure}
 
             \quad
-            ここから, telnetとsshの両方でserverからrouterにログインに可能であることが確認できる.
+            ここから, telnetとsshの両方でserverからrouterにログイン可能であることが確認できる.
             \vspace{\baselineskip}
             
         \item ［探査用マシン］から［被攻撃対象マシン］へ telnet および ssh でログインする過程で生じた通信の内容を解析し，調査結果より想定される telnet と ssh の最も大きな違いが確認できることを，実験した結果（比較を含む）を用いて，レポートで報告しなさい． \\
@@ -586,11 +558,11 @@
             \end{figure}
 
             \quad
-            telnetでログインシた際にキャプチャされたパケットの一覧を確認すると,
+            telnetでログイン時にキャプチャされたパケットの一覧を確認すると,
             最初に, 3wayハンドシェイクによりserverとrouterとの間で通信が確立された後に,
             TCP及びTELNETプロトコルの大量のパケットがキャプチャされていることがわかる.\\
             \quad 
-            一方で, sshでログインした際にキャプチャ刺されたパケットでは,
+            一方で, sshでログインした際にキャプチャされたパケットでは,
             同じく3wayハンドシェイクによりserverとrouterとの間で通信が確立された後に,
             TCP及びSSHv2プロトコルの大量のパケットがキャプチャされていることがわかる.\\
             \quad
@@ -729,7 +701,7 @@
                     開放ポート向けの調査用パケットが送信されず,
                     今回は, 21$\sim$23のtcpポートが開放されており, 
                     開放ポート向けの調査用パケットが送信されたため,
-                    検出されたtcpパケットの両に差が生じたと考えられる.
+                    検出されたtcpパケットの量に差が生じたと考えられる.
                     \vspace{\baselineskip}
 
 

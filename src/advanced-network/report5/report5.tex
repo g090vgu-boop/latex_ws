@@ -52,7 +52,7 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
 
 {\LARGE \uline{手順}} 
 
-\begin{enumerate}
+\begin{enumerate}[label=\arabic*.]
 
     \item router で dropbear が起動していないことを確認し，起動している場合は停止する．
     
@@ -214,7 +214,7 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
 
         \quad
         図\ref{fig:same_packet_example}に示すパケットは,それぞれrouterのeth0, eth1で観測されたSSHv2のパケットである.
-        tcpのヘッダにおいて, フィールドの値(\texttt{Sequensce Number(raw): 3645530960, Acknowledgment Number(raw): 1354975756 など})が完全一致しており,
+        tcpのヘッダにおいて, フィールドの値(\texttt{Sequence Number(raw): 3645530960, Acknowledgment Number(raw): 1354975756 など})が完全一致しており,
         転送されているものであるといえる.
         ここでは, server(192.168.100.2)のTCP 22番ポートからrouter(192.168.100.1)のTCP 58333番ポートへ送信されたパケットが, 
         router(10.6.158.90)のTCP 22番ポートからwindows(10.6.158.153)のTCP 58333番ポートへ送信されたパケットとして,
@@ -253,35 +253,41 @@ iptables を用いたパケットの制御の実習を行う. パケットを分
         \vspace{\baselineskip}
 
         \quad
-        図\ref{fig:server2windows_terminal}は, serverからwindowsに対してpingコマンドを実行した結果である.
+        図\ref{fig:masquarade}は, serverからwindowsに対してpingコマンドを実行した結果である.
         \begin{figure}[htbp]
             \centering
-            \includegraphics[width=0.8\textwidth]{imgs/ping_server2windows.png} 
+            \includegraphics[width=0.8\textwidth]{imgs/masquerade.png} 
             \caption{serverからwindowsに対するpingコマンドの実行結果}
-            \label{fig:server2windows_terminal}
+            \label{fig:masquarade}
         \end{figure}
 
         \quad
-        windowsからの応答が確認でき, serverとwindowsとの間で通信が可能であることが確認できる.\\
+        ターミナルでの実行結果からwindowsからの応答が確認でき, serverとwindowsとの間で通信が可能であることが確認できる.\\
         \quad
-        続いて, 図\ref{fig:masquerade_result}にserverからwindowsに対してpingコマンドを実行した際に
-        キャプチャされたパケットの一覧を示す.
-
+        wiresharkでのキャプチャ結果は,
+        左がeth0でのキャプチャ結果, 右がeth1でのキャプチャ結果である.
+        両者で類似したパケットが確認できる.\\
+        \quad
+        図\ref{fig:masquerade_comp}にserverからwindowsに対するpingコマンドの実行時に
+        eth0とeth1で観測されたパケットの例を示す.
         \begin{figure}[htbp]
             \centering
-            \includegraphics[width=0.8\textwidth]{imgs/prove_masquarade.png} 
-            \caption{serverからwindowsに対するpingコマンド実行時にキャプチャされたパケット一覧}
-            \label{fig:masquerade_result}
+            \includegraphics[width=0.8\textwidth]{imgs/masquerade_compare_packet.png} 
+            \caption{serverからwindowsに対するpingコマンドの実行時にeth0とeth1で観測されるパケットの比較}
+            \label{fig:masquerade_comp}
         \end{figure}      
         
         \quad
-        左がeth0でのキャプチャ結果, 右がeth1でのキャプチャ結果である.
-        ここで, eth0においてserver(192.168.100.2)からwindows(10.6.158.153)に対して送信されたICMPのパケットが,
-        eth1においては, routerの外部アドレス(10.6.158.90)からwindows(10.6.158.153)に対してのパケットとして転送されていること,
-        あるいはその逆のケースについても確認ができる.
-        
-
-
+        ここでは, pingコマンドによって発生した
+        ICMPエコー要求のパケットの例を上げた.
+        両パケットでIdentifierとSequesns\, Numberが一致していることから
+        同一のパケットであることがわかる.
+        eth0において
+        server(192.168.100.2)からwindows(10.6.158.153)に送信されて,
+        routerに到達したパケットが
+        eth1から
+        router(10.6.158.90)からwindows(10.6.158.153)へのパケットして,
+        送信元のIPアドレスがserverからrouterに書き換えられて転送されていることが確認できる.
 
 
         \vspace{\baselineskip}
